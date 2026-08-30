@@ -11,12 +11,24 @@ import {
 import { t, pick } from '../i18n.js'
 import Icon from '../Icons.jsx'
 
-function DutyCard({ ob, lang, done, onToggle }) {
+// Duties this app actively solves, and the step that solves them.
+const SOLVED = {
+  'risk-assessment': 'draft', // → step 2 draft
+  'safety-education-regular': 'print', // → step 4 TBM (counts toward training hours)
+  'sapa-management-system': 'print', // → step 4 SAPA semiannual check
+  'accident-report': 'print', // → step 4 accident panel
+}
+const SOLVED_ORDER = Object.keys(SOLVED)
+
+function DutyCard({ ob, lang, done, onToggle, reference }) {
   const kindLabel = ob.kind === 'duty' ? 'legal_duty' : ob.kind === 'incentive' ? 'incentive' : 'recommended'
+  const solveTab = SOLVED[ob.id]
   return (
-    <div className={'duty-card' + (done ? ' done' : '') + (ob.kind === 'incentive' ? ' incentive' : '')}>
+    <div className={'duty-card' + (done ? ' done' : '') + (ob.kind === 'incentive' ? ' incentive' : '') + (solveTab ? ' solved' : '')}>
       <div className="duty-head">
-        <span className={'kind-chip ' + ob.kind}>{t(lang, kindLabel)}</span>
+        <span className={'kind-chip ' + (reference ? 'reference' : ob.kind)}>
+          {t(lang, reference ? 'reference_chip' : kindLabel)}
+        </span>
         <strong>{pick(ob.title, lang)}</strong>
         {ob.kind === 'duty' && (
           <label className="done-check">
@@ -32,6 +44,11 @@ function DutyCard({ ob, lang, done, onToggle }) {
         {ob.penalty && <span className="penalty-chip"><Icon name="alert" size={12} /> {pick(ob.penalty, lang)}</span>}
         {ob.effectiveNote && <span className="note-chip">{pick(ob.effectiveNote, lang)}</span>}
       </div>
+      {solveTab && !reference && (
+        <button className="solve-cta" onClick={() => update((st) => { st.tab = solveTab })}>
+          {t(lang, 'solve_cta')}
+        </button>
+      )}
     </div>
   )
 }
@@ -118,17 +135,20 @@ export default function Step1Diagnose() {
             </div>
           )}
 
-          <h3 className="section-title">{t(lang, 'duties_now')} ({duties.length})</h3>
+          <h3 className="section-title">{t(lang, 'solved_here')}</h3>
           <div className="duty-grid">
-            {duties.map((ob) => (
-              <DutyCard
-                key={ob.id}
-                ob={ob}
-                lang={lang}
-                done={s.obligationsDone[ob.id]}
-                onToggle={() => update((st) => { st.obligationsDone[ob.id] = !st.obligationsDone[ob.id] })}
-              />
-            ))}
+            {duties
+              .filter((ob) => SOLVED[ob.id])
+              .sort((a, b) => SOLVED_ORDER.indexOf(a.id) - SOLVED_ORDER.indexOf(b.id))
+              .map((ob) => (
+                <DutyCard
+                  key={ob.id}
+                  ob={ob}
+                  lang={lang}
+                  done={s.obligationsDone[ob.id]}
+                  onToggle={() => update((st) => { st.obligationsDone[ob.id] = !st.obligationsDone[ob.id] })}
+                />
+              ))}
           </div>
 
           <div className="next-cta">
@@ -137,6 +157,26 @@ export default function Step1Diagnose() {
               {t(lang, 'step1_next')}
             </button>
           </div>
+
+          <details className="duties-ref">
+            <summary>
+              {t(lang, 'reference_duties').replace('{n}', duties.filter((ob) => !SOLVED[ob.id]).length)}
+            </summary>
+            <div className="duty-grid">
+              {duties
+                .filter((ob) => !SOLVED[ob.id])
+                .map((ob) => (
+                  <DutyCard
+                    key={ob.id}
+                    ob={ob}
+                    lang={lang}
+                    reference
+                    done={s.obligationsDone[ob.id]}
+                    onToggle={() => update((st) => { st.obligationsDone[ob.id] = !st.obligationsDone[ob.id] })}
+                  />
+                ))}
+            </div>
+          </details>
 
           {incentives.length > 0 && (
             <>
