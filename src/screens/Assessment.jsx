@@ -1,15 +1,9 @@
-import React, { useEffect, useRef } from 'react'
-import {
-  useStore,
-  update,
-  data,
-  uid,
-  riskOf,
-  bandOf,
-  computeReadiness,
-} from '../store.js'
+// Step 2 · Draft — the collaborative risk-assessment table. Agent drafts land
+// amber; humans confirm (or edit) them. Printing/signing live in later steps.
+import { useEffect, useRef, useState } from 'react'
+import { useStore, update, data, uid, riskOf, bandOf } from '../store.js'
 import { t, pick } from '../i18n.js'
-import { exportXlsx, exportBackup, importBackup } from '../export.js'
+import Icon from '../Icons.jsx'
 
 const ORIGIN_BADGE = { agent: 'badge_agent', import: 'badge_import', library: 'badge_library' }
 
@@ -23,11 +17,34 @@ function RiskChip({ l, s: sev, lang }) {
   )
 }
 
-export default function Assessment() {
+function ImportGuide({ lang }) {
+  const [copied, setCopied] = useState(false)
+  return (
+    <aside className="import-guide">
+      <h4><Icon name="file" size={15} /> {t(lang, 'import_title')}</h4>
+      <p>{t(lang, 'import_sub')}</p>
+      <div className="import-formats">{t(lang, 'import_formats')}</div>
+      <div className="import-prompt">
+        <code>“{t(lang, 'import_prompt')}”</code>
+        <button
+          onClick={() => {
+            navigator.clipboard?.writeText(t(lang, 'import_prompt'))
+            setCopied(true)
+            setTimeout(() => setCopied(false), 1500)
+          }}
+        >
+          {copied ? t(lang, 'copied') : t(lang, 'copy')}
+        </button>
+      </div>
+      <p className="fine-print">{t(lang, 'import_fallback')}</p>
+    </aside>
+  )
+}
+
+export default function Step2Draft() {
   const s = useStore()
   const lang = s.lang
   const tableRef = useRef(null)
-  const fileRef = useRef(null)
   const flaggedIds = s.reviewFlag?.ids || []
 
   useEffect(() => {
@@ -37,28 +54,21 @@ export default function Assessment() {
     }
   }, [s.reviewFlag?.ts])
 
-  const setDoc = (patch) => update((st) => Object.assign(st.assessment, patch))
   const setRow = (id, patch) =>
     update((st) => {
       const r = st.assessment.rows.find((x) => x.id === id)
       if (r) Object.assign(r, patch)
     })
 
-  const addRow = (row = {}) =>
+  const addRow = () =>
     update((st) => {
       st.assessment.rows.push({
         id: uid(),
-        process: '',
-        hazard: '',
-        cause: '',
-        likelihood: 2,
-        severity: 2,
-        current_controls: '',
-        measures: '',
-        status: 'open',
-        origin: 'human',
+        process: '', hazard: '', cause: '',
+        likelihood: 2, severity: 2,
+        current_controls: '', measures: '',
+        status: 'open', origin: 'human',
         human_confirmed: true, // a human typed it themselves
-        ...row,
       })
     })
 
@@ -73,22 +83,15 @@ export default function Assessment() {
       for (const h of seeds) {
         st.assessment.rows.push({
           id: uid(),
-          process: pick(h.process, 'ko'),
-          hazard: pick(h.hazard, 'ko'),
-          cause: pick(h.cause, 'ko'),
-          likelihood: h.likelihood,
-          severity: h.severity,
-          current_controls: pick(h.current_controls, 'ko'),
-          measures: pick(h.measures, 'ko'),
-          status: 'open',
-          origin: 'library',
-          human_confirmed: false,
+          process: pick(h.process, 'ko'), hazard: pick(h.hazard, 'ko'), cause: pick(h.cause, 'ko'),
+          likelihood: h.likelihood, severity: h.severity,
+          current_controls: pick(h.current_controls, 'ko'), measures: pick(h.measures, 'ko'),
+          status: 'open', origin: 'library', human_confirmed: false,
         })
       }
     })
   }
 
-  const readiness = s.readinessCheckedAt ? computeReadiness(s) : null
   const unconfirmed = s.assessment.rows.filter((r) => !r.human_confirmed).length
 
   return (
@@ -96,162 +99,151 @@ export default function Assessment() {
       {s.reviewFlag && (
         <div className="review-banner">
           <span>
-            <strong>{t(lang, 'agent_asks')}:</strong> {s.reviewFlag.note || `${flaggedIds.length} rows`}
+            <Icon name="bot" size={15} /> <strong>{t(lang, 'agent_asks')}:</strong>{' '}
+            {s.reviewFlag.note || `${flaggedIds.length} rows`}
           </span>
           <button onClick={() => update((st) => { st.reviewFlag = null })}>{t(lang, 'dismiss')}</button>
         </div>
       )}
 
-      <div className="doc-meta">
-        <h2>{t(lang, 'assessment_title')}</h2>
-        <span className="method">{t(lang, 'assessment_method')}</span>
-        <div className="doc-fields">
-          <label>
-            {t(lang, 'doc_title')}
-            <input value={s.assessment.title} onChange={(e) => setDoc({ title: e.target.value })} placeholder="2026 하반기 위험성평가" />
-          </label>
-          <label>
-            {t(lang, 'doc_date')}
-            <input type="date" value={s.assessment.date} onChange={(e) => setDoc({ date: e.target.value })} />
-          </label>
-          <label>
-            {t(lang, 'doc_preparer')}
-            <input value={s.assessment.preparedBy} onChange={(e) => setDoc({ preparedBy: e.target.value })} placeholder="홍길동" />
-          </label>
-        </div>
+      <div className="step-head">
+        <h2>{t(lang, 'draft_title')}</h2>
+        <p className="sub">{t(lang, 'draft_sub')}</p>
       </div>
 
-      <div className="toolbar">
-        <button onClick={() => addRow()}>{t(lang, 'add_row')}</button>
-        <button onClick={seedFromLibrary}>{t(lang, 'seed_library')}</button>
-        <button onClick={() => update((st) => { st.readinessCheckedAt = Date.now() })}>{t(lang, 'check_readiness')}</button>
-        <span className="spacer" />
-        <button onClick={() => exportXlsx(s)}>{t(lang, 'export_xlsx')}</button>
-        <button onClick={() => exportBackup(s)}>{t(lang, 'backup_json')}</button>
-        <button onClick={() => fileRef.current?.click()}>{t(lang, 'restore_json')}</button>
-        <input
-          ref={fileRef}
-          type="file"
-          accept=".json"
-          hidden
-          onChange={(e) => {
-            const f = e.target.files?.[0]
-            if (f) importBackup(f, (parsed) => update((st) => Object.assign(st, parsed)))
-            e.target.value = ''
-          }}
-        />
-        <button className="primary" onClick={() => window.print()}>{t(lang, 'print_pack')}</button>
-      </div>
+      <div className="draft-layout">
+        <div className="draft-main">
+          <div className="toolbar">
+            <label className="title-field">
+              {t(lang, 'doc_title')}
+              <input
+                value={s.assessment.title}
+                onChange={(e) => update((st) => { st.assessment.title = e.target.value })}
+                placeholder="2026 하반기 위험성평가"
+              />
+            </label>
+            <span className="spacer" />
+            <button onClick={addRow}>+ {t(lang, 'add_row')}</button>
+            <button onClick={seedFromLibrary}>{t(lang, 'seed_library')}</button>
+          </div>
 
-      {unconfirmed > 0 && (
-        <div className="unconfirmed-note">⚠ {unconfirmed} {t(lang, 'review_needed')}</div>
-      )}
+          {unconfirmed > 0 && (
+            <div className="unconfirmed-note"><Icon name="alert" size={14} /> {unconfirmed} {t(lang, 'review_needed')}</div>
+          )}
 
-      {readiness && (
-        <div className={'readiness' + (readiness.ready ? ' ok' : '')}>
-          <strong>{t(lang, 'readiness_title')}: </strong>
-          {readiness.ready ? (
-            <span>✅ {t(lang, 'ready_yes')}</span>
-          ) : (
-            <ul>
-              {readiness.blockers.map((b) => (
-                <li key={b.code}>
-                  <span className={'who-chip ' + b.who}>{t(lang, b.who === 'human' ? 'who_you' : 'who_agent')}</span>{' '}
-                  {t(lang, 'R_' + b.code)}
-                  {b.rows.length > 0 && <em> ({b.rows.length})</em>}
+          {s.assessment.rows.length === 0 ? (
+            <div className="empty-state">
+              <h3>{t(lang, 'no_rows_title')}</h3>
+              <ol className="start-ways">
+                <li><Icon name="bot" size={16} /> {t(lang, 'no_rows_agent')}</li>
+                <li>
+                  <Icon name="file" size={16} /> {t(lang, 'no_rows_import')} <code>“{t(lang, 'import_prompt')}”</code>
                 </li>
-              ))}
-            </ul>
+                <li>
+                  <Icon name="user" size={16} /> {t(lang, 'no_rows_manual')}{' '}
+                  <button className="inline-btn" onClick={addRow}>+ {t(lang, 'add_row')}</button>{' '}
+                  <button className="inline-btn" onClick={seedFromLibrary}>{t(lang, 'seed_library')}</button>
+                </li>
+              </ol>
+            </div>
+          ) : (
+            <div className="table-wrap" ref={tableRef}>
+              <table className="risk-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>{t(lang, 'col_process')}</th>
+                    <th>{t(lang, 'col_hazard')} / {t(lang, 'col_cause')}</th>
+                    <th>{t(lang, 'col_l')}</th>
+                    <th>{t(lang, 'col_s')}</th>
+                    <th>{t(lang, 'col_risk')}</th>
+                    <th>{t(lang, 'col_controls')} → {t(lang, 'col_measures')}</th>
+                    <th>{t(lang, 'col_status')}</th>
+                    <th>{t(lang, 'col_review')}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {s.assessment.rows.map((r, i) => {
+                    const locked = r.human_confirmed
+                    return (
+                      <tr key={r.id} className={(flaggedIds.includes(r.id) ? 'flagged ' : '') + (locked ? 'locked' : 'draft')}>
+                        <td className="num">{i + 1}</td>
+                        <td>
+                          <input value={r.process} onChange={(e) => setRow(r.id, { process: e.target.value })} />
+                          {r.origin !== 'human' && (
+                            <span className={'origin-badge ' + r.origin}>
+                              {t(lang, ORIGIN_BADGE[r.origin])}
+                              {r.imported_from ? `: ${r.imported_from}` : ''}
+                            </span>
+                          )}
+                        </td>
+                        <td>
+                          <input value={r.hazard} onChange={(e) => setRow(r.id, { hazard: e.target.value })} placeholder={t(lang, 'col_hazard')} />
+                          <input className="dim" value={r.cause} onChange={(e) => setRow(r.id, { cause: e.target.value })} placeholder={t(lang, 'col_cause')} />
+                        </td>
+                        <td>
+                          <select value={r.likelihood} onChange={(e) => setRow(r.id, { likelihood: Number(e.target.value) })}>
+                            {[1, 2, 3].map((n) => <option key={n}>{n}</option>)}
+                          </select>
+                        </td>
+                        <td>
+                          <select value={r.severity} onChange={(e) => setRow(r.id, { severity: Number(e.target.value) })}>
+                            {[1, 2, 3].map((n) => <option key={n}>{n}</option>)}
+                          </select>
+                        </td>
+                        <td><RiskChip l={r.likelihood} s={r.severity} lang={lang} /></td>
+                        <td>
+                          <input className="dim" value={r.current_controls} onChange={(e) => setRow(r.id, { current_controls: e.target.value })} placeholder={t(lang, 'col_controls')} />
+                          <input value={r.measures} onChange={(e) => setRow(r.id, { measures: e.target.value })} placeholder={t(lang, 'col_measures')} />
+                        </td>
+                        <td>
+                          <select value={r.status} onChange={(e) => setRow(r.id, { status: e.target.value })}>
+                            <option value="open">{t(lang, 'status_open')}</option>
+                            <option value="progress">{t(lang, 'status_progress')}</option>
+                            <option value="done">{t(lang, 'status_done')}</option>
+                          </select>
+                        </td>
+                        <td className="row-actions">
+                          {locked ? (
+                            <>
+                              <span className="confirmed-mark"><Icon name="check" size={13} /> {t(lang, 'confirmed')}</span>
+                              {r.origin !== 'human' && (
+                                <button className="tiny" onClick={() => setRow(r.id, { human_confirmed: false })}>{t(lang, 'unlock')}</button>
+                              )}
+                            </>
+                          ) : (
+                            <button className="confirm-btn" onClick={() => setRow(r.id, { human_confirmed: true })}>
+                              <Icon name="check" size={13} /> {t(lang, 'confirm')}
+                            </button>
+                          )}
+                          <button
+                            className="tiny danger"
+                            onClick={() => update((st) => { st.assessment.rows = st.assessment.rows.filter((x) => x.id !== r.id) })}
+                          >
+                            {t(lang, 'delete_row')}
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          <div className="legend">{t(lang, 'legend')}</div>
+
+          {s.assessment.rows.length > 0 && (
+            <div className="next-cta">
+              <button className="primary big" onClick={() => update((st) => { st.tab = 'review' })}>
+                {t(lang, 'step2_next')}
+              </button>
+            </div>
           )}
         </div>
-      )}
 
-      {s.assessment.rows.length === 0 ? (
-        <div className="empty-state">{t(lang, 'no_rows')}</div>
-      ) : (
-        <div className="table-wrap" ref={tableRef}>
-          <table className="risk-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>{t(lang, 'col_process')}</th>
-                <th>{t(lang, 'col_hazard')} / {t(lang, 'col_cause')}</th>
-                <th>{t(lang, 'col_l')}</th>
-                <th>{t(lang, 'col_s')}</th>
-                <th>{t(lang, 'col_risk')}</th>
-                <th>{t(lang, 'col_controls')} → {t(lang, 'col_measures')}</th>
-                <th>{t(lang, 'col_status')}</th>
-                <th>{t(lang, 'col_review')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {s.assessment.rows.map((r, i) => {
-                const locked = r.human_confirmed
-                return (
-                  <tr key={r.id} className={(flaggedIds.includes(r.id) ? 'flagged ' : '') + (locked ? 'locked' : 'draft')}>
-                    <td className="num">{i + 1}</td>
-                    <td>
-                      <input value={r.process} onChange={(e) => setRow(r.id, { process: e.target.value })} />
-                      {r.origin !== 'human' && (
-                        <span className={'origin-badge ' + r.origin}>
-                          {t(lang, ORIGIN_BADGE[r.origin])}
-                          {r.imported_from ? `: ${r.imported_from}` : ''}
-                        </span>
-                      )}
-                    </td>
-                    <td>
-                      <input value={r.hazard} onChange={(e) => setRow(r.id, { hazard: e.target.value })} placeholder={t(lang, 'col_hazard')} />
-                      <input className="dim" value={r.cause} onChange={(e) => setRow(r.id, { cause: e.target.value })} placeholder={t(lang, 'col_cause')} />
-                    </td>
-                    <td>
-                      <select value={r.likelihood} onChange={(e) => setRow(r.id, { likelihood: Number(e.target.value) })}>
-                        {[1, 2, 3].map((n) => <option key={n}>{n}</option>)}
-                      </select>
-                    </td>
-                    <td>
-                      <select value={r.severity} onChange={(e) => setRow(r.id, { severity: Number(e.target.value) })}>
-                        {[1, 2, 3].map((n) => <option key={n}>{n}</option>)}
-                      </select>
-                    </td>
-                    <td><RiskChip l={r.likelihood} s={r.severity} lang={lang} /></td>
-                    <td>
-                      <input className="dim" value={r.current_controls} onChange={(e) => setRow(r.id, { current_controls: e.target.value })} placeholder={t(lang, 'col_controls')} />
-                      <input value={r.measures} onChange={(e) => setRow(r.id, { measures: e.target.value })} placeholder={t(lang, 'col_measures')} />
-                    </td>
-                    <td>
-                      <select value={r.status} onChange={(e) => setRow(r.id, { status: e.target.value })}>
-                        <option value="open">{t(lang, 'status_open')}</option>
-                        <option value="progress">{t(lang, 'status_progress')}</option>
-                        <option value="done">{t(lang, 'status_done')}</option>
-                      </select>
-                    </td>
-                    <td className="row-actions">
-                      {locked ? (
-                        <>
-                          <span className="confirmed-mark">✓ {t(lang, 'confirmed')}</span>
-                          {r.origin !== 'human' && (
-                            <button className="tiny" onClick={() => setRow(r.id, { human_confirmed: false })}>{t(lang, 'unlock')}</button>
-                          )}
-                        </>
-                      ) : (
-                        <button className="confirm-btn" onClick={() => setRow(r.id, { human_confirmed: true })}>{t(lang, 'confirm')}</button>
-                      )}
-                      <button
-                        className="tiny danger"
-                        onClick={() => update((st) => { st.assessment.rows = st.assessment.rows.filter((x) => x.id !== r.id) })}
-                      >
-                        {t(lang, 'delete_row')}
-                      </button>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
-      )}
-
-      <div className="legend">{t(lang, 'legend')}</div>
+        <ImportGuide lang={lang} />
+      </div>
     </div>
   )
 }

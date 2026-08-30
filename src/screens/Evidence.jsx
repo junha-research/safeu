@@ -1,19 +1,42 @@
-import React, { useState } from 'react'
+// Step 3 · Review & sign — deliberately human-only: row-confirmation status,
+// worker participation record, preparer/date. No WebMCP tool writes here.
+import { useState } from 'react'
 import { useStore, update } from '../store.js'
 import { t } from '../i18n.js'
+import Icon from '../Icons.jsx'
 
-const OFFICIAL_FORM_URL = 'https://www.law.go.kr/lsBylInfoPLinkR.do?lsiSeq=267607&lsNm=%EC%82%B0%EC%97%85%EC%95%88%EC%A0%84%EB%B3%B4%EA%B1%B4%EB%B2%95+%EC%8B%9C%ED%96%89%EA%B7%9C%EC%B9%99&bylNo=0030&bylBrNo=00&bylCls=BF'
-
-export default function Evidence() {
+export default function Step3Review() {
   const s = useStore()
   const lang = s.lang
-  const [copied, setCopied] = useState(false)
   const setPart = (patch) => update((st) => Object.assign(st.participation, patch))
+  // Local raw text so Enter/newlines survive typing; the store keeps the clean list.
+  const [workersRaw, setWorkersRaw] = useState(s.participation.workers.join('\n'))
+
+  const unconfirmed = s.assessment.rows.filter((r) => !r.human_confirmed).length
 
   return (
     <div className="evidence">
+      <div className="step-head">
+        <h2>{t(lang, 'review_title')}</h2>
+        <p className="sub">{t(lang, 'review_sub')}</p>
+      </div>
+
+      <section className={'panel' + (unconfirmed ? ' attention' : ' ok')}>
+        <h3><Icon name="check" size={16} /> {t(lang, 'confirm_status_title')}</h3>
+        {unconfirmed === 0 ? (
+          <p className="status-ok">{t(lang, 'confirm_status_all')}</p>
+        ) : (
+          <p className="status-open">
+            <strong>{unconfirmed}</strong> {t(lang, 'confirm_status_open')}{' '}
+            <button className="inline-btn" onClick={() => update((st) => { st.tab = 'draft' })}>
+              {t(lang, 'go_confirm')}
+            </button>
+          </p>
+        )}
+      </section>
+
       <section className="panel human-only">
-        <h2>{t(lang, 'participation_title')}</h2>
+        <h3><Icon name="user" size={16} /> {t(lang, 'participation_title')}</h3>
         <p className="sub">{t(lang, 'participation_sub')}</p>
         <div className="part-form">
           <label>
@@ -31,8 +54,11 @@ export default function Evidence() {
             {t(lang, 'part_workers')}
             <textarea
               rows={4}
-              value={s.participation.workers.join('\n')}
-              onChange={(e) => setPart({ workers: e.target.value.split('\n').map((x) => x.trim()).filter(Boolean) })}
+              value={workersRaw}
+              onChange={(e) => {
+                setWorkersRaw(e.target.value)
+                setPart({ workers: e.target.value.split('\n').map((x) => x.trim()).filter(Boolean) })
+              }}
               placeholder={'김철수\n이영희'}
             />
           </label>
@@ -43,45 +69,34 @@ export default function Evidence() {
         </div>
       </section>
 
-      <section className="panel">
-        <h2>{t(lang, 'import_title')}</h2>
-        <p className="sub">{t(lang, 'import_sub')}</p>
-        <div className="import-formats">{t(lang, 'import_formats')}</div>
-        <div className="import-prompt">
-          <span>{t(lang, 'import_prompt_label')}</span>
-          <code>“{t(lang, 'import_prompt')}”</code>
-          <button
-            onClick={() => {
-              navigator.clipboard?.writeText(t(lang, 'import_prompt'))
-              setCopied(true)
-              setTimeout(() => setCopied(false), 1500)
-            }}
-          >
-            {copied ? t(lang, 'copied') : t(lang, 'copy')}
-          </button>
+      <section className="panel human-only">
+        <h3><Icon name="file" size={16} /> {t(lang, 'sign_title')}</h3>
+        <p className="sub">{t(lang, 'sign_sub')}</p>
+        <div className="part-form">
+          <label>
+            {t(lang, 'doc_preparer')}
+            <input
+              value={s.assessment.preparedBy}
+              onChange={(e) => update((st) => { st.assessment.preparedBy = e.target.value })}
+              placeholder="홍길동"
+            />
+          </label>
+          <label>
+            {t(lang, 'doc_date')}
+            <input
+              type="date"
+              value={s.assessment.date}
+              onChange={(e) => update((st) => { st.assessment.date = e.target.value })}
+            />
+          </label>
         </div>
-        <p className="fine-print">{t(lang, 'import_fallback')}</p>
       </section>
 
-      <section className="panel">
-        <h2>{t(lang, 'accident_title')}</h2>
-        <p className="sub">{t(lang, 'accident_sub')}</p>
-        <a className="ext-link" href={OFFICIAL_FORM_URL} target="_blank" rel="noreferrer">
-          {t(lang, 'accident_link')}
-        </a>
-        <table className="copy-table">
-          <tbody>
-            <tr><th>사업장명</th><td>{s.profile?.companyName || '—'}</td></tr>
-            <tr><th>업종</th><td>{s.profile?.industry || '—'}</td></tr>
-            <tr><th>상시근로자 수</th><td>{s.profile?.workers ?? '—'}</td></tr>
-            <tr><th>위험성평가 실시 여부</th><td>{s.assessment.rows.length > 0 ? `실시 (${s.assessment.date || '날짜 미기입'})` : '미실시'}</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section className="panel note">
-        <p>{t(lang, 'retention_note')}</p>
-      </section>
+      <div className="next-cta">
+        <button className="primary big" onClick={() => update((st) => { st.tab = 'print' })}>
+          {t(lang, 'step3_next')}
+        </button>
+      </div>
     </div>
   )
 }

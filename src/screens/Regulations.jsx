@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useStore, data } from '../store.js'
+import { useState } from 'react'
+import { useStore, update, data } from '../store.js'
 import { t, pick } from '../i18n.js'
 
 export default function Regulations() {
@@ -25,6 +25,9 @@ export default function Regulations() {
 
   return (
     <div className="regulations">
+      <button className="inline-btn back-link" onClick={() => update((st) => { st.tab = 'diagnose' })}>
+        {t(lang, 'back_to_journey')}
+      </button>
       <h2>{t(lang, 'reg_title')}</h2>
       <p className="sub">{t(lang, 'reg_sub')}</p>
       <input

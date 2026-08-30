@@ -1,32 +1,35 @@
-/* Print pack: hide the app, show the documents. */
+/* Print pack styles.
+   Layout/visibility rules live in @media print; the document styles below are
+   unconditional so the standalone HTML export (webview print fallback) can
+   reuse this exact stylesheet. */
 .print-only { display: none; }
 
 @media print {
   .screen-only { display: none !important; }
   .print-only { display: block; }
-
   @page { size: A4; margin: 14mm 12mm; }
-  body { background: #fff; color: #000; font-size: 11px; }
-
+  body { background: #fff; }
   .print-page { page-break-after: always; }
   .print-page:last-child { page-break-after: auto; }
-
-  .print-page h1 { font-size: 18px; margin: 0 0 10px; border-bottom: 2px solid #000; padding-bottom: 6px; }
-  .print-page h2 { font-size: 13px; margin: 14px 0 6px; }
-  .en-sub { font-size: 10px; font-weight: 400; color: #555; margin-left: 8px; }
-
-  .p-meta, .p-rows, .p-sign, .p-sign-grid { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
-  .p-meta th, .p-meta td, .p-rows th, .p-rows td, .p-sign th, .p-sign td,
-  .p-sign-grid th, .p-sign-grid td {
-    border: 1px solid #333; padding: 4px 6px; text-align: left; vertical-align: top;
-  }
-  .p-meta th, .p-rows th, .p-sign th, .p-sign-grid th { background: #eee; font-weight: 700; white-space: nowrap; }
-  .p-rows td { font-size: 10px; }
-  .p-sign td { height: 34px; }
-  .p-sign-grid td { height: 26px; }
-  .p-note { font-size: 9px; color: #444; margin: 6px 0; }
-
-  .poster h1 { font-size: 22px; border: none; }
-  .poster-meta { color: #555; }
-  .poster-rows td, .poster-rows th { font-size: 12px; padding: 8px; }
 }
+
+.print-only { color: #000; font-size: 11px; line-height: 1.5; }
+
+.print-page h1 { font-size: 18px; margin: 0 0 10px; border-bottom: 2px solid #000; padding-bottom: 6px; }
+.print-page h2 { font-size: 13px; margin: 14px 0 6px; }
+.en-sub { font-size: 10px; font-weight: 400; color: #555; margin-left: 8px; }
+
+.p-meta, .p-rows, .p-sign, .p-sign-grid { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+.p-meta th, .p-meta td, .p-rows th, .p-rows td, .p-sign th, .p-sign td,
+.p-sign-grid th, .p-sign-grid td {
+  border: 1px solid #333; padding: 4px 6px; text-align: left; vertical-align: top;
+}
+.p-meta th, .p-rows th, .p-sign th, .p-sign-grid th { background: #eee; font-weight: 700; white-space: nowrap; }
+.p-rows td { font-size: 10px; }
+.p-sign td { height: 34px; }
+.p-sign-grid td { height: 26px; }
+.p-note { font-size: 9px; color: #444; margin: 6px 0; }
+
+.poster h1 { font-size: 22px; border: none; }
+.poster-meta { color: #555; }
+.poster-rows td, .poster-rows th { font-size: 12px; padding: 8px; }

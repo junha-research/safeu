@@ -21,6 +21,8 @@ import {
   computeReadiness,
   BLOCKER_FIX,
   INDUSTRIES,
+  journey,
+  NEXT_ACTION,
 } from './store.js'
 import { pick } from './i18n.js'
 
@@ -90,20 +92,29 @@ const TOOLS = [
     {
       name: 'get_site_status',
       description:
-        'Get the current safeU state: workplace profile, applicable legal duties, risk assessment rows with review status, worker participation record, and inspection readiness. Call this first, and again after any human action.',
+        'Get the current safeU state and journey position. The GOAL of this site is a printed, signed, inspection-ready risk-assessment pack — the journey block tells you which of the 4 steps (diagnose → draft → review & sign → print) is next and what to do. Call this first, and again after any human action.',
       annotations: { readOnlyHint: true },
       inputSchema: { type: 'object', properties: {}, additionalProperties: false },
       async execute() {
         const s = getState()
+        const jr = journey(s)
+        const journeyInfo = {
+          goal: 'An inspection-ready pack (위험성평가표 + worker-participation evidence) the user prints and retains for 3 years.',
+          steps: jr.steps.map((st, i) => ({ step: i + 1, id: st.id, done: st.done })),
+          current_step: jr.current,
+          next_action: NEXT_ACTION[jr.current],
+        }
         if (!s.profile) {
           return {
             profile: null,
+            journey: journeyInfo,
             hint: 'No workplace profile yet. Ask the user for their industry and regular-employee count, then call set_workplace_profile.',
           }
         }
         const rows = s.assessment.rows
         const readiness = computeReadiness(s)
         return {
+          journey: journeyInfo,
           profile: s.profile,
           fine_enforcement_date: enforcementDate(s.profile),
           obligations: applicableObligations(s.profile).map((ob) =>
@@ -178,7 +189,7 @@ const TOOLS = [
         }
       },
     },
-    'dashboard',
+    'diagnose',
     (i) => `set profile: ${i.industry}, ${i.workers} workers`
   ),
 
@@ -308,7 +319,7 @@ const TOOLS = [
         }
       },
     },
-    'assessment',
+    'draft',
     (i) => (i.imported_from ? `imported ${i.rows?.length ?? 0} rows from “${i.imported_from}”` : `drafted ${i.rows?.length ?? 0} risk rows`)
   ),
 
@@ -354,7 +365,7 @@ const TOOLS = [
         return { ok: true, row: updated }
       },
     },
-    'assessment',
+    'draft',
     (i) => `updated row ${i.row_id}`
   ),
 
@@ -386,7 +397,7 @@ const TOOLS = [
         }
       },
     },
-    'assessment',
+    'draft',
     (i) => `asked the user to review ${i.row_ids?.length ?? 0} rows`
   ),
 
@@ -418,7 +429,7 @@ const TOOLS = [
         }
       },
     },
-    'assessment',
+    'print',
     (i, r) => (r.ready ? 'readiness check: READY ✅' : `readiness check: ${r.blockers?.length ?? 0} blockers`)
   ),
 ]

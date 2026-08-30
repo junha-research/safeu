@@ -18,7 +18,7 @@ export const INDUSTRIES = [
 function defaultState() {
   return {
     lang: 'en',
-    tab: 'dashboard',
+    tab: 'diagnose',
     profile: null, // { companyName, industry, workers }
     obligationsDone: {}, // id -> true (human attestation only)
     assessment: {
@@ -35,10 +35,16 @@ function defaultState() {
   }
 }
 
+const VIEWS = ['diagnose', 'draft', 'review', 'print', 'regulations']
+
 function load() {
   try {
     const raw = localStorage.getItem(KEY)
-    if (raw) return { ...defaultState(), ...JSON.parse(raw) }
+    if (raw) {
+      const s = { ...defaultState(), ...JSON.parse(raw) }
+      if (!VIEWS.includes(s.tab)) s.tab = 'diagnose' // migrate pre-journey tab ids
+      return s
+    }
   } catch {
     /* corrupted or unavailable storage — start fresh */
   }
@@ -144,6 +150,41 @@ export function daysUntil(dateStr) {
   return Math.ceil((new Date(dateStr) - Date.now()) / 86400000)
 }
 
+// ---------- journey (the single goal the UI and the agent both drive toward) ----------
+// Goal: an inspection-ready pack (위험성평가표 + 근로자 참여 증빙) printed and retained.
+export function journey(s) {
+  const rows = s.assessment.rows
+  const steps = [
+    { id: 'diagnose', done: !!s.profile },
+    { id: 'draft', done: rows.length > 0 },
+    {
+      id: 'review',
+      done:
+        rows.length > 0 &&
+        rows.every((r) => r.human_confirmed) &&
+        s.participation.workers.length > 0 &&
+        !!s.participation.date &&
+        s.participation.shared &&
+        !!s.assessment.preparedBy &&
+        !!s.assessment.date,
+    },
+    { id: 'print', done: computeReadiness(s).ready },
+  ]
+  const current = steps.find((st) => !st.done)?.id || 'print'
+  return { steps, current }
+}
+
+export const NEXT_ACTION = {
+  diagnose:
+    'Ask the user for their industry and regular-employee count, then call set_workplace_profile. This computes their legal duties.',
+  draft:
+    'Draft risk-assessment rows with add_risk_assessment_rows — interview the user about their work processes, or read a document they provide (HWP/PDF/Excel/photo).',
+  review:
+    'Human-only stage: the user must Confirm each row (step 2 table), record worker participation and sign (step 3 on screen). Use request_human_review to point at rows, then wait.',
+  print:
+    'Call check_inspection_readiness; when ready, tell the user to click Print on step 4. Printing is human-only.',
+}
+
 // ---------- inspection readiness (shared by the tool and the UI panel) ----------
 export function computeReadiness(s) {
   const blockers = []
@@ -173,12 +214,12 @@ export const BLOCKER_FIX = {
   NO_PROFILE: 'AGENT: ask the user for industry and employee count, then call set_workplace_profile.',
   NO_ROWS: 'AGENT: you can fix this — interview the user about their work processes (or read a document they provide) and call add_risk_assessment_rows.',
   UNCONFIRMED_ROWS:
-    'HUMAN: the user must review each highlighted row (adjust ratings if wrong) and click Confirm. Only a human can confirm — worker participation in risk assessment is required by 산업안전보건법 제36조 (2026 amendment).',
+    'HUMAN: the user must review each highlighted row (adjust ratings if wrong) and click Confirm in the step 2 table. Only a human can confirm — worker participation in risk assessment is required by 산업안전보건법 제36조 (2026 amendment).',
   HIGH_RISK_NO_MEASURES: 'AGENT: you can fix this — add concrete reduction measures via update_risk_assessment_row.',
   NO_WORKER_PARTICIPATION:
-    'HUMAN: the user must record participating workers (names, date, meeting or circulation) in the Participation panel on the Evidence tab. An agent cannot legally substitute for worker participation.',
+    'HUMAN: the user must record participating workers (names, date, meeting or circulation) on step 3 (Review & sign). An agent cannot legally substitute for worker participation.',
   RESULT_NOT_SHARED:
-    'HUMAN: the user must actually share/post the results to workers and check the "results shared" box (Evidence tab). Failing to share results carries a fine of up to 5,000,000 KRW.',
+    'HUMAN: the user must actually share/post the results to workers and check the "results shared" box on step 3. Failing to share results carries a fine of up to 5,000,000 KRW.',
   NO_PREPARER_OR_DATE:
-    'HUMAN: the user must enter the preparer name and assessment date on the Risk Assessment tab. Missing signatures/dates are the #1 inspection citation.',
+    'HUMAN: the user must enter the preparer name and assessment date on step 3 (Review & sign). Missing signatures/dates are the #1 inspection citation.',
 }

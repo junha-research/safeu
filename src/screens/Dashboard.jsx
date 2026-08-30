@@ -1,4 +1,4 @@
-import React from 'react'
+// Step 1 · Diagnose — hero (first visit) + 3-question triage + legal duty list.
 import {
   useStore,
   update,
@@ -9,6 +9,7 @@ import {
   daysUntil,
 } from '../store.js'
 import { t, pick } from '../i18n.js'
+import Icon from '../Icons.jsx'
 
 function DutyCard({ ob, lang, done, onToggle }) {
   const kindLabel = ob.kind === 'duty' ? 'legal_duty' : ob.kind === 'incentive' ? 'incentive' : 'recommended'
@@ -26,16 +27,16 @@ function DutyCard({ ob, lang, done, onToggle }) {
       <p className="duty-detail">{pick(ob.detail, lang)}</p>
       <div className="duty-meta">
         <span className="cite-chip" title={t(lang, 'citation')}>
-          §&nbsp;{pick(ob.citation?.law, 'ko')} {ob.citation?.article}
+          § {pick(ob.citation?.law, 'ko')} {ob.citation?.article}
         </span>
-        {ob.penalty && <span className="penalty-chip">⚠ {pick(ob.penalty, lang)}</span>}
+        {ob.penalty && <span className="penalty-chip"><Icon name="alert" size={12} /> {pick(ob.penalty, lang)}</span>}
         {ob.effectiveNote && <span className="note-chip">{pick(ob.effectiveNote, lang)}</span>}
       </div>
     </div>
   )
 }
 
-export default function Dashboard() {
+export default function Step1Diagnose() {
   const s = useStore()
   const lang = s.lang
   const industries = data.obligations?.industries || []
@@ -53,6 +54,25 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard">
+      {!s.profile && (
+        <section className="hero">
+          <span className="hero-kicker">{t(lang, 'hero_kicker')}</span>
+          <h1>{t(lang, 'hero_title')}</h1>
+          <p className="hero-sub">{t(lang, 'hero_sub')}</p>
+          <div className="hero-how">
+            <h3>{t(lang, 'hero_how')}</h3>
+            <ol>
+              {[1, 2, 3, 4].map((n) => (
+                <li key={n}>
+                  <span className="how-n">{n}</span>
+                  {t(lang, 'hero_how' + n)}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      )}
+
       <section className="profile-card">
         <h2>{t(lang, 'setup_title')}</h2>
         <p className="sub">{t(lang, 'setup_sub')}</p>
@@ -67,10 +87,7 @@ export default function Dashboard() {
           </label>
           <label>
             {t(lang, 'industry')}
-            <select
-              value={s.profile?.industry || ''}
-              onChange={(e) => setProfile({ industry: e.target.value })}
-            >
+            <select value={s.profile?.industry || ''} onChange={(e) => setProfile({ industry: e.target.value })}>
               <option value="" disabled>—</option>
               {industries.map((ind) => (
                 <option key={ind.id} value={ind.id}>{pick(ind, lang)}</option>
@@ -88,14 +105,16 @@ export default function Dashboard() {
             />
           </label>
         </div>
-        <div className="agent-hint">{t(lang, 'setup_agent_hint')}</div>
+        <div className="agent-hint">
+          <Icon name="bot" size={15} /> {t(lang, 'hero_agent_hint')}
+        </div>
       </section>
 
       {s.profile && (
         <>
           {enf && daysUntil(enf) > 0 && (
             <div className="countdown">
-              <strong>D-{daysUntil(enf)}</strong>&nbsp;{enf} — {t(lang, 'countdown')}
+              <strong>D-{daysUntil(enf)}</strong> {enf} — {t(lang, 'countdown')}
             </div>
           )}
 
@@ -107,13 +126,16 @@ export default function Dashboard() {
                 ob={ob}
                 lang={lang}
                 done={s.obligationsDone[ob.id]}
-                onToggle={() =>
-                  update((st) => {
-                    st.obligationsDone[ob.id] = !st.obligationsDone[ob.id]
-                  })
-                }
+                onToggle={() => update((st) => { st.obligationsDone[ob.id] = !st.obligationsDone[ob.id] })}
               />
             ))}
+          </div>
+
+          <div className="next-cta">
+            <p>{t(lang, 'step1_next_hint')}</p>
+            <button className="primary big" onClick={() => update((st) => { st.tab = 'draft' })}>
+              {t(lang, 'step1_next')}
+            </button>
           </div>
 
           {incentives.length > 0 && (

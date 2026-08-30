@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { useStore, update, loadData, data } from './store.js'
+import { useEffect, useState } from 'react'
+import { useStore, update, loadData, data, journey } from './store.js'
 import { registerWebMCPTools } from './mcp.js'
 import { t } from './i18n.js'
-import Dashboard from './screens/Dashboard.jsx'
-import Assessment from './screens/Assessment.jsx'
-import Evidence from './screens/Evidence.jsx'
+import Icon from './Icons.jsx'
+import Step1Diagnose from './screens/Dashboard.jsx'
+import Step2Draft from './screens/Assessment.jsx'
+import Step3Review from './screens/Evidence.jsx'
+import Step4Print from './screens/Step4Print.jsx'
 import Regulations from './screens/Regulations.jsx'
 import PrintPack from './screens/PrintPack.jsx'
 
-const TABS = [
-  ['dashboard', 'tab_dashboard'],
-  ['assessment', 'tab_assessment'],
-  ['evidence', 'tab_evidence'],
-  ['regulations', 'tab_regulations'],
+const STEPS = [
+  ['diagnose', 'step1', 'step1_sub'],
+  ['draft', 'step2', 'step2_sub'],
+  ['review', 'step3', 'step3_sub'],
+  ['print', 'step4', 'step4_sub'],
 ]
 
 export default function App() {
@@ -25,74 +27,102 @@ export default function App() {
   useEffect(() => {
     loadData()
     setMcp(registerWebMCPTools())
-    const onActivity = (e) => {
-      const { summary } = e.detail
+    const pushToast = (text, ms = 4500) => {
       const id = Math.random()
-      setToasts((ts) => [...ts, { id, text: `🤖 ${summary}` }])
+      setToasts((ts) => [...ts, { id, text }])
+      setTimeout(() => setToasts((ts) => ts.filter((x) => x.id !== id)), ms)
+    }
+    const onActivity = (e) => {
+      pushToast(`🤖 ${e.detail.summary}`)
       setPulse(true)
       setTimeout(() => setPulse(false), 1200)
-      setTimeout(() => setToasts((ts) => ts.filter((x) => x.id !== id)), 4500)
     }
+    const onToast = (e) => pushToast(e.detail.text, 9000)
     window.addEventListener('safeu-agent-activity', onActivity)
-    return () => window.removeEventListener('safeu-agent-activity', onActivity)
+    window.addEventListener('safeu-toast', onToast)
+    return () => {
+      window.removeEventListener('safeu-agent-activity', onActivity)
+      window.removeEventListener('safeu-toast', onToast)
+    }
   }, [])
+
+  const jr = journey(s)
+  const currentIdx = STEPS.findIndex(([id]) => id === jr.current)
+  const goto = (tab) => update((st) => { st.tab = tab })
 
   return (
     <>
       <div className="screen-only">
         <header className="topbar">
-          <div className="brand">
-            <span className="brand-mark">🦺</span>
+          <button className="brand" onClick={() => goto('diagnose')}>
+            <span className="brand-mark"><Icon name="shield" size={22} /></span>
             <span className="brand-name">safeU</span>
             <span className="brand-tagline">{t(lang, 'tagline')}</span>
-          </div>
+          </button>
           <div className="topbar-right">
+            <button
+              className={'nav-link' + (s.tab === 'regulations' ? ' active' : '')}
+              onClick={() => goto('regulations')}
+            >
+              <Icon name="scale" size={14} /> {t(lang, 'nav_regulations')}
+            </button>
             <span className={'agent-badge' + (mcp.active ? ' on' : '') + (pulse ? ' pulse' : '')} title={mcp.active ? '' : t(lang, 'agent_inactive')}>
               <span className="dot" />
               {mcp.active ? `${mcp.count} ${t(lang, 'agent_active')}` : 'WebMCP off'}
             </span>
-            <button
-              className="lang-toggle"
-              onClick={() => update((st) => { st.lang = st.lang === 'en' ? 'ko' : 'en' })}
-            >
+            <button className="lang-toggle" onClick={() => update((st) => { st.lang = st.lang === 'en' ? 'ko' : 'en' })}>
               {t(lang, 'lang_toggle')}
             </button>
           </div>
         </header>
 
-        {!mcp.active && (
-          <div className="mcp-hint">{t(lang, 'agent_inactive')}</div>
-        )}
+        {!mcp.active && <div className="mcp-hint">{t(lang, 'agent_inactive')}</div>}
 
-        <nav className="tabs">
-          {TABS.map(([id, key]) => (
-            <button
-              key={id}
-              className={'tab' + (s.tab === id ? ' active' : '')}
-              onClick={() => update((st) => { st.tab = id })}
-            >
-              {t(lang, key)}
-            </button>
-          ))}
-        </nav>
+        {s.tab !== 'regulations' && (
+          <nav className="stepper" aria-label="progress">
+            {STEPS.map(([id, key, subKey], i) => {
+              const done = jr.steps[i].done
+              const isCurrent = i === currentIdx && !done
+              return (
+                <button
+                  key={id}
+                  className={
+                    'step' +
+                    (s.tab === id ? ' viewing' : '') +
+                    (done ? ' done' : '') +
+                    (isCurrent ? ' current' : '')
+                  }
+                  onClick={() => goto(id)}
+                >
+                  <span className="step-dot">{done ? <Icon name="check" size={14} /> : i + 1}</span>
+                  <span className="step-label">
+                    <strong>{t(lang, key)}</strong>
+                    <small>{t(lang, subKey)}</small>
+                  </span>
+                  {i < 3 && <span className="step-line" aria-hidden="true" />}
+                </button>
+              )
+            })}
+          </nav>
+        )}
 
         <main className="content">
           {!data.loaded ? (
             <div className="loading">Loading regulation data…</div>
-          ) : s.tab === 'dashboard' ? (
-            <Dashboard />
-          ) : s.tab === 'assessment' ? (
-            <Assessment />
-          ) : s.tab === 'evidence' ? (
-            <Evidence />
+          ) : s.tab === 'diagnose' ? (
+            <Step1Diagnose />
+          ) : s.tab === 'draft' ? (
+            <Step2Draft />
+          ) : s.tab === 'review' ? (
+            <Step3Review />
+          ) : s.tab === 'print' ? (
+            <Step4Print />
           ) : (
             <Regulations />
           )}
         </main>
 
-        <footer className="footer">
-          <span>safeU — WebMCP Challenge 2026 · MIT License · Data: law.go.kr · KOSHA (KOGL) · No sign-up, everything stays in your browser.</span>
-        </footer>
+        <footer className="footer">{t(lang, 'footer')}</footer>
 
         <div className="toasts">
           {toasts.map((x) => (

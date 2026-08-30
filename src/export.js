@@ -1,7 +1,58 @@
-// XLSX export (SheetJS) + JSON backup/restore. Import of user documents is
-// deliberately NOT here — the agent reads files and calls add_risk_assessment_rows.
+// XLSX export (SheetJS) + JSON backup/restore + print fallback. Import of user
+// documents is deliberately NOT here — the agent reads files and calls
+// add_risk_assessment_rows.
 import * as XLSX from 'xlsx'
 import { riskOf, bandOf } from './store.js'
+import printCss from './print.css?raw'
+
+// Agent-browser webviews (ChatGPT in-app / Atlas) silently ignore
+// window.print(). Detect via beforeprint — Chromium fires it synchronously
+// before the dialog opens — and fall back to downloading the pack as a
+// standalone HTML file that auto-prints when opened in a normal browser.
+export function printInspectionPack(onFallback) {
+  let dialogOpened = false
+  const mark = () => { dialogOpened = true }
+  window.addEventListener('beforeprint', mark)
+  try {
+    window.print()
+  } catch {
+    /* fall through to fallback */
+  }
+  window.removeEventListener('beforeprint', mark)
+  if (dialogOpened) return true
+  downloadPrintPackHtml()
+  onFallback?.()
+  return false
+}
+
+export function downloadPrintPackHtml() {
+  const pack = document.querySelector('.print-only')
+  if (!pack) return
+  const html = `<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>safeU — 위험성평가 점검 대비 서류 (Inspection Pack)</title>
+<style>
+body { max-width: 800px; margin: 20px auto; padding: 0 16px;
+  font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; }
+${printCss}
+.print-only { display: block; }
+.print-page { margin-bottom: 40px; }
+</style>
+</head>
+<body>
+<div class="print-only">${pack.innerHTML}</div>
+<script>setTimeout(() => window.print(), 300)</script>
+</body>
+</html>`
+  const blob = new Blob([html], { type: 'text/html' })
+  const a = document.createElement('a')
+  a.href = URL.createObjectURL(blob)
+  a.download = 'safeU-inspection-pack.html'
+  a.click()
+  URL.revokeObjectURL(a.href)
+}
 
 const BAND_KO = { low: '낮음', medium: '보통', high: '높음' }
 
