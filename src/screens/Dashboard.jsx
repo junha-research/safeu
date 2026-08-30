@@ -8,7 +8,7 @@ import {
   enforcementDate,
   daysUntil,
 } from '../store.js'
-import { t, pick } from '../i18n.js'
+import { t, pick, formatArticle } from '../i18n.js'
 import Icon from '../Icons.jsx'
 
 // Duties this app actively solves, and the step that solves them.
@@ -39,7 +39,7 @@ function DutyCard({ ob, lang, done, onToggle, reference }) {
       <p className="duty-detail">{pick(ob.detail, lang)}</p>
       <div className="duty-meta">
         <span className="cite-chip" title={t(lang, 'citation')}>
-          § {pick(ob.citation?.law, 'ko')} {ob.citation?.article}
+          § {pick(ob.citation?.law, lang)} {formatArticle(ob.citation?.article, lang)}
         </span>
         {ob.penalty && <span className="penalty-chip"><Icon name="alert" size={12} /> {pick(ob.penalty, lang)}</span>}
         {ob.effectiveNote && <span className="note-chip">{pick(ob.effectiveNote, lang)}</span>}
@@ -197,7 +197,9 @@ export default function Step1Diagnose() {
                   <div key={ob.id} className="duty-card ghost">
                     <strong>{pick(ob.title, lang)}</strong>
                     <span className="cite-chip">
-                      § {pick(ob.citation?.law, 'ko')} {ob.citation?.article} · ≥{ob.applies?.minWorkers}인
+                      § {pick(ob.citation?.law, lang)} {formatArticle(ob.citation?.article, lang)} · ≥
+                      {ob.applies?.minWorkers}
+                      {lang === 'ko' ? '인' : ' workers'}
                     </span>
                   </div>
                 ))}

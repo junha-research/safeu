@@ -231,7 +231,7 @@ export const BLOCKER_FIX = {
   NO_PROFILE: 'AGENT: ask the user for industry and employee count, then call set_workplace_profile.',
   NO_ROWS: 'AGENT: you can fix this — interview the user about their work processes (or read a document they provide) and call add_risk_assessment_rows.',
   UNCONFIRMED_ROWS:
-    'HUMAN: the user must review each highlighted row (adjust ratings if wrong) and click Confirm in the step 2 table. Only a human can confirm — worker participation in risk assessment is required by 산업안전보건법 제36조 (2026 amendment).',
+    'HUMAN: the user must review each highlighted row (adjust ratings if wrong) and click Confirm in the step 2 table. Only a human can confirm — worker participation in risk assessment is required by OSH Act Art. 36 (산업안전보건법 제36조, 2026 amendment).',
   HIGH_RISK_NO_MEASURES: 'AGENT: you can fix this — add concrete reduction measures via update_risk_assessment_row.',
   NO_WORKER_PARTICIPATION:
     'HUMAN: the user must record participating workers (names, date, meeting or circulation) on step 3 (Review & sign). An agent cannot legally substitute for worker participation.',

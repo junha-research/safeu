@@ -27,7 +27,7 @@ import {
   tbmRows,
   sapaApplicableIdx,
 } from './store.js'
-import { pick } from './i18n.js'
+import { pick, formatArticle } from './i18n.js'
 
 function activity(tool, summary) {
   window.dispatchEvent(new CustomEvent('safeu-agent-activity', { detail: { tool, summary } }))
@@ -61,7 +61,7 @@ function obligationSummary(ob, done) {
     kind: ob.kind,
     title_en: pick(ob.title, 'en'),
     title_ko: pick(ob.title, 'ko'),
-    legal_basis: `${pick(ob.citation?.law, 'ko')} ${ob.citation?.article || ''}`.trim(),
+    legal_basis: `${pick(ob.citation?.law, 'en')} ${formatArticle(ob.citation?.article, 'en')} (${pick(ob.citation?.law, 'ko')} ${ob.citation?.article || ''})`.trim(),
     penalty: ob.penalty ? pick(ob.penalty, 'en') : null,
     note: ob.effectiveNote ? pick(ob.effectiveNote, 'en') : null,
     done_by_human: !!done,
@@ -129,7 +129,7 @@ const TOOLS = [
           ),
           risk_assessment: {
             title: s.assessment.title,
-            method: 'frequency_severity (1-3 × 1-3, 고시 제2024-76호)',
+            method: 'frequency_severity (1-3 × 1-3, MOEL Notice 2024-76)',
             date: s.assessment.date || null,
             prepared_by: s.assessment.preparedBy || null,
             rows: rows.slice(0, 30).map(rowSummary),
@@ -150,13 +150,13 @@ const TOOLS = [
             date: s.tbm.date || null,
             leader: s.tbm.leader || null,
             rows_selected: tbmRows(s).length,
-            note: 'Use prepare_tbm_briefing to draft it. Running the meeting and collecting signatures is human-only; 15 min × attendees counts toward statutory training hours (고시 제2023-63호).',
+            note: 'Use prepare_tbm_briefing to draft it. Running the meeting and collecting signatures is human-only; 15 min × attendees counts toward statutory training hours (MOEL Notice 2023-63).',
           },
           sapa_semiannual_check: {
             period: s.sapaCheck.period || null,
             done: sapaIdx.filter((i) => s.sapaCheck.items[i]?.status === 'done').length,
             total: sapaIdx.length,
-            note: 'Human-only attestation (중처법 시행령 제4조, semiannual). Checked on step 4 — no tool can write it.',
+            note: 'Human-only attestation (Serious Accidents Punishment Act Decree Art. 4, semiannual). Checked on step 4 — no tool can write it.',
           },
           inspection_ready: readiness.ready,
         }
@@ -217,7 +217,7 @@ const TOOLS = [
     {
       name: 'search_regulations',
       description:
-        'Search the bundled Korean safety regulations (산업안전보건법, 중대재해처벌법, risk-assessment notice 고시 제2024-76호). Use this to cite the exact legal basis for any duty, penalty, or measure — users distrust uncited claims.',
+        'Search the bundled Korean safety regulations: the Occupational Safety and Health Act (산업안전보건법), the Serious Accidents Punishment Act (중대재해처벌법), and MOEL risk-assessment Notice 2024-76. Use this to cite the exact legal basis for any duty, penalty, or measure — users distrust uncited claims.',
       annotations: { readOnlyHint: true },
       inputSchema: {
         type: 'object',
@@ -278,7 +278,7 @@ const TOOLS = [
     {
       name: 'add_risk_assessment_rows',
       description:
-        'Add draft rows to the risk assessment table. Rows appear on screen as drafts that a HUMAN must review and confirm — you cannot confirm them. Likelihood and severity are 1–3 (frequency-severity method, 고시 제2024-76호). If the user gives you an existing document (HWP, PDF, Excel, Word, or a photo of a paper form), read it yourself, extract the rows, and pass the file name as imported_from.',
+        'Add draft rows to the risk assessment table. Rows appear on screen as drafts that a HUMAN must review and confirm — you cannot confirm them. Likelihood and severity are 1–3 (frequency-severity method, MOEL Notice 2024-76). If the user gives you an existing document (HWP, PDF, Excel, Word, or a photo of a paper form), read it yourself, extract the rows, and pass the file name as imported_from.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -335,7 +335,7 @@ const TOOLS = [
         return {
           ok: true,
           added,
-          human_action_needed: `${added.length} draft row(s) are highlighted on screen with Confirm buttons. Ask the user to review each row — adjusting ratings if wrong — and click Confirm. Only a human can confirm: worker participation in risk assessment is required by 산업안전보건법 제36조 (2026 amendment, fine up to ₩5,000,000 for excluding workers).`,
+          human_action_needed: `${added.length} draft row(s) are highlighted on screen with Confirm buttons. Ask the user to review each row — adjusting ratings if wrong — and click Confirm. Only a human can confirm: worker participation in risk assessment is required by OSH Act Art. 36 (산업안전보건법 제36조, 2026 amendment — fine up to ₩5,000,000 for excluding workers).`,
         }
       },
     },
@@ -425,7 +425,7 @@ const TOOLS = [
     {
       name: 'prepare_tbm_briefing',
       description:
-        "Prepare a toolbox-meeting (TBM, 작업 전 안전점검회의) briefing sheet from HUMAN-CONFIRMED risk-assessment rows. It becomes the 5th document in the print pack. Running the meeting and collecting attendee signatures is human-only; a documented TBM counts toward statutory safety-training hours (고시 제2023-63호) and the daily unit of 상시평가 (고시 제2023-19호).",
+        'Prepare a toolbox-meeting (TBM) briefing sheet from HUMAN-CONFIRMED risk-assessment rows. It becomes the 5th document in the print pack. Running the meeting and collecting attendee signatures is human-only; a documented TBM counts toward statutory safety-training hours (MOEL Notice 2023-63) and the daily unit of ongoing assessment (MOEL Notice 2023-19).',
       inputSchema: {
         type: 'object',
         properties: {
@@ -466,7 +466,7 @@ const TOOLS = [
           ok: true,
           tbm: { date, leader: leader || getState().tbm.leader || null, rows: chosen.map((r) => ({ id: r.id, process: r.process, hazard: r.hazard })) },
           human_action_needed:
-            'The TBM sheet is now in the print pack (step 4). Only a human (관리감독자) can lead the meeting and collect signatures' +
+            'The TBM sheet is now in the print pack (step 4). Only a human supervisor (관리감독자) can lead the meeting and collect signatures' +
             (leader ? '.' : ' — ask the user for the meeting leader name.') +
             ' 15 minutes × attendees counts toward semiannual training hours.',
         }

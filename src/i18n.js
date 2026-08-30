@@ -53,7 +53,7 @@ const dict = {
 
     // step 2
     draft_title: 'Step 2 · Draft the risk assessment',
-    draft_sub: 'Your agent drafts, drafts stay amber until a human confirms them in step 3. Method: Frequency × Severity (고용노동부고시 제2024-76호).',
+    draft_sub: 'Your agent drafts, drafts stay amber until a human confirms them in step 3. Method: Frequency × Severity (MOEL Notice 2024-76).',
     doc_title: 'Assessment title',
     add_row: 'Add row',
     seed_library: 'Seed from library',
@@ -99,7 +99,7 @@ const dict = {
 
     // step 3
     review_title: 'Step 3 · Review & sign — humans only',
-    review_sub: 'The 2026 amendment of 산업안전보건법 makes this stage law: workers participate, results are shared, a human signs. No agent tool can touch this page’s fields.',
+    review_sub: 'The 2026 amendment of the Occupational Safety and Health Act makes this stage law: workers participate, results are shared, a human signs. No agent tool can touch this page’s fields.',
     confirm_status_title: 'Row confirmation',
     confirm_status_all: 'All rows confirmed by a human.',
     confirm_status_open: 'rows still need a human Confirm in step 2.',
@@ -139,16 +139,16 @@ const dict = {
     export_xlsx: 'Excel (.xlsx)',
     backup_json: 'Backup (JSON)',
     restore_json: 'Restore',
-    retention_note: 'Keep risk-assessment records for 3 years (산업안전보건법 시행규칙 제37조의4; fine up to ₩3,000,000). This site stores data only in your browser — download a Backup copy.',
-    accident_title: 'If an accident happens: 산업재해조사표',
+    retention_note: 'Keep risk-assessment records for 3 years (OSH Act Enforcement Rule Art. 37-4; fine up to ₩3,000,000). This site stores data only in your browser — download a Backup copy.',
+    accident_title: 'If an accident happens: the accident report (산업재해조사표)',
     accident_sub: 'A death, or an injury requiring 3+ days off work, must be reported within 1 month (fine: up to ₩15,000,000). This is the one document you actually submit — use the official form; your data below is ready to copy.',
-    accident_link: 'Official form (별지 제30호서식) on law.go.kr →',
+    accident_link: 'Official form (attached Form 30, 별지 제30호서식) on law.go.kr →',
 
     // TBM
-    tbm_title: 'TBM briefing (작업 전 안전점검회의)',
-    tbm_sub: 'A morning toolbox meeting built from your confirmed high-risk rows. A documented TBM counts toward statutory training hours (고시 제2023-63호) and is the daily unit of ongoing risk assessment (고시 제2023-19호) — one page, two legal credits.',
+    tbm_title: 'TBM briefing (toolbox meeting)',
+    tbm_sub: 'A morning toolbox meeting built from your confirmed high-risk rows. A documented TBM counts toward statutory training hours (MOEL Notice 2023-63) and is the daily unit of ongoing risk assessment (MOEL Notice 2023-19) — one page, two legal credits.',
     tbm_date: 'Meeting date',
-    tbm_leader: 'Leader (관리감독자)',
+    tbm_leader: 'Leader (supervisor, 관리감독자)',
     tbm_rows: 'Briefing topics',
     tbm_rows_auto: 'Auto-selected from confirmed high-risk rows.',
     tbm_badge: '15 min × {n} attendees accrues toward semiannual training hours',
@@ -177,7 +177,7 @@ const dict = {
 
     // regulations
     reg_title: 'Regulation library',
-    reg_sub: 'Curated articles from 산업안전보건법, 중대재해처벌법 and the risk-assessment notice. Statutes carry no copyright (저작권법 제7조).',
+    reg_sub: 'Curated articles from the Occupational Safety and Health Act, the Serious Accidents Punishment Act, and the risk-assessment notice — Korean originals included (statutes carry no copyright, Copyright Act Art. 7).',
     reg_search: 'Search regulations… (e.g. “worker participation”, 위험성평가)',
     reg_original: 'Korean original',
     reg_source: 'Source',
@@ -372,4 +372,22 @@ export function pick(field, lang) {
   if (field == null) return ''
   if (typeof field === 'string') return field
   return field[lang] ?? field.en ?? field.ko ?? ''
+}
+
+// Korean statute article notation → English (e.g. 제29조제1항 → Art. 29(1),
+// 제128조의2 → Art. 128-2, 제17조·제18조 → Art. 17 & 18). KO passes through.
+export function formatArticle(article, lang) {
+  if (!article || lang === 'ko') return article || ''
+  return article
+    .replace(/시행규칙/g, 'Enforcement Rule ')
+    .replace(/시행령/g, 'Enforcement Decree ')
+    .replace(/별표\s*(\d+)/g, 'attached Table $1')
+    .replace(/별지\s*제(\d+)호서식/g, 'attached Form $1')
+    .replace(/제(\d+)조의(\d+)/g, 'Art. $1-$2')
+    .replace(/제(\d+)조/g, 'Art. $1')
+    .replace(/제(\d+)항/g, '($1)')
+    .replace(/제(\d+)호/g, 'no. $1')
+    .replace(/Art\.\s*(\d+(?:-\d+)?(?:\(\d+\))?)\s*·\s*Art\.\s*/g, 'Art. $1 & ')
+    .replace(/\s+/g, ' ')
+    .trim()
 }
