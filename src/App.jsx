@@ -46,6 +46,10 @@ export default function App() {
     }
   }, [])
 
+  useEffect(() => {
+    window.scrollTo(0, 0) // SPA view switch keeps scroll position otherwise
+  }, [s.tab])
+
   const jr = journey(s)
   const currentIdx = STEPS.findIndex(([id]) => id === jr.current)
   const goto = (tab) => update((st) => { st.tab = tab })
