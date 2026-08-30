@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCP & WebMCP 기초</title>
+<style>
+  body { max-width: 720px; margin: 40px auto; padding: 0 20px;
+         font-family: -apple-system, "Apple SD Gothic Neo", sans-serif;
+         line-height: 1.7; color: #222; }
+  h1 { font-size: 1.6em; border-bottom: 2px solid #222; padding-bottom: 8px; }
+  h2 { font-size: 1.2em; margin-top: 2em; }
+  h3 { font-size: 1.05em; margin-top: 1.5em; }
+  code, pre { background: #f4f4f4; border-radius: 4px; font-size: 0.9em; }
+  code { padding: 2px 5px; }
+  pre { padding: 14px; overflow-x: auto; }
+  .point { background: #fffbe6; border-left: 4px solid #f0c000; padding: 10px 14px; }
+  table { border-collapse: collapse; width: 100%; }
+  td, th { border: 1px solid #ddd; padding: 8px; text-align: left; }
+</style>
+</head>
+<body>
+
+<h1>MCP & WebMCP 기초</h1>
+
+<h2>1. MCP (Model Context Protocol)란?</h2>
+<p>Anthropic이 만든 <strong>오픈 프로토콜</strong>. AI 에이전트(Claude, ChatGPT 등)가
+외부 도구·데이터에 접근하는 방식을 표준화한 것이다. "AI용 USB-C 포트"라고 생각하면 된다.</p>
+<table>
+  <tr><th>구성요소</th><th>역할</th></tr>
+  <tr><td><strong>호스트</strong></td><td>AI 앱 (Claude, ChatGPT 데스크톱 등)</td></tr>
+  <tr><td><strong>MCP 서버</strong></td><td>도구를 제공하는 쪽 (내가 만드는 것)</td></tr>
+</table>
+<p>둘 사이 통신은 <strong>JSON-RPC</strong> 메시지로 오간다.
+서버가 제공하는 3가지: <strong>tools</strong>(에이전트가 호출하는 함수),
+<strong>resources</strong>(읽을 수 있는 데이터), <strong>prompts</strong>(템플릿).</p>
+<div class="point">핵심: 도구마다 <code>name</code> + <code>description</code> +
+<code>inputSchema</code>(JSON Schema)를 선언하면, 에이전트가 <em>설명을 읽고 스스로</em>
+언제/어떻게 호출할지 판단한다. 좋은 description이 곧 좋은 도구다.</div>
+
+<h2>2. MCP 서버 코드 예시 (전통적인 MCP)</h2>
+<p>WebMCP 이전의 "원조" MCP는 <strong>별도 프로세스로 도는 서버</strong>다.
+Python이나 TypeScript SDK로 만들고, Claude 데스크톱 같은 호스트가 실행해서 연결한다.</p>
+
+<h3>2-1. Python (FastMCP) — 산업안전 규정 검색 서버</h3>
+<pre># pip install mcp
+from mcp.server.fastmcp import FastMCP
+
+mcp = FastMCP("safety-regulations")   # 서버 이름
+
+@mcp.tool()
+def search_regulations(keyword: str) -> str:
+    """산업안전보건법 조문을 키워드로 검색한다."""
+    # 실제로는 DB나 JSON 파일 검색
+    db = {
+        "위험성평가": "산안법 제36조: 사업주는 위험성평가를 실시해야 한다...",
+        "안전교육":   "산안법 제29조: 정기 안전보건교육 매반기 6~12시간...",
+    }
+    return db.get(keyword, "해당 규정을 찾지 못했습니다.")
+
+@mcp.tool()
+def check_obligations(industry: str, workers: int) -> dict:
+    """업종과 상시근로자 수로 법적 의무 목록을 반환한다."""
+    duties = ["위험성평가 (전 사업장)"]
+    if workers >= 5:
+        duties.append("중대재해처벌법 적용")
+    if workers >= 50:
+        duties.append("안전관리자 선임")
+    return {"industry": industry, "workers": workers, "duties": duties}
+
+if __name__ == "__main__":
+    mcp.run()   # stdio로 호스트와 통신</pre>
+
+<h3>2-2. TypeScript SDK — 같은 내용</h3>
+<pre>// npm install @modelcontextprotocol/sdk zod
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { z } from "zod";
+
+const server = new McpServer({ name: "safety-regulations", version: "1.0.0" });
+
+server.tool(
+  "search_regulations",
+  "산업안전보건법 조문을 키워드로 검색한다.",
+  { keyword: z.string() },                    // inputSchema
+  async ({ keyword }) => ({
+    content: [{ type: "text", text: `검색 결과: ${keyword} 관련 조문...` }]
+  })
+);
+
+const transport = new StdioServerTransport();
+await server.connect(transport);             // stdio로 호스트와 통신</pre>
+
+<h3>2-3. 호스트에 연결 — Claude 데스크톱 설정 예시</h3>
+<pre>// claude_desktop_config.json
+{
+  "mcpServers": {
+    "safety-regulations": {
+      "command": "python",
+      "args": ["/path/to/server.py"]
+    }
+  }
+}</pre>
+<p>이렇게 등록하면 Claude가 대화 중 필요할 때
+<code>search_regulations("위험성평가")</code>를 알아서 호출한다.</p>
+
+<h3>2-4. 내부에서 오가는 실제 메시지 (JSON-RPC)</h3>
+<pre>// 에이전트 → 서버: 도구 호출 요청
+{ "jsonrpc": "2.0", "id": 1, "method": "tools/call",
+  "params": { "name": "search_regulations",
+              "arguments": { "keyword": "위험성평가" } } }
+
+// 서버 → 에이전트: 결과
+{ "jsonrpc": "2.0", "id": 1,
+  "result": { "content": [
+    { "type": "text", "text": "산안법 제36조: ..." } ] } }</pre>
+<div class="point">SDK가 이 JSON-RPC를 전부 감싸주므로 실제로는
+"함수 하나 + 설명 + 스키마"만 쓰면 된다. WebMCP도 같은 철학이다.</div>
+
+<h2>3. WebMCP란?</h2>
+<p>MCP를 <strong>웹페이지 안으로</strong> 가져온 브라우저 표준(W3C 제안).
+별도 서버 프로세스 없이, 페이지의 JavaScript가 직접 도구를 등록한다.</p>
+<pre>document.modelContext.registerTool({
+  name: "search_regulations",
+  description: "산업안전 규정 검색",     // 에이전트가 읽는 설명
+  inputSchema: {                        // JSON Schema
+    type: "object",
+    properties: { keyword: { type: "string" } },
+    required: ["keyword"]
+  },
+  execute: async (input) => {
+    // 페이지 JS 실행 — 반환값이 JSON으로 직렬화되어 에이전트에게 전달
+    return { results: searchLocal(input.keyword) };
+  }
+});</pre>
+<p><code>registerTool</code>만 호출하면 끝 — 브라우저의 에이전트가 자동으로 도구를 발견한다.</p>
+
+<h3>MCP vs WebMCP 비교</h3>
+<table>
+  <tr><th></th><th>MCP (원조)</th><th>WebMCP</th></tr>
+  <tr><td>도구가 사는 곳</td><td>별도 서버 프로세스</td><td>웹페이지의 JS</td></tr>
+  <tr><td>연결 방법</td><td>호스트 설정 파일에 등록</td><td>페이지 방문만으로 자동 발견</td></tr>
+  <tr><td>UI 공유</td><td>없음 (백그라운드)</td><td><strong>사람과 같은 화면 공유</strong></td></tr>
+  <tr><td>설치</td><td>사용자가 서버 설치 필요</td><td>불필요 (URL만 열면 됨)</td></tr>
+</table>
+
+<h2>4. 왜 중요한가</h2>
+<p>기존에는 에이전트가 웹앱을 쓰려면 DOM을 스크래핑하거나 클릭을 흉내내야 했다(느리고 잘 깨짐).
+WebMCP는 페이지가 <strong>구조화된 API를 직접 노출</strong>하므로:</p>
+<ul>
+  <li>에이전트가 정확하고 빠르게 기능을 호출</li>
+  <li><strong>사람과 에이전트가 같은 화면을 공유</strong> — 에이전트가 도구를 호출하면
+      화면 UI도 실시간으로 업데이트</li>
+</ul>
+<div class="point">이게 대회 주제 "humans and agents collaborate on the same live page"의 핵심.
+safeU에서는: 에이전트가 위험성평가 초안을 채우고 → 사람이 같은 화면에서 검토·수정 →
+근로자 참여 확인(법적으로 사람만 가능)은 사람이 직접.</div>
+
+<h2>5. 지원 환경</h2>
+<ul>
+  <li>ChatGPT 인앱 브라우저 — 기본 지원 (단, iframe 안 도구는 무시됨)</li>
+  <li>Chrome 149+ — <code>chrome://flags/#enable-webmcp-testing</code> 플래그 활성화</li>
+  <li>기능 감지: <code>typeof document.modelContext?.registerTool === "function"</code></li>
+</ul>
+<p>주의: 도구 하나하나가 에이전트의 컨텍스트를 소모하므로, 도구는 6~10개로 적게,
+설명은 명확하게 쓰는 것이 좋다.</p>
+
+</body>
+</html>

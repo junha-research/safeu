@@ -1,0 +1,441 @@
+{
+  "industries": [
+    { "id": "manufacturing_metal", "en": "Metal & machinery manufacturing", "ko": "금속·기계 제조업" },
+    { "id": "manufacturing_food", "en": "Food manufacturing", "ko": "식품 제조업" },
+    { "id": "manufacturing_chemical", "en": "Chemical-handling manufacturing", "ko": "화학물질 취급 제조업" },
+    { "id": "construction", "en": "Construction", "ko": "건설업" },
+    { "id": "logistics_warehouse", "en": "Transport & warehousing", "ko": "운수·창고업" },
+    { "id": "wholesale_retail", "en": "Wholesale & retail trade", "ko": "도소매업" },
+    { "id": "restaurant", "en": "Restaurant & food service", "ko": "음식점업" },
+    { "id": "other_service", "en": "Other services", "ko": "기타 서비스업" }
+  ],
+  "obligations": [
+    {
+      "id": "risk-assessment",
+      "category": "assessment",
+      "kind": "duty",
+      "title": {
+        "en": "Conduct workplace risk assessment",
+        "ko": "위험성평가 실시"
+      },
+      "detail": {
+        "en": "Identify hazards, estimate frequency and severity, and implement reduction measures — with worker participation. Run an initial assessment, then a regular (annual) or ongoing assessment; share results with workers and keep records for 3 years (Enforcement Rule Art. 37, MOEL Notice 2024-76).",
+        "ko": "근로자 참여 하에 유해·위험요인을 파악하고 빈도·강도를 추정하여 감소대책을 수립·이행합니다. 최초평가 후 정기(연 1회)·수시 또는 상시평가로 운영하고, 결과를 근로자에게 공유하며 기록을 3년간 보존해야 합니다(시행규칙 제37조, 고용노동부고시 제2024-76호)."
+      },
+      "citation": {
+        "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+        "article": "제36조",
+        "url": "https://law.go.kr/법령/산업안전보건법/제36조"
+      },
+      "penalty": {
+        "en": "Failure to assess: fine 5M/7M/10M KRW (1st/2nd/3rd). No worker participation or no result sharing: up to 5M KRW each. Failure to keep records: up to 3M KRW.",
+        "ko": "미실시 과태료 500/700/1,000만원(1·2·3차), 근로자 미참여·결과 미공유 각 최대 500만원, 기록 미보존 최대 300만원 (2026-01 개정 신설)"
+      },
+      "effectiveNote": {
+        "en": "Mandatory from 2026-06-01. Fines apply from 2027-01-01 (50+ workers) and 2028-01-01 (under 50 workers).",
+        "ko": "2026-06-01부터 의무 시행. 과태료 부과는 50인 이상 2027-01-01, 50인 미만 2028-01-01부터."
+      },
+      "applies": { "minWorkers": 1, "maxWorkers": null, "industries": "all", "constructionOnly": false }
+    },
+    {
+      "id": "safety-education-regular",
+      "category": "education",
+      "kind": "duty",
+      "title": {
+        "en": "Regular safety and health training",
+        "ko": "정기 안전보건교육"
+      },
+      "detail": {
+        "en": "Provide regular safety and health training every half-year: at least 6 hours for office/sales workers and 12 hours for all other workers (Enforcement Rule attached Table 4). Keep attendance records.",
+        "ko": "매반기 정기 안전보건교육을 실시합니다: 사무직·판매업무 직접 종사 근로자 반기 6시간 이상, 그 외 근로자 반기 12시간 이상(시행규칙 별표4). 교육일지 등 실시 근거를 보관하세요."
+      },
+      "citation": {
+        "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+        "article": "제29조제1항",
+        "url": "https://law.go.kr/법령/산업안전보건법/제29조"
+      },
+      "penalty": {
+        "en": "Fine up to 5M KRW (Art. 175(5)).",
+        "ko": "미실시 과태료 최대 500만원(제175조제5항)"
+      },
+      "effectiveNote": {
+        "en": "Not required for workplaces with fewer than 5 workers; also exempt for retail and certain service sectors with fewer than 50 workers (Enforcement Decree attached Table 1).",
+        "ko": "5인 미만 사업장은 적용 제외. 소매업(자동차 제외)·기타 개인서비스업 등 시행령 별표1 업종은 50인 미만인 경우에도 교육 의무 제외."
+      },
+      "applies": { "minWorkers": 5, "maxWorkers": null, "industries": "all", "constructionOnly": false }
+    },
+    {
+      "id": "safety-education-supervisor",
+      "category": "education",
+      "kind": "duty",
+      "title": {
+        "en": "Supervisor safety training (16h/year)",
+        "ko": "관리감독자 정기교육 (연 16시간)"
+      },
+      "detail": {
+        "en": "Persons in a supervisory position (관리감독자) must receive at least 16 hours of safety and health training per year, in place of the regular half-yearly training (Enforcement Rule attached Table 4).",
+        "ko": "관리감독자 지위에 있는 사람은 일반 정기교육 대신 연간 16시간 이상의 정기교육을 이수해야 합니다(시행규칙 별표4). 일부는 인터넷 원격교육·집체교육으로 이수 가능합니다."
+      },
+      "citation": {
+        "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+        "article": "제29조제1항",
+        "url": "https://law.go.kr/법령/산업안전보건법/제29조"
+      },
+      "penalty": {
+        "en": "Fine up to 5M KRW (Art. 175(5)).",
+        "ko": "미실시 과태료 최대 500만원(제175조제5항)"
+      },
+      "effectiveNote": {
+        "en": "Not required for workplaces with fewer than 5 workers (Enforcement Decree attached Table 1).",
+        "ko": "5인 미만 사업장은 적용 제외(시행령 별표1)."
+      },
+      "applies": { "minWorkers": 5, "maxWorkers": null, "industries": "all", "constructionOnly": false }
+    },
+    {
+      "id": "safety-education-new-hire",
+      "category": "education",
+      "kind": "duty",
+      "title": {
+        "en": "New-hire safety training (8h)",
+        "ko": "채용 시 안전보건교육 (8시간)"
+      },
+      "detail": {
+        "en": "Provide at least 8 hours of safety and health training when hiring a new worker (shorter hours apply to daily/short-term workers under Enforcement Rule attached Table 4). Complete it at or right after hiring, before hazardous work begins.",
+        "ko": "근로자 채용 시 8시간 이상의 안전보건교육을 실시해야 합니다(일용직·1개월 이하 단기 근로자는 시행규칙 별표4에 따라 단축 적용). 업무 배치 전 실시가 원칙입니다."
+      },
+      "citation": {
+        "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+        "article": "제29조제2항",
+        "url": "https://law.go.kr/법령/산업안전보건법/제29조"
+      },
+      "penalty": {
+        "en": "Fine up to 5M KRW (Art. 175(5)).",
+        "ko": "미실시 과태료 최대 500만원(제175조제5항)"
+      },
+      "effectiveNote": {
+        "en": "Not required for workplaces with fewer than 5 workers; retail and certain service sectors under 50 workers are also exempt (Enforcement Decree attached Table 1).",
+        "ko": "5인 미만 사업장은 적용 제외. 소매업(자동차 제외) 등 시행령 별표1 업종은 50인 미만인 경우에도 제외."
+      },
+      "applies": { "minWorkers": 5, "maxWorkers": null, "industries": "all", "constructionOnly": false }
+    },
+    {
+      "id": "accident-report",
+      "category": "reporting",
+      "kind": "duty",
+      "title": {
+        "en": "Report occupational accidents (within 1 month)",
+        "ko": "산업재해 발생 보고 (1개월 이내)"
+      },
+      "detail": {
+        "en": "If an accident causes death or an injury/illness requiring 3 or more days of leave, submit the occupational accident report form (attached Form No. 30) to the local labor office within 1 month of occurrence (Enforcement Rule Art. 73). Fatal/serious accidents must additionally be reported immediately.",
+        "ko": "사망 또는 3일 이상 휴업이 필요한 재해 발생 시 1개월 이내에 산업재해조사표(별지 제30호서식)를 관할 지방고용노동관서에 제출해야 합니다(시행규칙 제73조). 중대재해는 발생 즉시 지체 없이 보고해야 합니다."
+      },
+      "citation": {
+        "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+        "article": "제57조",
+        "url": "https://law.go.kr/법령/산업안전보건법/제57조"
+      },
+      "penalty": {
+        "en": "Failure to report or false reporting: fine up to 15M KRW.",
+        "ko": "미제출·거짓 제출 시 과태료 최대 1,500만원"
+      },
+      "effectiveNote": null,
+      "applies": { "minWorkers": 1, "maxWorkers": null, "industries": "all", "constructionOnly": false }
+    },
+    {
+      "id": "sapa-management-system",
+      "category": "system",
+      "kind": "duty",
+      "title": {
+        "en": "Serious Accidents Punishment Act: safety management system",
+        "ko": "중대재해처벌법 안전보건관리체계 구축"
+      },
+      "detail": {
+        "en": "The business owner/CEO must build and operate a safety and health management system: set goals, run a hazard identification and improvement process (risk assessment), allocate budget and staff, hear workers' opinions, and prepare emergency manuals (SAPA Art. 4, Enforcement Decree Art. 4).",
+        "ko": "경영책임자는 안전보건 목표 수립, 유해·위험요인 확인·개선 절차(위험성평가) 운영, 예산·전문인력 확보, 종사자 의견 청취, 비상대응 매뉴얼 마련 등 안전보건관리체계를 구축·이행해야 합니다(중처법 제4조, 시행령 제4조)."
+      },
+      "citation": {
+        "law": { "en": "Serious Accidents Punishment Act", "ko": "중대재해 처벌 등에 관한 법률" },
+        "article": "제4조",
+        "url": "https://law.go.kr/법령/중대재해처벌등에관한법률/제4조"
+      },
+      "penalty": {
+        "en": "If a worker dies due to breach of these duties: imprisonment of 1 year or more, or a fine of up to 1 billion KRW for the responsible executive (Art. 6).",
+        "ko": "의무 위반으로 사망자 발생 시 경영책임자에게 1년 이상 징역 또는 10억원 이하 벌금(제6조)"
+      },
+      "effectiveNote": {
+        "en": "Extended to workplaces with 5-49 workers from 2024-01-27. Not applicable under 5 workers.",
+        "ko": "2024-01-27부터 5~49인 사업장에도 확대 적용. 5인 미만은 적용 제외."
+      },
+      "applies": { "minWorkers": 5, "maxWorkers": null, "industries": "all", "constructionOnly": false }
+    },
+    {
+      "id": "supervisor-designation",
+      "category": "staffing",
+      "kind": "duty",
+      "title": {
+        "en": "Designate frontline supervisors (관리감독자)",
+        "ko": "관리감독자 지정"
+      },
+      "detail": {
+        "en": "Managers who directly direct and supervise production-related work (team/line leaders) must perform safety duties: equipment and PPE checks, workplace inspections, and participation in risk assessment.",
+        "ko": "생산 관련 업무와 소속 직원을 직접 지휘·감독하는 부서장·반장 등에게 관리감독자로서 설비·보호구 점검, 작업장 순회점검, 위험성평가 참여 등의 안전보건 업무를 수행하게 해야 합니다."
+      },
+      "citation": {
+        "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+        "article": "제16조",
+        "url": "https://law.go.kr/법령/산업안전보건법/제16조"
+      },
+      "penalty": {
+        "en": "Fine up to 5M KRW (Art. 175(5)).",
+        "ko": "위반 시 과태료 최대 500만원(제175조제5항)"
+      },
+      "effectiveNote": {
+        "en": "Not required for workplaces with fewer than 5 workers (Enforcement Decree attached Table 1).",
+        "ko": "5인 미만 사업장은 적용 제외(시행령 별표1)."
+      },
+      "applies": { "minWorkers": 5, "maxWorkers": null, "industries": "all", "constructionOnly": false }
+    },
+    {
+      "id": "safety-health-manager-20-49",
+      "category": "staffing",
+      "kind": "duty",
+      "title": {
+        "en": "Appoint a safety and health coordinator (20-49 workers, 5 sectors)",
+        "ko": "안전보건관리담당자 선임 (20~49인, 5개 업종)"
+      },
+      "detail": {
+        "en": "Manufacturing, forestry, sewage/wastewater, waste treatment/recycling, and environmental remediation businesses with 20-49 workers must appoint at least one safety and health coordinator (may hold the role concurrently with other duties) (Enforcement Decree Art. 24).",
+        "ko": "제조업, 임업, 하수·폐수 및 분뇨처리업, 폐기물 수집·운반·처리 및 원료재생업, 환경정화 및 복원업의 상시근로자 20~49인 사업장은 안전보건관리담당자를 1명 이상 선임해야 합니다(겸직 가능, 시행령 제24조)."
+      },
+      "citation": {
+        "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+        "article": "제19조",
+        "url": "https://law.go.kr/법령/산업안전보건법/제19조"
+      },
+      "penalty": {
+        "en": "Fine up to 5M KRW (Art. 175(5)).",
+        "ko": "미선임 과태료 최대 500만원(제175조제5항)"
+      },
+      "effectiveNote": null,
+      "applies": {
+        "minWorkers": 20,
+        "maxWorkers": 49,
+        "industries": ["manufacturing_metal", "manufacturing_food", "manufacturing_chemical"],
+        "constructionOnly": false
+      }
+    },
+    {
+      "id": "safety-health-managers-50plus",
+      "category": "staffing",
+      "kind": "duty",
+      "title": {
+        "en": "Appoint safety manager and health manager (50+ workers)",
+        "ko": "안전관리자·보건관리자 선임 (50인 이상)"
+      },
+      "detail": {
+        "en": "Once the workforce reaches 50 (thresholds vary by industry — Enforcement Decree attached Tables 3 and 5), a qualified safety manager and health manager must be appointed. Plan ahead if the company is approaching 50 workers.",
+        "ko": "상시근로자 50인 이상이 되면 업종·규모별 기준(시행령 별표3·별표5)에 따라 자격을 갖춘 안전관리자·보건관리자를 선임해야 합니다. 50인 도달이 가까워지면 미리 준비하세요."
+      },
+      "citation": {
+        "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+        "article": "제17조·제18조",
+        "url": "https://law.go.kr/법령/산업안전보건법/제17조"
+      },
+      "penalty": {
+        "en": "Fine up to 5M KRW (Art. 175(5)).",
+        "ko": "미선임 과태료 최대 500만원(제175조제5항)"
+      },
+      "effectiveNote": {
+        "en": "Applies when the company grows to 50+ workers.",
+        "ko": "50인 이상으로 성장 시 적용되는 의무입니다."
+      },
+      "applies": { "minWorkers": 50, "maxWorkers": null, "industries": "all", "constructionOnly": false }
+    },
+    {
+      "id": "safety-health-officer-50plus",
+      "category": "staffing",
+      "kind": "duty",
+      "title": {
+        "en": "Appoint an overall safety and health officer",
+        "ko": "안전보건관리책임자 선임"
+      },
+      "detail": {
+        "en": "The person who oversees the workplace (e.g. plant manager) must be designated to lead safety and health duties. Thresholds: 50+ workers for manufacturing etc., 100+ for most other sectors, 300+ for some service sectors, and construction projects of 2 billion KRW or more (Enforcement Decree attached Table 2).",
+        "ko": "사업장을 실질적으로 총괄하는 사람(공장장 등)을 안전보건관리책임자로 두어 안전보건 업무를 총괄하게 해야 합니다. 기준: 제조업 등 50인 이상, 그 외 대부분 업종 100인 이상, 일부 서비스업 300인 이상, 건설업은 공사금액 20억원 이상(시행령 별표2)."
+      },
+      "citation": {
+        "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+        "article": "제15조",
+        "url": "https://law.go.kr/법령/산업안전보건법/제15조"
+      },
+      "penalty": {
+        "en": "Fine up to 5M KRW (Art. 175(5)).",
+        "ko": "위반 시 과태료 최대 500만원(제175조제5항)"
+      },
+      "effectiveNote": {
+        "en": "Applies when the company grows to 50+ workers (manufacturing) or meets the industry threshold.",
+        "ko": "제조업 기준 50인 이상 성장 시 적용. 업종별 기준은 시행령 별표2 확인."
+      },
+      "applies": { "minWorkers": 50, "maxWorkers": null, "industries": "all", "constructionOnly": false }
+    },
+    {
+      "id": "osh-committee",
+      "category": "system",
+      "kind": "duty",
+      "title": {
+        "en": "Occupational safety and health committee",
+        "ko": "산업안전보건위원회 구성·운영"
+      },
+      "detail": {
+        "en": "A joint labor-management committee must review and decide safety and health matters. Thresholds (Enforcement Decree attached Table 9): 50+ workers for higher-risk manufacturing (chemicals, metals, machinery etc.), 100+ for most sectors, 300+ for some service sectors, construction projects of 12 billion KRW+ (15 billion for civil engineering).",
+        "ko": "노사 동수로 구성해 안전보건에 관한 사항을 심의·의결합니다. 기준(시행령 별표9): 화학·1차금속·금속가공·기계 등 유해·위험 제조업 50인 이상, 대부분 업종 100인 이상, 일부 서비스업 300인 이상, 건설업 공사금액 120억원(토목공사업 150억원) 이상."
+      },
+      "citation": {
+        "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+        "article": "제24조",
+        "url": "https://law.go.kr/법령/산업안전보건법/제24조"
+      },
+      "penalty": {
+        "en": "Fine up to 5M KRW (Art. 175(5)).",
+        "ko": "미구성·미운영 과태료 최대 500만원(제175조제5항)"
+      },
+      "effectiveNote": {
+        "en": "Applies when the company grows to 50+ workers (higher-risk manufacturing) or meets the industry threshold.",
+        "ko": "유해·위험 제조업 기준 50인 이상 성장 시 적용. 업종별 기준은 시행령 별표9 확인."
+      },
+      "applies": { "minWorkers": 50, "maxWorkers": null, "industries": "all", "constructionOnly": false }
+    },
+    {
+      "id": "safety-health-rules",
+      "category": "system",
+      "kind": "duty",
+      "title": {
+        "en": "Safety and health management rules",
+        "ko": "안전보건관리규정 작성"
+      },
+      "detail": {
+        "en": "Workplaces with 100+ workers (300+ for some service sectors, Enforcement Rule attached Table 2) must prepare written safety and health management rules within 30 days of becoming subject, and update them when changes occur.",
+        "ko": "상시근로자 100인 이상(농업·금융업 등 일부 업종은 300인 이상, 시행규칙 별표2) 사업장은 작성 사유 발생일부터 30일 이내에 안전보건관리규정을 작성하고, 변경 사유 발생 시에도 30일 이내 반영해야 합니다."
+      },
+      "citation": {
+        "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+        "article": "제25조",
+        "url": "https://law.go.kr/법령/산업안전보건법/제25조"
+      },
+      "penalty": {
+        "en": "Fine up to 5M KRW (Art. 175(5)).",
+        "ko": "미작성 과태료 최대 500만원(제175조제5항)"
+      },
+      "effectiveNote": {
+        "en": "Applies when the company grows to 100+ workers.",
+        "ko": "100인 이상 성장 시 적용되는 의무입니다."
+      },
+      "applies": { "minWorkers": 100, "maxWorkers": null, "industries": "all", "constructionOnly": false }
+    },
+    {
+      "id": "msds-management",
+      "category": "health",
+      "kind": "duty",
+      "title": {
+        "en": "Post and keep MSDS for chemicals",
+        "ko": "물질안전보건자료(MSDS) 게시·비치"
+      },
+      "detail": {
+        "en": "If the workplace handles MSDS-subject chemicals (solvents, paints, cutting oil, cleaning/disinfecting agents etc.), the MSDS must be posted or kept where workers handling them can easily see it, and workers must be trained on its contents.",
+        "ko": "MSDS 대상 화학물질(용제, 도료, 절삭유, 세척·소독제 등)을 취급하는 경우 취급 근로자가 쉽게 볼 수 있는 장소에 MSDS를 게시·비치하고, 그 내용을 근로자에게 교육해야 합니다."
+      },
+      "citation": {
+        "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+        "article": "제114조",
+        "url": "https://law.go.kr/법령/산업안전보건법/제114조"
+      },
+      "penalty": {
+        "en": "Failure to post/keep: fine 1M/2M/5M KRW (1st/2nd/3rd) per substance per workplace, up to 5M KRW (Art. 175(5)).",
+        "ko": "미게시·미비치 시 대상 물질별·작업장 1개소당 과태료 100/200/500만원(1·2·3차), 최대 500만원(제175조제5항)"
+      },
+      "effectiveNote": null,
+      "applies": { "minWorkers": 1, "maxWorkers": null, "industries": "all", "constructionOnly": false }
+    },
+    {
+      "id": "general-health-checkup",
+      "category": "health",
+      "kind": "duty",
+      "title": {
+        "en": "General health examinations for workers",
+        "ko": "일반건강진단 실시"
+      },
+      "detail": {
+        "en": "Provide general health examinations: office workers at least once every 2 years, all other workers at least once a year (Enforcement Rule Art. 197). National Health Insurance checkups count as fulfilling this duty.",
+        "ko": "사무직 근로자는 2년에 1회 이상, 그 외 근로자는 1년에 1회 이상 일반건강진단을 실시해야 합니다(시행규칙 제197조). 국민건강보험공단 일반건강검진으로 갈음할 수 있습니다."
+      },
+      "citation": {
+        "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+        "article": "제129조",
+        "url": "https://law.go.kr/법령/산업안전보건법/제129조"
+      },
+      "penalty": {
+        "en": "Fine of 100k/200k/300k KRW (1st/2nd/3rd) per worker not examined (Enforcement Decree attached Table 35).",
+        "ko": "미실시 근로자 1명당 과태료 10/20/30만원(1·2·3차, 시행령 별표35)"
+      },
+      "effectiveNote": null,
+      "applies": { "minWorkers": 1, "maxWorkers": null, "industries": "all", "constructionOnly": false }
+    },
+    {
+      "id": "rest-facility",
+      "category": "facility",
+      "kind": "duty",
+      "title": {
+        "en": "Install a rest facility",
+        "ko": "휴게시설 설치"
+      },
+      "detail": {
+        "en": "Workplaces with 20+ workers (construction: total project cost of 2 billion KRW+), or 10-19 workers with 2 or more workers in 7 designated occupations (call/telemarketing staff, care workers, delivery workers, cleaners, apartment/building guards), must install a rest facility meeting the standards (min. 6 sq.m, 2.1 m height, ventilation, temperature control etc.).",
+        "ko": "상시근로자 20인 이상(건설업은 총공사금액 20억원 이상) 사업장, 또는 10~19인 사업장 중 전화상담원·텔레마케터·돌봄서비스 종사원·배달원·청소원·아파트/건물 경비원 7개 직종 근로자를 2명 이상 사용하는 사업장은 설치·관리기준(바닥면적 6제곱미터·높이 2.1미터 이상, 환기·온도 등)을 갖춘 휴게시설을 설치해야 합니다(시행령 제96조의2)."
+      },
+      "citation": {
+        "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+        "article": "제128조의2",
+        "url": "https://law.go.kr/법령/산업안전보건법/제128조의2"
+      },
+      "penalty": {
+        "en": "No facility: fine up to 15M KRW. Facility not meeting standards: fine up to 10M KRW.",
+        "ko": "미설치 과태료 최대 1,500만원, 설치·관리기준 위반 최대 1,000만원"
+      },
+      "effectiveNote": {
+        "en": "In force for under-50-worker workplaces since 2023-08-18.",
+        "ko": "50인 미만 사업장은 2023-08-18부터 적용 중."
+      },
+      "applies": { "minWorkers": 10, "maxWorkers": null, "industries": "all", "constructionOnly": false }
+    },
+    {
+      "id": "kosha-risk-assessment-incentive",
+      "category": "assessment",
+      "kind": "incentive",
+      "title": {
+        "en": "KOSHA risk assessment recognition: 20% workers' comp discount",
+        "ko": "KOSHA 위험성평가 인정 시 산재보험료 20% 감면"
+      },
+      "detail": {
+        "en": "Manufacturing businesses with fewer than 50 workers that obtain KOSHA recognition of their risk assessment get a 20% reduction in the industrial accident insurance premium rate for 3 years (accident-prevention rate scheme). Free KOSHA consulting is available before applying.",
+        "ko": "50인 미만 제조업 등 사업장이 안전보건공단(KOSHA)의 위험성평가 인정을 받으면 산재예방요율제에 따라 3년간 산재보험료율을 20% 인하받습니다. 신청 전 공단의 무료 컨설팅을 활용할 수 있습니다."
+      },
+      "citation": {
+        "law": { "en": "Employment/Industrial Accident Insurance Premium Collection Act (accident-prevention rate scheme)", "ko": "고용보험 및 산업재해보상보험의 보험료징수 등에 관한 법률(산재예방요율제)" },
+        "article": "제15조",
+        "url": "https://kras.kosha.or.kr/information/danger2_page"
+      },
+      "penalty": null,
+      "effectiveNote": {
+        "en": "Recognition is valid for 3 years. From 2025 the passing score was raised to 90 points (MOEL Notice 2024-76).",
+        "ko": "인정 유효기간 3년. 2025년부터 인정기준이 90점으로 상향(고시 제2024-76호)."
+      },
+      "applies": {
+        "minWorkers": 1,
+        "maxWorkers": 49,
+        "industries": ["manufacturing_metal", "manufacturing_food", "manufacturing_chemical"],
+        "constructionOnly": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+[
+  {
+    "id": "osh-15",
+    "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+    "article": { "en": "Article 15 (Safety and Health Manager)", "ko": "제15조(안전보건관리책임자)" },
+    "ko": "제15조(안전보건관리책임자) ① 사업주는 사업장을 실질적으로 총괄하여 관리하는 사람에게 해당 사업장의 다음 각 호의 업무를 총괄하여 관리하도록 하여야 한다.\n1. 사업장의 산업재해 예방계획의 수립에 관한 사항\n2. 제25조 및 제26조에 따른 안전보건관리규정의 작성 및 변경에 관한 사항\n3. 제29조에 따른 안전보건교육에 관한 사항\n4. 작업환경측정 등 작업환경의 점검 및 개선에 관한 사항\n5. 제129조부터 제132조까지에 따른 근로자의 건강진단 등 건강관리에 관한 사항\n6. 산업재해의 원인 조사 및 재발 방지대책 수립에 관한 사항\n7. 산업재해에 관한 통계의 기록 및 유지에 관한 사항\n8. 안전장치 및 보호구 구입 시 적격품 여부 확인에 관한 사항\n9. 그 밖에 근로자의 유해ㆍ위험 방지조치에 관한 사항으로서 고용노동부령으로 정하는 사항\n② 제1항 각 호의 업무를 총괄하여 관리하는 사람(이하 \"안전보건관리책임자\"라 한다)은 제17조에 따른 안전관리자와 제18조에 따른 보건관리자를 지휘ㆍ감독한다.\n③ 안전보건관리책임자를 두어야 하는 사업의 종류와 사업장의 상시근로자 수, 그 밖에 필요한 사항은 대통령령으로 정한다.",
+    "en": "The employer must designate the person who effectively oversees the workplace as the Safety and Health Manager, responsible for nine duties including accident prevention planning, safety training, risk assessment follow-up, health checkups, and accident statistics. This manager directs and supervises the safety manager and health manager. Which business types and sizes must appoint one is set by Presidential Decree.",
+    "tags": ["안전보건관리책임자", "safety and health manager", "안전보건관리체계", "선임", "총괄관리", "management system", "appointment duty", "산업재해 예방계획"],
+    "sourceUrl": "https://www.law.go.kr/법령/산업안전보건법/제15조"
+  },
+  {
+    "id": "osh-16",
+    "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+    "article": { "en": "Article 16 (Supervisors)", "ko": "제16조(관리감독자)" },
+    "ko": "제16조(관리감독자) ① 사업주는 사업장의 생산과 관련되는 업무와 그 소속 직원을 직접 지휘ㆍ감독하는 직위에 있는 사람(이하 \"관리감독자\"라 한다)에게 산업 안전 및 보건에 관한 업무로서 대통령령으로 정하는 업무를 수행하도록 하여야 한다.\n② 관리감독자가 있는 경우에는 「건설기술 진흥법」 제64조제1항제2호에 따른 안전관리책임자 및 같은 항 제3호에 따른 안전관리담당자를 각각 둔 것으로 본다.",
+    "en": "Front-line supervisors — those who directly direct production work and staff — must be assigned occupational safety and health duties prescribed by Presidential Decree, such as inspecting equipment and checking protective gear. Supervisors are also key participants in risk assessments and receive 16 hours of safety training per year. Having supervisors satisfies certain safety-officer requirements under the Construction Technology Promotion Act.",
+    "tags": ["관리감독자", "supervisor", "라인 관리자", "안전점검", "관리감독자 교육", "supervisor training", "현장 감독", "front-line supervisor"],
+    "sourceUrl": "https://www.law.go.kr/법령/산업안전보건법/제16조"
+  },
+  {
+    "id": "osh-17",
+    "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+    "article": { "en": "Article 17 (Safety Managers)", "ko": "제17조(안전관리자)" },
+    "ko": "제17조(안전관리자) ① 사업주는 사업장에 제15조제1항 각 호의 사항 중 안전에 관한 기술적인 사항에 관하여 사업주 또는 안전보건관리책임자를 보좌하고 관리감독자에게 지도ㆍ조언하는 업무를 수행하는 사람(이하 \"안전관리자\"라 한다)을 두어야 한다.\n② 안전관리자를 두어야 하는 사업의 종류와 사업장의 상시근로자 수, 안전관리자의 수ㆍ자격ㆍ업무ㆍ권한ㆍ선임방법, 그 밖에 필요한 사항은 대통령령으로 정한다.\n③ 대통령령으로 정하는 사업의 종류 및 사업장의 상시근로자 수에 해당하는 사업장의 사업주는 안전관리자에게 그 업무만을 전담하도록 하여야 한다. <신설 2021. 5. 18.>\n④ 고용노동부장관은 산업재해 예방을 위하여 필요한 경우로서 고용노동부령으로 정하는 사유에 해당하는 경우에는 사업주에게 안전관리자를 제2항에 따라 대통령령으로 정하는 수 이상으로 늘리거나 교체할 것을 명할 수 있다. <개정 2021. 5. 18.>\n⑤ 대통령령으로 정하는 사업의 종류 및 사업장의 상시근로자 수에 해당하는 사업장의 사업주는 제21조에 따라 지정받은 안전관리 업무를 전문적으로 수행하는 기관(이하 \"안전관리전문기관\"이라 한다)에 안전관리자의 업무를 위탁할 수 있다. <개정 2021. 5. 18.>",
+    "en": "Workplaces of prescribed types and sizes must appoint a safety manager who assists the employer on technical safety matters and advises supervisors. The number, qualifications, and appointment method are set by Presidential Decree; larger workplaces must make the role full-time. Smaller workplaces may outsource the duties to a designated safety management agency.",
+    "tags": ["안전관리자", "safety manager", "선임 의무", "안전관리전문기관", "outsourcing", "전담 안전관리자", "appointment", "기술적 사항"],
+    "sourceUrl": "https://www.law.go.kr/법령/산업안전보건법/제17조"
+  },
+  {
+    "id": "osh-19",
+    "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+    "article": { "en": "Article 19 (Safety and Health Officers)", "ko": "제19조(안전보건관리담당자)" },
+    "ko": "제19조(안전보건관리담당자) ① 사업주는 사업장에 안전 및 보건에 관하여 사업주를 보좌하고 관리감독자에게 지도ㆍ조언하는 업무를 수행하는 사람(이하 \"안전보건관리담당자\"라 한다)을 두어야 한다. 다만, 안전관리자 또는 보건관리자가 있거나 이를 두어야 하는 경우에는 그러하지 아니하다.\n② 안전보건관리담당자를 두어야 하는 사업의 종류와 사업장의 상시근로자 수, 안전보건관리담당자의 수ㆍ자격ㆍ업무ㆍ권한ㆍ선임방법, 그 밖에 필요한 사항은 대통령령으로 정한다.\n③ 고용노동부장관은 산업재해 예방을 위하여 필요한 경우로서 고용노동부령으로 정하는 사유에 해당하는 경우에는 사업주에게 안전보건관리담당자를 제2항에 따라 대통령령으로 정하는 수 이상으로 늘리거나 교체할 것을 명할 수 있다.\n④ 대통령령으로 정하는 사업의 종류 및 사업장의 상시근로자 수에 해당하는 사업장의 사업주는 안전관리전문기관 또는 보건관리전문기관에 안전보건관리담당자의 업무를 위탁할 수 있다.",
+    "en": "Workplaces that are not required to have a safety manager or health manager must instead appoint a safety and health officer — a lighter-duty role common in SMEs — who assists the employer and advises supervisors on safety and health. Covered business types and sizes are set by Presidential Decree, and the duties may be outsourced to a specialized agency.",
+    "tags": ["안전보건관리담당자", "safety and health officer", "소규모 사업장", "SME", "선임", "20인 이상", "위탁", "겸직"],
+    "sourceUrl": "https://www.law.go.kr/법령/산업안전보건법/제19조"
+  },
+  {
+    "id": "osh-29",
+    "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+    "article": { "en": "Article 29 (Safety and Health Training for Workers)", "ko": "제29조(근로자에 대한 안전보건교육)" },
+    "ko": "제29조(근로자에 대한 안전보건교육) ① 사업주는 소속 근로자에게 고용노동부령으로 정하는 바에 따라 정기적으로 안전보건교육을 하여야 한다.\n② 사업주는 근로자를 채용할 때와 작업내용을 변경할 때에는 그 근로자에게 고용노동부령으로 정하는 바에 따라 해당 작업에 필요한 안전보건교육을 하여야 한다. 다만, 제31조제1항에 따른 안전보건교육을 이수한 건설 일용근로자를 채용하는 경우에는 그러하지 아니하다. <개정 2020. 6. 9.>\n③ 사업주는 근로자를 유해하거나 위험한 작업에 채용하거나 그 작업으로 작업내용을 변경할 때에는 제2항에 따른 안전보건교육 외에 고용노동부령으로 정하는 바에 따라 유해하거나 위험한 작업에 필요한 안전보건교육을 추가로 하여야 한다.\n④ 사업주는 제1항부터 제3항까지의 규정에 따른 안전보건교육을 제33조에 따라 고용노동부장관에게 등록한 안전보건교육기관에 위탁할 수 있다.",
+    "en": "Employers must give workers regular safety and health training, plus training at hiring and whenever job duties change, with extra special training for hazardous work. Under the Enforcement Rule (Annex Table 4, amended 2023-09-27), regular training is at least 6 hours per half-year for office workers and 12 hours for all others, supervisors need 16 hours per year, and new hires need 8 hours. Training may be outsourced to a registered training institution.",
+    "tags": ["안전보건교육", "safety training", "정기교육", "채용 시 교육", "특별교육", "매반기", "training hours", "관리감독자 교육", "교육 위탁"],
+    "sourceUrl": "https://www.law.go.kr/법령/산업안전보건법/제29조"
+  },
+  {
+    "id": "osh-36",
+    "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+    "article": { "en": "Article 36 (Risk Assessment)", "ko": "제36조(위험성평가의 실시)" },
+    "ko": "제36조(위험성평가의 실시) ① 사업주는 건설물, 기계ㆍ기구ㆍ설비, 원재료, 가스, 증기, 분진, 근로자의 작업행동 또는 그 밖의 업무로 인한 유해ㆍ위험 요인을 찾아내어 사망, 부상 및 질병으로 이어질 수 있는 위험성의 크기가 허용 가능한 수준인지를 결정하고, 그 위험성을 줄이기 위하여 이 법과 이 법에 따른 명령에 따른 조치를 포함하여 근로자에 대한 위험 또는 건강장해를 방지하기 위한 개선대책을 수립하고 이행(이하 \"위험성평가\"라 한다)하여야 한다. <개정 2026. 2. 19.>\n② 사업주는 위험성평가 시 고용노동부령으로 정하는 바에 따라 위험성평가에 해당 사업장의 근로자를 참여시켜야 한다. <개정 2026. 2. 19.>\n③ 사업주는 근로자대표가 요구하면 위험성평가 시 근로자대표를 참여시켜야 한다. <신설 2026. 2. 19.>\n④ 사업주는 고용노동부령으로 정하는 위험성평가 관련 사항을 해당 사업장의 근로자에게 제29조에 따른 안전보건교육, 설명회, 사업장 게시, 서면 또는 전자적 방법 등으로 알려야 한다. 이 경우 사업주는 중대재해로 이어질 수 있는 유해ㆍ위험 요인에 대하여 작업 전 안전점검회의 등을 통하여 근로자에게 상시적으로 주지시키도록 노력하여야 한다. <신설 2026. 2. 19.>\n⑤ 사업주는 위험성평가의 결과를 고용노동부령으로 정하는 바에 따라 기록하여 보존하여야 한다. <개정 2026. 2. 19.>\n⑥ 위험성평가의 방법, 절차 및 시기, 그 밖에 필요한 사항은 고용노동부령으로 정한다. <개정 2026. 2. 19.>",
+    "en": "Employers must identify workplace hazards, decide whether the resulting risk is at an acceptable level, and implement improvement measures — the risk assessment. As amended on 2026-02-19 (in force 2026-06-01), it is a binding duty: workers must participate, results must be shared with workers, and results must be recorded and kept for 3 years (Enforcement Rule Art. 37-4). Fines for not conducting an assessment are KRW 5/7/10 million for the 1st/2nd/3rd violation, with fine enforcement starting 2027-01-01 for workplaces with 50+ workers and 2028-01-01 for those under 50.",
+    "tags": ["위험성평가", "risk assessment", "유해·위험요인", "근로자 참여", "감소대책", "기록 보존", "worker participation", "hazard identification", "2026 개정", "과태료"],
+    "sourceUrl": "https://www.law.go.kr/법령/산업안전보건법/제36조"
+  },
+  {
+    "id": "osh-57",
+    "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+    "article": { "en": "Article 57 (Prohibition of Concealing Industrial Accidents; Reporting)", "ko": "제57조(산업재해 발생 은폐 금지 및 보고 등)" },
+    "ko": "제57조(산업재해 발생 은폐 금지 및 보고 등) ① 사업주는 산업재해가 발생하였을 때에는 그 발생 사실을 은폐해서는 아니 된다.\n② 사업주는 고용노동부령으로 정하는 바에 따라 산업재해의 발생 원인 등을 기록하여 보존하여야 한다.\n③ 사업주는 고용노동부령으로 정하는 산업재해에 대해서는 그 발생 개요ㆍ원인 및 보고 시기, 재발방지 계획 등을 고용노동부령으로 정하는 바에 따라 고용노동부장관에게 보고하여야 한다.",
+    "en": "Employers must never conceal an industrial accident, must keep records of its causes, and must report prescribed accidents to the Ministry of Employment and Labor. In practice, a death or an injury/illness requiring 3 or more days off work must be reported within 1 month using the industrial accident report form (Enforcement Rule Art. 73). Failure to report carries a fine of up to KRW 15 million; concealment is punished more severely.",
+    "tags": ["산업재해 보고", "accident reporting", "은폐 금지", "산업재해조사표", "concealment", "1개월 이내", "과태료", "재발방지 계획"],
+    "sourceUrl": "https://www.law.go.kr/법령/산업안전보건법/제57조"
+  },
+  {
+    "id": "osh-114",
+    "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+    "article": { "en": "Article 114 (Posting of Material Safety Data Sheets)", "ko": "제114조(물질안전보건자료의 게시 및 교육)" },
+    "ko": "제114조(물질안전보건자료의 게시 및 교육) ① 물질안전보건자료대상물질을 취급하려는 사업주는 제110조제1항 또는 제3항에 따라 작성하였거나 제111조제1항부터 제3항까지의 규정에 따라 제공받은 물질안전보건자료를 고용노동부령으로 정하는 방법에 따라 물질안전보건자료대상물질을 취급하는 작업장 내에 이를 취급하는 근로자가 쉽게 볼 수 있는 장소에 게시하거나 갖추어 두어야 한다.\n② 제1항에 따른 사업주는 물질안전보건자료대상물질을 취급하는 작업공정별로 고용노동부령으로 정하는 바에 따라 물질안전보건자료대상물질의 관리 요령을 게시하여야 한다.\n③ 제1항에 따른 사업주는 물질안전보건자료대상물질을 취급하는 근로자의 안전 및 보건을 위하여 고용노동부령으로 정하는 바에 따라 해당 근로자를 교육하는 등 적절한 조치를 하여야 한다.",
+    "en": "Any employer handling MSDS-covered chemicals must post or keep the Material Safety Data Sheet where workers handling the substance can easily see it. Handling instructions must also be posted for each work process, and workers handling the chemicals must be trained. This applies to any workplace using covered chemicals, including small manufacturers and food or cleaning operations.",
+    "tags": ["물질안전보건자료", "MSDS", "화학물질", "게시 의무", "chemical safety", "취급 근로자 교육", "관리 요령", "hazardous substances"],
+    "sourceUrl": "https://www.law.go.kr/법령/산업안전보건법/제114조"
+  },
+  {
+    "id": "osh-129",
+    "law": { "en": "Occupational Safety and Health Act", "ko": "산업안전보건법" },
+    "article": { "en": "Article 129 (General Health Examinations)", "ko": "제129조(일반건강진단)" },
+    "ko": "제129조(일반건강진단) ① 사업주는 상시 사용하는 근로자의 건강관리를 위하여 건강진단(이하 \"일반건강진단\"이라 한다)을 실시하여야 한다. 다만, 사업주가 고용노동부령으로 정하는 건강진단을 실시한 경우에는 그 건강진단을 받은 근로자에 대하여 일반건강진단을 실시한 것으로 본다.\n② 사업주는 제135조제1항에 따른 특수건강진단기관 또는 「건강검진기본법」 제3조제2호에 따른 건강검진기관(이하 \"건강진단기관\"이라 한다)에서 일반건강진단을 실시하여야 한다.\n③ 일반건강진단의 주기ㆍ항목ㆍ방법 및 비용, 그 밖에 필요한 사항은 고용노동부령으로 정한다.",
+    "en": "Employers must provide general health examinations for all regular workers through designated examination institutions. Under the Enforcement Rule (Art. 197) the cycle is at least once every 2 years for office workers and at least once a year for all others; National Health Insurance checkups can count as the general examination. Frequency, items, and costs are set by ministerial rule.",
+    "tags": ["일반건강진단", "health examination", "건강검진", "주기", "사무직 2년 1회", "checkup", "건강관리", "특수건강진단기관"],
+    "sourceUrl": "https://www.law.go.kr/법령/산업안전보건법/제129조"
+  },
+  {
+    "id": "sapa-4",
+    "law": { "en": "Serious Accidents Punishment Act", "ko": "중대재해 처벌 등에 관한 법률" },
+    "article": { "en": "Article 4 (Duty of Employers and Responsible Managers to Ensure Safety and Health)", "ko": "제4조(사업주와 경영책임자등의 안전 및 보건 확보의무)" },
+    "ko": "제4조(사업주와 경영책임자등의 안전 및 보건 확보의무) ① 사업주 또는 경영책임자등은 사업주나 법인 또는 기관이 실질적으로 지배ㆍ운영ㆍ관리하는 사업 또는 사업장에서 종사자의 안전ㆍ보건상 유해 또는 위험을 방지하기 위하여 그 사업 또는 사업장의 특성 및 규모 등을 고려하여 다음 각 호에 따른 조치를 하여야 한다.\n1. 재해예방에 필요한 인력 및 예산 등 안전보건관리체계의 구축 및 그 이행에 관한 조치\n2. 재해 발생 시 재발방지 대책의 수립 및 그 이행에 관한 조치\n3. 중앙행정기관ㆍ지방자치단체가 관계 법령에 따라 개선, 시정 등을 명한 사항의 이행에 관한 조치\n4. 안전ㆍ보건 관계 법령에 따른 의무이행에 필요한 관리상의 조치\n② 제1항제1호ㆍ제4호의 조치에 관한 구체적인 사항은 대통령령으로 정한다.",
+    "en": "The business owner or chief executive (CEO-level) must personally ensure four things: build and run a safety and health management system with adequate staff and budget, establish recurrence-prevention measures after accidents, implement corrective orders from authorities, and manage compliance with safety laws. Since 2024-01-27 this applies to all businesses with 5 or more workers. Violations leading to a serious accident can bring criminal punishment of the executive.",
+    "tags": ["중대재해처벌법", "Serious Accidents Punishment Act", "경영책임자", "안전보건확보의무", "CEO liability", "안전보건관리체계", "5인 이상", "중대산업재해", "형사처벌"],
+    "sourceUrl": "https://www.law.go.kr/법령/중대재해처벌등에관한법률/제4조"
+  },
+  {
+    "id": "sapa-decree-4",
+    "law": { "en": "Enforcement Decree of the Serious Accidents Punishment Act", "ko": "중대재해 처벌 등에 관한 법률 시행령" },
+    "article": { "en": "Article 4 (Establishment and Implementation of a Safety and Health Management System)", "ko": "제4조(안전보건관리체계의 구축 및 이행 조치)" },
+    "ko": "제4조(안전보건관리체계의 구축 및 이행 조치) 법 제4조제1항제1호에 따른 조치의 구체적인 사항은 다음 각 호와 같다.\n1. 사업 또는 사업장의 안전ㆍ보건에 관한 목표와 경영방침을 설정할 것\n2. (상시근로자 500명 이상 등 일정 규모 사업장) 안전ㆍ보건에 관한 업무를 총괄ㆍ관리하는 전담 조직을 둘 것\n3. 유해ㆍ위험요인을 확인하여 개선하는 업무절차를 마련하고, 반기 1회 이상 점검한 후 필요한 조치를 할 것. 다만, 「산업안전보건법」 제36조에 따른 위험성평가 절차를 마련하고 실시한 경우에는 점검을 한 것으로 본다.\n4. 재해 예방에 필요한 인력ㆍ시설ㆍ장비의 구비와 유해ㆍ위험요인 개선에 필요한 예산을 편성하고 그 용도에 맞게 집행하도록 할 것\n5. 안전보건관리책임자등이 업무를 충실히 수행할 수 있도록 권한과 예산을 주고, 반기 1회 이상 평가ㆍ관리할 것\n6. 「산업안전보건법」에 따라 정해진 수 이상의 안전관리자, 보건관리자, 안전보건관리담당자 및 산업보건의를 배치할 것\n7. 종사자의 의견을 듣는 절차를 마련하고, 재해 예방에 필요한 개선방안의 이행 여부를 반기 1회 이상 점검할 것\n8. 중대산업재해 발생 또는 급박한 위험에 대비한 매뉴얼을 마련하고, 매뉴얼에 따라 조치하는지를 반기 1회 이상 점검할 것\n9. 도급, 용역, 위탁 시 종사자의 안전ㆍ보건 확보를 위한 기준과 절차를 마련하고, 반기 1회 이상 점검할 것 (발췌)",
+    "en": "This decree spells out the nine concrete elements of the safety and health management system a CEO must establish under Article 4(1)1 of the Act. Notably, running a proper risk assessment under OSH Act Article 36 counts as the required semi-annual hazard check (item 3), making risk assessment the practical backbone of compliance for SMEs.",
+    "tags": ["안전보건관리체계", "9가지 의무", "management system", "경영방침", "예산 편성", "반기 1회 점검", "semi-annual check", "종사자 의견 청취", "도급 안전", "매뉴얼"],
+    "sourceUrl": "https://www.law.go.kr/법령/중대재해처벌등에관한법률시행령/제4조",
+    "items": [
+      { "en": "Set safety and health goals and management policy for the business", "ko": "안전ㆍ보건에 관한 목표와 경영방침 설정" },
+      { "en": "Establish a dedicated safety organization (500+ workers or top-200 builders)", "ko": "안전ㆍ보건 업무 총괄ㆍ관리 전담 조직 설치(상시근로자 500명 이상 또는 시공능력 상위 200위 이내 건설사업자)" },
+      { "en": "Set up procedures to identify and fix hazards; check twice a year — a proper Article 36 risk assessment counts", "ko": "유해ㆍ위험요인 확인ㆍ개선 절차 마련 및 반기 1회 이상 점검(산안법 제36조 위험성평가 실시 시 점검 간주)" },
+      { "en": "Allocate and properly spend budget for safety staff, facilities, equipment, and hazard remediation", "ko": "재해 예방 인력ㆍ시설ㆍ장비 구비 및 유해ㆍ위험요인 개선에 필요한 예산 편성ㆍ집행" },
+      { "en": "Give safety managers authority and budget, and evaluate their performance twice a year", "ko": "안전보건관리책임자등에게 권한ㆍ예산 부여 및 반기 1회 이상 평가ㆍ관리" },
+      { "en": "Staff the legally required number of safety managers, health managers, officers, and occupational physicians", "ko": "법정 기준 이상의 안전관리자ㆍ보건관리자ㆍ안전보건관리담당자ㆍ산업보건의 배치" },
+      { "en": "Create a procedure to hear workers' opinions and check follow-up twice a year", "ko": "종사자 의견 청취 절차 마련 및 개선방안 이행 여부 반기 1회 이상 점검" },
+      { "en": "Prepare an emergency manual (work stoppage, evacuation, rescue) and check it twice a year", "ko": "중대산업재해 대비 매뉴얼(작업 중지ㆍ근로자 대피ㆍ위험요인 제거ㆍ구호조치 등) 마련 및 반기 1회 이상 점검" },
+      { "en": "Set safety criteria and procedures for contractors and check them twice a year", "ko": "도급ㆍ용역ㆍ위탁 시 안전ㆍ보건 확보 기준과 절차 마련 및 반기 1회 이상 점검" }
+    ]
+  },
+  {
+    "id": "ra-notice-6",
+    "law": { "en": "MOEL Notice No. 2024-76 (Guidelines on Workplace Risk Assessment)", "ko": "고용노동부고시 제2024-76호(사업장 위험성평가에 관한 지침)" },
+    "article": { "en": "Article 6 (Worker Participation)", "ko": "제6조(근로자 참여)" },
+    "ko": "제6조(근로자 참여) 사업주는 위험성평가를 실시할 때, 법 제36조제2항에 따라 다음 각 호에 해당하는 경우 해당 작업에 종사하는 근로자를 참여시켜야 한다.\n1. 유해ㆍ위험요인의 위험성 수준을 판단하는 기준을 마련하고, 유해ㆍ위험요인별로 허용 가능한 위험성 수준을 정하거나 변경하는 경우\n2. 해당 사업장의 유해ㆍ위험요인을 파악하는 경우\n3. 유해ㆍ위험요인의 위험성이 허용 가능한 수준인지 여부를 결정하는 경우\n4. 위험성 감소대책을 수립하여 실행하는 경우\n5. 위험성 감소대책 실행 여부를 확인하는 경우",
+    "en": "Workers doing the actual job must participate in every key stage of the risk assessment: setting risk criteria, identifying hazards, deciding whether risk is acceptable, establishing reduction measures, and confirming those measures were carried out. Under the 2026 amendment, worker participation is a legal duty with fines of up to KRW 5 million for violations, and the Enforcement Rule (Art. 37-2) specifies workplace walk-around inspections plus surveys or interviews as the participation methods.",
+    "tags": ["근로자 참여", "worker participation", "위험성평가", "감소대책", "유해·위험요인 파악", "순회점검", "설문조사", "risk criteria"],
+    "sourceUrl": "https://www.law.go.kr/행정규칙/사업장위험성평가에관한지침"
+  },
+  {
+    "id": "ra-notice-7",
+    "law": { "en": "MOEL Notice No. 2024-76 (Guidelines on Workplace Risk Assessment)", "ko": "고용노동부고시 제2024-76호(사업장 위험성평가에 관한 지침)" },
+    "article": { "en": "Article 7 (Risk Assessment Methods)", "ko": "제7조(위험성평가의 방법)" },
+    "ko": "제7조(위험성평가의 방법) ① 사업주는 다음과 같은 방법으로 위험성평가를 실시하여야 한다.\n1. 안전보건관리책임자 등 해당 사업장에서 사업의 실시를 총괄 관리하는 사람에게 위험성평가의 실시를 총괄 관리하게 할 것\n2. 사업장의 안전관리자, 보건관리자 등이 위험성평가의 실시에 관하여 안전보건관리책임자를 보좌하고 지도ㆍ조언하게 할 것\n3. 유해ㆍ위험요인을 파악하고 그 결과에 따른 개선조치를 시행할 것\n4. 기계ㆍ기구, 설비 등과 관련된 위험성평가에는 해당 기계ㆍ기구, 설비 등에 전문 지식을 갖춘 사람을 참여하게 할 것\n5. 안전ㆍ보건관리자의 선임의무가 없는 경우에는 제2호에 따른 업무를 수행할 사람을 지정하는 등 그 밖에 위험성평가를 위한 체제를 구축할 것\n⑤ 사업주는 사업장의 규모와 특성 등을 고려하여 다음 각 호의 위험성평가 방법 중 한 가지 이상을 선정하여 위험성평가를 실시할 수 있다.\n1. 위험 가능성과 중대성을 조합한 빈도ㆍ강도법\n2. 체크리스트(Checklist)법\n3. 위험성 수준 3단계(저ㆍ중ㆍ고) 판단법\n4. 핵심요인 기술(One Point Sheet)법\n5. 그 외 규칙 제50조제1항제2호 각 목의 방법 (발췌)",
+    "en": "The employer may choose one or more assessment methods suited to the workplace's size and characteristics: the frequency-severity (matrix) method, the checklist method, the 3-level (low/medium/high) judgment method, or the one-point-sheet key-factor method. The safety and health manager oversees the assessment, assisted by safety/health managers, and equipment experts join assessments involving machinery. For SMEs, the 3-level and checklist methods are the most common entry points.",
+    "tags": ["빈도·강도법", "체크리스트법", "3단계 판단법", "핵심요인 기술법", "OPS", "assessment methods", "frequency severity", "checklist", "위험성평가 방법"],
+    "sourceUrl": "https://www.law.go.kr/행정규칙/사업장위험성평가에관한지침"
+  },
+  {
+    "id": "ra-notice-15",
+    "law": { "en": "MOEL Notice No. 2024-76 (Guidelines on Workplace Risk Assessment)", "ko": "고용노동부고시 제2024-76호(사업장 위험성평가에 관한 지침)" },
+    "article": { "en": "Article 15 (Timing of Risk Assessments)", "ko": "제15조(위험성평가의 실시 시기)" },
+    "ko": "제15조(위험성평가의 실시 시기) ① 사업주는 사업이 성립된 날(사업 개시일을 말하며, 건설업의 경우 실착공일을 말한다)로부터 1개월이 되는 날까지 제5조의2제1항에 따라 위험성평가의 대상이 되는 유해ㆍ위험요인에 대한 최초 위험성평가의 실시에 착수하여야 한다.\n② 사업주는 다음 각 호의 어느 하나에 해당하여 추가적인 유해ㆍ위험요인이 생기는 경우에는 해당 유해ㆍ위험요인에 대한 수시 위험성평가를 실시하여야 한다.\n1. 사업장 건설물의 설치ㆍ이전ㆍ변경 또는 해체\n2. 기계ㆍ기구, 설비, 원재료 등의 신규 도입 또는 변경\n3. 건설물, 기계ㆍ기구, 설비 등의 정비 또는 보수\n4. 작업방법 또는 작업절차의 신규 도입 또는 변경\n5. 중대산업사고 또는 산업재해(휴업 이상의 요양을 요하는 경우에 한정한다) 발생\n6. 그 밖에 사업주가 필요하다고 판단한 경우\n③ 사업주는 제1항에 따라 실시한 위험성평가의 결과에 대한 적정성을 1년마다 정기적으로 재검토하여야 한다.\n④ 사업주가 사업장의 상시적인 위험성평가를 위해 다음 각 호의 사항을 이행하는 경우 제2항과 제3항의 수시평가와 정기평가를 실시한 것으로 본다.\n1. 매월 1회 이상 근로자 제안제도 활용, 아차사고 확인, 사업장 순회점검 등을 통해 유해ㆍ위험요인을 발굴하여 위험성결정 및 감소대책 수립ㆍ실행을 할 것\n2. 매주 안전보건관리책임자, 안전관리자, 관리감독자 등을 중심으로 제1호의 결과 등을 논의ㆍ공유하고 이행상황을 점검할 것\n3. 매 작업일마다 근로자가 준수하여야 할 사항 및 주의하여야 할 사항을 작업 전 안전점검회의 등을 통해 공유ㆍ주지할 것 (발췌)",
+    "en": "There are four assessment timings: initial (start within 1 month of business commencement), occasional (when new equipment, materials, or work methods are introduced, or after an accident with lost work days), regular (review adequacy every year), and ongoing. A workplace running the ongoing cycle — monthly hazard hunts including near-miss checks, weekly review meetings, and daily pre-work toolbox talks — is deemed to have met the occasional and regular assessment duties.",
+    "tags": ["실시 시기", "최초평가", "정기평가", "수시평가", "상시평가", "TBM", "아차사고", "assessment timing", "toolbox meeting", "월-주-일"],
+    "sourceUrl": "https://www.law.go.kr/행정규칙/사업장위험성평가에관한지침"
+  },
+  {
+    "id": "osh-rule-73",
+    "law": { "en": "Enforcement Rule of the Occupational Safety and Health Act", "ko": "산업안전보건법 시행규칙" },
+    "article": { "en": "Article 73 (Reporting Industrial Accidents)", "ko": "제73조(산업재해 발생 보고 등)" },
+    "ko": "제73조(산업재해 발생 보고 등) ① 사업주는 산업재해로 사망자가 발생하거나 3일 이상의 휴업이 필요한 부상을 입거나 질병에 걸린 사람이 발생한 경우에는 법 제57조제3항에 따라 해당 산업재해가 발생한 날부터 1개월 이내에 별지 제30호서식의 산업재해조사표를 작성하여 관할 지방고용노동관서의 장에게 제출(전자문서로 제출하는 것을 포함한다)해야 한다.\n③ 사업주는 제1항에 따른 산업재해조사표에 근로자대표의 확인을 받아야 하며, 그 기재 내용에 대하여 근로자대표의 이견이 있는 경우에는 그 내용을 첨부해야 한다. 다만, 근로자대표가 없는 경우에는 재해자 본인의 확인을 받아 산업재해조사표를 제출할 수 있다. (발췌)",
+    "en": "If an industrial accident causes a death or an injury or illness requiring 3 or more days off work, the employer must file the industrial accident report form (Annex Form No. 30) with the local labor office within 1 month, on paper or electronically. The form needs confirmation from the workers' representative, or from the injured worker if there is no representative. Failing to report carries a fine of up to KRW 15 million — filing a workers' compensation claim does not replace this report.",
+    "tags": ["산업재해조사표", "accident report form", "1개월 이내", "3일 이상 휴업", "별지 제30호서식", "지방고용노동관서", "reporting deadline", "산재 보고", "과태료 1500만원"],
+    "sourceUrl": "https://www.law.go.kr/법령/산업안전보건법시행규칙/제73조"
+  }
+]

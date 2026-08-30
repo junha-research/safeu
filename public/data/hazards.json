@@ -1,0 +1,522 @@
+[
+  {
+    "industry": "manufacturing_metal",
+    "process": { "en": "Press operation", "ko": "프레스 작업" },
+    "hazard": { "en": "Hand crushed between press dies", "ko": "금형 사이 손 협착" },
+    "cause": { "en": "Slide descends while worker feeds material by hand; no safety device on press", "ko": "방호장치 미설치 프레스에 수공구 없이 손으로 소재 투입 중 슬라이드 하강" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Relies on operator attention only", "ko": "작업자 주의에만 의존" },
+    "measures": { "en": "Install photoelectric guard or two-hand control; use safety blocks when adjusting dies; provide feeding tongs so hands never enter the die; check guard function daily before work", "ko": "광전자식 방호장치 또는 양수조작식 방호장치 설치, 금형 조정·교체 시 안전블록 사용, 수공구(집게) 지급으로 금형 내 손 투입 금지, 작업 전 방호장치 작동상태 일상점검" }
+  },
+  {
+    "industry": "manufacturing_metal",
+    "process": { "en": "Welding", "ko": "용접 작업" },
+    "hazard": { "en": "Burns from sparks and inhalation of welding fumes", "ko": "용접 불티에 의한 화상·화재 및 용접흄 흡입" },
+    "cause": { "en": "CO2 welding in poorly ventilated area without proper PPE; sparks reach skin and combustibles", "ko": "환기가 불충분한 장소에서 보호구 미착용 상태로 CO2 용접, 불티가 피부·가연물에 비산" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "Ordinary dust mask and gloves only", "ko": "일반 마스크·면장갑만 착용" },
+    "measures": { "en": "Install mobile local exhaust ventilation (fume extractor); provide certified welding respirator, face shield and leather gloves/apron; lay spark-resistant blankets and remove combustibles; include welders in special health examinations", "ko": "이동식 국소배기장치(흄 포집기) 설치, 방진마스크(특급)·용접용 보안면·가죽장갑·앞치마 지급, 불티비산방지포 설치 및 주변 가연물 제거, 용접 근로자 특수건강진단 실시" }
+  },
+  {
+    "industry": "manufacturing_metal",
+    "process": { "en": "Forklift transport", "ko": "지게차 운반 작업" },
+    "hazard": { "en": "Forklift striking a pedestrian worker", "ko": "지게차와 보행자 충돌" },
+    "cause": { "en": "No separation between forklift routes and walkways; poor visibility when reversing", "ko": "지게차 통로와 보행자 통로 미구분, 후진 시 시야 미확보" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Verbal caution to drivers", "ko": "운전자에게 구두 주의만 실시" },
+    "measures": { "en": "Fit rear-view camera and reversing alarm; mark and physically separate pedestrian walkways (floor lines, safety fences); set site speed limit; verify driver qualification; assign a signaller in congested areas", "ko": "후방카메라·후진경보기 설치, 보행자 통로 구획(바닥 표시·안전펜스), 사업장 제한속도 지정, 지게차 운전자격 확인, 혼잡구역 유도자 배치" }
+  },
+  {
+    "industry": "manufacturing_metal",
+    "process": { "en": "Overhead crane lifting", "ko": "천장크레인 양중 작업" },
+    "hazard": { "en": "Falling load striking workers", "ko": "인양물 낙하에 의한 맞음" },
+    "cause": { "en": "Damaged slings, hook without safety latch, workers passing under suspended load", "ko": "손상된 줄걸이 용구 사용, 훅 해지장치 불량, 인양물 하부 통행" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Occasional visual check of slings", "ko": "줄걸이 용구 수시 육안확인 수준" },
+    "measures": { "en": "Fit and maintain hook safety latches; inspect slings before each use and apply discard criteria; ban entry under suspended loads with marked exclusion zone; designate a signaller and use standard hand signals", "ko": "훅 해지장치 설치·정비, 줄걸이 용구 사용 전 점검 및 폐기기준 운영, 인양물 하부 출입금지 구역 설정·표시, 신호수 지정 및 표준 신호방법 사용" }
+  },
+  {
+    "industry": "manufacturing_metal",
+    "process": { "en": "Grinding", "ko": "그라인더(연삭) 작업" },
+    "hazard": { "en": "Eye/face injury from wheel fragments and flying particles", "ko": "숫돌 파손·비산물에 의한 눈 손상" },
+    "cause": { "en": "Grinder used without wheel guard or safety glasses; wrong or damaged wheel fitted", "ko": "덮개 미설치 연삭기 사용, 보안경 미착용, 규격 외·손상 숫돌 사용" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "Safety glasses available but not enforced", "ko": "보안경 비치만 하고 착용 관리 미흡" },
+    "measures": { "en": "Fit wheel guards on all grinders; run 3-minute test after wheel replacement; enforce safety glasses and face shield; check wheel rated speed against spindle speed before mounting", "ko": "모든 연삭기에 덮개 설치, 숫돌 교체 후 3분 이상 시운전, 보안경·안면보호구 착용 관리, 장착 전 숫돌 최고사용회전속도 확인" }
+  },
+  {
+    "industry": "manufacturing_metal",
+    "process": { "en": "Noisy machine operation (press, grinding)", "ko": "프레스·연마 등 소음 작업" },
+    "hazard": { "en": "Noise-induced hearing loss", "ko": "소음성 난청" },
+    "cause": { "en": "Continuous exposure to high noise without hearing protection", "ko": "고소음(85dB 이상 추정) 지속 노출, 청력보호구 미착용" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "Earplugs provided irregularly", "ko": "귀마개 비정기 지급" },
+    "measures": { "en": "Conduct work-environment noise measurement; provide and enforce earplugs/earmuffs; apply damping or enclosures at noise sources; include exposed workers in special health examinations", "ko": "작업환경측정(소음) 실시, 귀마개·귀덮개 지급 및 착용 관리, 소음원 방진·차음(방음커버) 조치, 소음 노출 근로자 특수건강진단 실시" }
+  },
+  {
+    "industry": "manufacturing_metal",
+    "process": { "en": "Manual handling of heavy parts", "ko": "중량물 인력 운반" },
+    "hazard": { "en": "Back injury (musculoskeletal disorder)", "ko": "중량물 취급에 의한 요통 등 근골격계질환" },
+    "cause": { "en": "Repeated manual lifting of heavy parts in awkward postures without aids", "ko": "운반 보조기구 없이 무리한 자세로 중량물 반복 인력 취급" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "None in particular", "ko": "특별한 조치 없음" },
+    "measures": { "en": "Use carts, hoists or lift tables instead of manual lifting; require two-person lifts for heavy items; post weights on loads and set handling limits; conduct musculoskeletal hazard survey and posture training", "ko": "대차·호이스트·리프트테이블 등 운반 보조기구 사용, 중량물 2인 1조 운반, 중량 표시 및 취급기준 게시, 근골격계부담작업 유해요인조사 및 올바른 취급자세 교육" }
+  },
+  {
+    "industry": "manufacturing_metal",
+    "process": { "en": "Electrical equipment use and maintenance", "ko": "전기 설비 사용·정비 작업" },
+    "hazard": { "en": "Electric shock from leakage current or live parts", "ko": "누전·충전부 접촉에 의한 감전" },
+    "cause": { "en": "No earth-leakage breaker or grounding; damaged cable insulation; live work during repair", "ko": "누전차단기·접지 미설치, 전선 피복 손상 방치, 전원 미차단 상태 정비" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Some breakers installed, no regular testing", "ko": "일부 차단기만 설치, 정기 시험 미실시" },
+    "measures": { "en": "Install earth-leakage circuit breakers and test monthly; ground all equipment; replace damaged cables immediately; de-energize and lock out (LOTO) before maintenance", "ko": "누전차단기 설치 및 월 1회 작동시험, 전기기계·기구 접지 실시, 손상 전선 즉시 교체, 정비 시 전원 차단 및 잠금장치·표지판 부착(LOTO)" }
+  },
+  {
+    "industry": "manufacturing_metal",
+    "process": { "en": "Degreasing / painting with solvents", "ko": "유기용제 세척·도장 작업" },
+    "hazard": { "en": "Poisoning from inhaling organic solvent vapors", "ko": "유기용제 증기 흡입에 의한 중독·건강장해" },
+    "cause": { "en": "Solvent cleaning in enclosed area without local exhaust ventilation or respirator", "ko": "국소배기장치 없는 밀폐된 장소에서 방독마스크 미착용 상태로 세척·도장" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Natural ventilation only", "ko": "자연환기에만 의존" },
+    "measures": { "en": "Install local exhaust ventilation and check performance; provide organic-vapor respirators; post MSDS and train workers on them; review substitution with less hazardous products; run work-environment measurement and special health exams", "ko": "국소배기장치 설치 및 성능 점검, 방독마스크(유기화합물용) 지급, MSDS 게시·교육 실시, 저독성 물질로의 대체 검토, 작업환경측정 및 특수건강진단 실시" }
+  },
+  {
+    "industry": "manufacturing_metal",
+    "process": { "en": "Machining with cutting fluid", "ko": "선반·머시닝 절삭 가공 작업" },
+    "hazard": { "en": "Skin disease from cutting fluid contact", "ko": "절삭유 접촉에 의한 피부질환" },
+    "cause": { "en": "Bare-hand contact with degraded cutting fluid; fluid not replaced or managed", "ko": "맨손으로 절삭유 접촉, 절삭유 부패·오염 관리 미흡" },
+    "likelihood": 3,
+    "severity": 1,
+    "current_controls": { "en": "Cotton gloves only", "ko": "면장갑만 착용" },
+    "measures": { "en": "Provide oil-resistant gloves; manage cutting-fluid concentration and replace degraded fluid on schedule; install splash guards; provide washing facilities and skin-protection cream", "ko": "내유성 보호장갑 지급, 절삭유 농도 관리 및 정기 교체, 비산방지 커버 설치, 세척시설·피부보호크림 비치" }
+  },
+  {
+    "industry": "manufacturing_metal",
+    "process": { "en": "Operating rotating machinery (lathe etc.)", "ko": "선반 등 회전기계 작업" },
+    "hazard": { "en": "Entanglement of gloves, sleeves or hair in rotating parts", "ko": "회전부에 장갑·소매·머리카락 말림(끼임)" },
+    "cause": { "en": "Wearing cotton gloves near rotating parts; missing guards; cleaning chips while machine running", "ko": "회전체 취급 시 면장갑 착용, 회전부 덮개 미설치, 가동 중 칩 제거·청소" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Verbal caution only", "ko": "구두 주의만 실시" },
+    "measures": { "en": "Ban cotton gloves at rotating machinery; fit guards/enclosures on rotating parts; stop the machine and lock the start switch before cleaning or chip removal; enforce close-fitting clothing and hair restraint", "ko": "회전기계 취급 시 면장갑 착용 금지, 회전부 덮개·울 설치, 청소·칩 제거 시 운전 정지 및 기동장치 잠금, 소매·복장 단속 및 두발 정리" }
+  },
+  {
+    "industry": "manufacturing_metal",
+    "process": { "en": "Work at height (equipment inspection/repair)", "ko": "고소 설비 점검·보수 작업" },
+    "hazard": { "en": "Fall from ladder or makeshift work platform", "ko": "사다리·임시 작업발판에서 추락" },
+    "cause": { "en": "Working from top rung of A-ladder; platforms without guardrails; working alone", "ko": "A형 사다리 최상단 디딤대 작업, 안전난간 없는 임시발판 사용, 단독 작업" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Ordinary A-ladder used as work platform", "ko": "일반 A형 사다리를 작업발판으로 사용" },
+    "measures": { "en": "Use mobile scaffold or platform ladder with guardrails; ban work on the top rungs; work in pairs with one person footing the ladder; wear hard hats; consider mobile elevated work platform for frequent tasks", "ko": "안전난간 부착 이동식 틀비계 또는 발판형 사다리 사용, 최상단 디딤대 작업 금지, 2인 1조 작업(1인 사다리 지지), 안전모 착용, 반복 작업은 고소작업대 사용 검토" }
+  },
+  {
+    "industry": "manufacturing_food",
+    "process": { "en": "Food slicer operation", "ko": "식품 슬라이서 작업" },
+    "hazard": { "en": "Hand cut by slicer blade", "ko": "슬라이서 칼날에 의한 손 베임·절단" },
+    "cause": { "en": "Cleaning or removing jams with power on; blade guard removed; feeding by hand", "ko": "전원 미차단 상태 청소·이물 제거, 방호덮개 제거 사용, 손으로 직접 투입" },
+    "likelihood": 2,
+    "severity": 2,
+    "current_controls": { "en": "Verbal caution only", "ko": "구두 주의만 실시" },
+    "measures": { "en": "Unplug and de-energize before cleaning or clearing jams; keep blade guard fitted at all times; use pushers/feeding aids instead of hands; provide cut-resistant gloves for blade handling", "ko": "청소·이물 제거 시 전원 차단 및 플러그 분리, 칼날 방호덮개 부착 상태로만 사용, 손 대신 밀대(푸셔) 사용, 칼날 취급 시 베임방지장갑 지급" }
+  },
+  {
+    "industry": "manufacturing_food",
+    "process": { "en": "Moving around wet processing area", "ko": "작업장 내 이동" },
+    "hazard": { "en": "Slip on wet or greasy floor", "ko": "물·기름에 젖은 바닥 미끄러짐" },
+    "cause": { "en": "Floors constantly wet from washing; poor drainage; ordinary footwear", "ko": "세척수로 바닥 상시 젖음, 배수 불량, 미끄럼방지화 미착용" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "Occasional mopping", "ko": "수시 걸레질 수준" },
+    "measures": { "en": "Install anti-slip flooring/mats in wet zones; fix drainage gradients and clean drains; remove water immediately and place warning signs; issue slip-resistant safety shoes", "ko": "상시 젖는 구역 미끄럼방지 바닥재·매트 시공, 배수 구배·배수로 정비, 물기 즉시 제거 및 경고표지 설치, 미끄럼방지 안전화 지급" }
+  },
+  {
+    "industry": "manufacturing_food",
+    "process": { "en": "Cooking / steaming process", "ko": "가열·증자(스팀) 공정" },
+    "hazard": { "en": "Burns from steam, hot oil and hot surfaces", "ko": "증기·뜨거운 기름·가열 설비에 의한 화상" },
+    "cause": { "en": "Steam bursts when opening kettle lids; splashes when handling hot oil; no heat-protective PPE", "ko": "솥 뚜껑 개방 시 증기 분출, 뜨거운 기름 취급 중 튐, 내열 보호구 미착용" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "Ordinary rubber gloves", "ko": "일반 고무장갑 착용" },
+    "measures": { "en": "Provide heat-resistant gloves and aprons; set procedure to vent steam before opening lids; insulate hot pipes and vessel surfaces; train first aid for burns (immediate cooling with water)", "ko": "내열장갑·내열 앞치마 지급, 뚜껑 개방 전 증기 배출 절차 수립, 스팀 배관·솥 표면 단열재 시공, 화상 응급처치(즉시 냉수 냉각) 교육" }
+  },
+  {
+    "industry": "manufacturing_food",
+    "process": { "en": "Cold storage work", "ko": "냉동·냉장창고 작업" },
+    "hazard": { "en": "Frostbite, hypothermia, or being trapped inside", "ko": "저온에 의한 동상·저체온증 및 냉동실 갇힘" },
+    "cause": { "en": "Long continuous work at sub-zero temperature; faulty internal door release; working alone", "ko": "영하 환경 장시간 연속 작업, 내부 비상개방장치 고장 방치, 단독 작업" },
+    "likelihood": 2,
+    "severity": 2,
+    "current_controls": { "en": "Personal winter clothing", "ko": "개인 방한복 착용 수준" },
+    "measures": { "en": "Provide insulated clothing and gloves; limit continuous exposure time with warm-up breaks; inspect internal emergency door release and alarm regularly; use buddy system or check-in rule for cold-room entry", "ko": "방한복·방한장갑 지급, 연속 작업시간 제한 및 온난 휴게 보장, 냉동실 내부 비상개방장치·경보장치 정기 점검, 출입 시 2인 1조 또는 출입 확인 절차 운영" }
+  },
+  {
+    "industry": "manufacturing_food",
+    "process": { "en": "Dough mixer operation", "ko": "반죽기(믹서) 작업" },
+    "hazard": { "en": "Hand caught in rotating mixer blades", "ko": "반죽기 회전 날개에 손 끼임" },
+    "cause": { "en": "Adding ingredients or scraping dough while machine running; no interlocked cover", "ko": "가동 중 재료 투입·반죽 긁어내기, 투입구 덮개 인터록 미설치" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Verbal caution only", "ko": "구두 주의만 실시" },
+    "measures": { "en": "Fit interlocked cover that stops blades when opened; ban hands in bowl during operation and use scrapers/tools; de-energize and lock the switch before cleaning", "ko": "덮개 개방 시 자동 정지되는 인터록 장치 설치, 가동 중 손 투입 금지 및 보조도구(스크레이퍼) 사용, 청소 시 전원 차단 및 기동스위치 잠금" }
+  },
+  {
+    "industry": "manufacturing_food",
+    "process": { "en": "Handling raw-material sacks and product boxes", "ko": "원료·제품 상자 운반" },
+    "hazard": { "en": "Back injury from repetitive heavy lifting", "ko": "중량물 반복 취급에 의한 요통" },
+    "cause": { "en": "Manual handling of 20kg+ sacks repeatedly without aids", "ko": "20kg 이상 포대·상자를 보조기구 없이 반복 인력 운반" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "None in particular", "ko": "특별한 조치 없음" },
+    "measures": { "en": "Use carts, pallet trucks or lifters; review smaller packaging units; train correct lifting posture; conduct musculoskeletal hazard survey", "ko": "대차·핸드파렛트트럭·리프터 사용, 포장단위 소형화 검토, 올바른 들기 자세 교육, 근골격계부담작업 유해요인조사 실시" }
+  },
+  {
+    "industry": "manufacturing_food",
+    "process": { "en": "Equipment washing and sanitizing", "ko": "설비 세척·소독 작업" },
+    "hazard": { "en": "Chemical burns and toxic gas from cleaning agents", "ko": "알칼리·염소계 세척제 접촉 화상 및 유해가스 흡입" },
+    "cause": { "en": "Handling caustic/chlorine cleaners without PPE; mixing chlorine bleach with acidic cleaner generating gas", "ko": "보호구 미착용 상태 세척제 취급, 염소계와 산성 세척제 혼합 사용으로 유해가스 발생" },
+    "likelihood": 2,
+    "severity": 2,
+    "current_controls": { "en": "Ordinary rubber gloves", "ko": "일반 고무장갑 착용 수준" },
+    "measures": { "en": "Provide chemical-resistant gloves, goggles and apron; prohibit and train against mixing chlorine and acid products; post MSDS at point of use; install eye-wash facility; ventilate during use", "ko": "내화학 장갑·보안경·앞치마 지급, 염소계·산성 세척제 혼합 금지 교육 및 표지, 사용 장소에 MSDS 게시, 세안설비 설치, 사용 중 환기 실시" }
+  },
+  {
+    "industry": "manufacturing_food",
+    "process": { "en": "Blender/agitator operation", "ko": "배합기(교반기) 작업" },
+    "hazard": { "en": "Entanglement in agitator blades", "ko": "교반 날개에 신체 끼임·말림" },
+    "cause": { "en": "Inspecting or cleaning with power on; unguarded feed opening; no emergency stop", "ko": "전원 미차단 상태 점검·청소, 투입구 방호 미흡, 비상정지장치 미설치" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Verbal caution only", "ko": "구두 주의만 실시" },
+    "measures": { "en": "De-energize and lock out before cleaning or inspection; fit grid guard on feed opening sized to block hands; install and test emergency stop devices", "ko": "청소·점검 시 전원 차단 및 기동스위치 잠금(LOTO), 투입구에 손이 들어가지 않는 격자망 설치, 비상정지장치 설치 및 작동 확인" }
+  },
+  {
+    "industry": "construction",
+    "process": { "en": "Work at height on scaffolds / near floor openings", "ko": "비계·개구부 인근 고소 작업" },
+    "hazard": { "en": "Fall from scaffold platform or through floor opening", "ko": "작업발판·개구부에서 추락" },
+    "cause": { "en": "Missing guardrails and toe boards; uncovered floor openings; safety harness not worn or nothing to anchor to", "ko": "안전난간 미설치, 개구부 덮개 미설치, 안전대 미착용 또는 부착설비 부재" },
+    "likelihood": 3,
+    "severity": 3,
+    "current_controls": { "en": "Hard hats worn; incomplete guardrails", "ko": "안전모 착용, 안전난간 일부만 설치" },
+    "measures": { "en": "Install full work platforms and guardrails on scaffolds; cover and mark all floor openings against displacement; provide anchor points and enforce full-body harness use; install safety nets where guardrails are infeasible", "ko": "비계에 작업발판·안전난간 전면 설치, 개구부 덮개 고정 설치 및 표지 부착, 안전대 부착설비 설치 및 안전대 착용 관리, 난간 설치 곤란 구간 추락방호망 설치" }
+  },
+  {
+    "industry": "construction",
+    "process": { "en": "Passage below overhead work", "ko": "상부 작업 하부 통행" },
+    "hazard": { "en": "Struck by falling materials or tools", "ko": "자재·공구 낙하에 의한 맞음" },
+    "cause": { "en": "No debris nets or protective shelves; simultaneous work at different levels; no access control below", "ko": "낙하물방지망·방호선반 미설치, 상하 동시작업, 하부 출입통제 미실시" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Hard hats worn", "ko": "안전모 착용 수준" },
+    "measures": { "en": "Install debris nets and protective shelves; prohibit simultaneous upper/lower work in the same vertical zone; set exclusion zones below overhead work; use tool lanyards and toe boards", "ko": "낙하물방지망·방호선반 설치, 동일 수직구간 상하 동시작업 금지, 상부 작업 하부 출입통제 구역 설정, 공구 낙하방지 끈 및 발끝막이판 사용" }
+  },
+  {
+    "industry": "construction",
+    "process": { "en": "Temporary electrical installation use", "ko": "가설전기 사용 작업" },
+    "hazard": { "en": "Electric shock from temporary wiring", "ko": "가설전선 누전·충전부 접촉 감전" },
+    "cause": { "en": "No earth-leakage breakers on distribution panels; damaged cable insulation dragged on ground; use in wet conditions", "ko": "분전반 누전차단기 미설치, 피복 손상 전선 바닥 방치, 물기 있는 장소 사용" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Basic distribution panel installed", "ko": "분전반 설치 수준" },
+    "measures": { "en": "Fit earth-leakage breakers on all temporary panels and test regularly; replace damaged cables and route them overhead or protected; ground equipment; inspect portable tools before each use", "ko": "가설 분전반 누전차단기 설치 및 정기 작동시험, 손상 전선 즉시 교체 및 가공(架空)·보호관 배선, 전기기계·기구 접지, 이동형 전동공구 사용 전 점검" }
+  },
+  {
+    "industry": "construction",
+    "process": { "en": "Excavator and construction machinery operation", "ko": "굴착기 등 건설기계 작업" },
+    "hazard": { "en": "Worker crushed or struck within machine swing radius", "ko": "장비 작업반경 내 근로자 협착·충돌" },
+    "cause": { "en": "Workers entering swing radius; no signaller; operator blind spots when slewing or reversing", "ko": "작업반경 내 근로자 출입, 유도자 미배치, 선회·후진 시 운전원 사각지대" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Verbal caution before work", "ko": "작업 전 구두 주의 수준" },
+    "measures": { "en": "Prepare machine-specific work plans; assign signallers and control entry to the swing radius; fit rear-view cameras and audible alarms; hold pre-work briefings coordinating machine and ground crews", "ko": "건설기계 작업계획서 작성, 유도자 배치 및 작업반경 내 출입통제, 후방영상장치·경보장치 부착, 장비-신호수-작업자 간 작업 전 신호체계 교육(TBM)" }
+  },
+  {
+    "industry": "construction",
+    "process": { "en": "Excavation and shoring work", "ko": "굴착·흙막이 작업" },
+    "hazard": { "en": "Burial by collapse of excavation face or shoring", "ko": "굴착면·흙막이 붕괴에 의한 매몰" },
+    "cause": { "en": "Excavation slope steeper than standard; no shoring in deep trench; ground weakened by rain", "ko": "굴착면 기울기 기준 미준수, 깊은 굴착부 흙막이 지보공 미설치, 우기 지반 약화" },
+    "likelihood": 1,
+    "severity": 3,
+    "current_controls": { "en": "Visual check by site manager", "ko": "현장 관리자 육안 확인 수준" },
+    "measures": { "en": "Keep excavation slopes to standard gradients; install and inspect shoring for deep trenches; survey ground before digging; intensify inspections after rain and during thaw; keep spoil and equipment back from the edge", "ko": "굴착면 기울기 기준 준수, 흙막이 지보공 설치 및 부재 변형 점검, 굴착 전 지반조사 실시, 강우 후·해빙기 점검 강화, 굴착단부 상부 적치·장비 접근 제한" }
+  },
+  {
+    "industry": "construction",
+    "process": { "en": "Welding and cutting (hot work)", "ko": "용접·용단(화기) 작업" },
+    "hazard": { "en": "Fire or explosion ignited by sparks", "ko": "불티에 의한 화재·폭발" },
+    "cause": { "en": "Hot work next to combustibles (insulation, urethane foam); no fire watch; no spark containment", "ko": "우레탄폼 등 가연물 인접 화기작업, 화재감시자 미배치, 불티 비산방지 조치 미흡" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Fire extinguisher somewhere on site", "ko": "현장 내 소화기 비치 수준" },
+    "measures": { "en": "Operate a hot-work permit system; remove or cover combustibles before starting; station a fire watch with extinguisher during and after work; lay spark-resistant blankets; check the area after completion", "ko": "화기작업 허가제 운영, 작업 전 가연물 제거·불연재 덮기, 화재감시자 배치 및 소화기 비치(작업 후 잔불 확인 포함), 불티비산방지포 설치" }
+  },
+  {
+    "industry": "construction",
+    "process": { "en": "Confined space work (manholes, tanks, pits)", "ko": "맨홀·정화조 등 밀폐공간 작업" },
+    "hazard": { "en": "Asphyxiation from oxygen deficiency or toxic gas", "ko": "산소결핍·유해가스에 의한 질식" },
+    "cause": { "en": "Entering without gas measurement or ventilation; no attendant outside; unprotected rescue attempts", "ko": "작업 전 산소·유해가스 농도 미측정, 환기 미실시, 감시인 미배치, 무방비 구조 시도" },
+    "likelihood": 1,
+    "severity": 3,
+    "current_controls": { "en": "None in particular", "ko": "특별한 조치 없음" },
+    "measures": { "en": "Establish a confined-space program; measure oxygen and hazardous gas before and during entry; ventilate continuously; station an attendant outside; keep supplied-air respirators and rescue equipment ready; never attempt rescue without respiratory protection", "ko": "밀폐공간 작업 프로그램 수립, 작업 전·작업 중 산소 및 유해가스 농도 측정, 지속 환기 실시, 외부 감시인 배치, 송기마스크·구조장비 비치, 호흡보호구 없는 구조 진입 금지 교육" }
+  },
+  {
+    "industry": "construction",
+    "process": { "en": "Cutting, grinding and demolition", "ko": "절단·연마·해체 작업" },
+    "hazard": { "en": "Respiratory disease from dust inhalation", "ko": "분진 흡입에 의한 호흡기 질환(진폐 등)" },
+    "cause": { "en": "Dry cutting of concrete/masonry without dust suppression or respirators", "ko": "살수 없이 콘크리트 건식 절단, 방진마스크 미착용" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "Ordinary masks used occasionally", "ko": "일반 마스크 수시 착용 수준" },
+    "measures": { "en": "Use wet cutting or water spray to suppress dust; provide certified dust respirators and enforce use; use tools with dust extraction where possible; include exposed workers in special health examinations", "ko": "습식 절단·살수로 분진 발생 억제, 방진마스크(안면부여과식 특급·1급) 지급 및 착용 관리, 집진장치 부착 공구 사용, 분진 노출 근로자 특수건강진단 실시" }
+  },
+  {
+    "industry": "logistics_warehouse",
+    "process": { "en": "Forklift loading/unloading", "ko": "지게차 하역·운반 작업" },
+    "hazard": { "en": "Forklift colliding with pedestrian", "ko": "지게차와 보행자 충돌" },
+    "cause": { "en": "Shared routes for forklifts and pedestrians; reversing with load blocking view; speeding in aisles", "ko": "지게차·보행자 동선 미분리, 적재물로 전방 시야 가린 상태 운행, 통로 내 과속" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Verbal caution to drivers", "ko": "운전자 구두 주의 수준" },
+    "measures": { "en": "Physically separate pedestrian walkways with fences and floor markings; fit rear cameras, reversing alarms and blue safety lights; set and enforce speed limits; place mirrors at blind intersections; reverse when the load blocks forward view", "ko": "보행자 통로 물리적 분리(안전펜스·바닥 표시), 후방카메라·후진경보기·블루라이트 설치, 제한속도 지정·단속, 사각 교차점 반사경 설치, 시야 가림 시 후진 운행 원칙" }
+  },
+  {
+    "industry": "logistics_warehouse",
+    "process": { "en": "Pallet rack storage", "ko": "랙(선반) 보관 작업" },
+    "hazard": { "en": "Rack collapse crushing workers", "ko": "랙 전도·붕괴에 의한 깔림" },
+    "cause": { "en": "Overloading beyond rated capacity; forklift impact damage left unrepaired; racks not anchored", "ko": "허용하중 초과 적재, 지게차 충격 손상 방치, 랙 바닥 고정(앵커) 미실시" },
+    "likelihood": 1,
+    "severity": 3,
+    "current_controls": { "en": "Visual check when noticed", "ko": "눈에 띌 때만 육안 확인" },
+    "measures": { "en": "Post and enforce rack load ratings; inspect racks periodically and repair damaged uprights immediately; anchor racks to the floor; fit column guards at forklift impact points", "ko": "랙 허용하중 표시 및 준수, 랙 정기점검·손상 기둥 즉시 보수, 랙 바닥 앵커 고정, 지게차 충돌 위험 지점 기둥 보호대(가드) 설치" }
+  },
+  {
+    "industry": "logistics_warehouse",
+    "process": { "en": "Truck loading/unloading", "ko": "화물차 상하차 작업" },
+    "hazard": { "en": "Fall from truck bed or loading dock", "ko": "적재함·도크에서 추락" },
+    "cause": { "en": "Working on unstable cargo on truck beds; no steps or platforms; gap between dock and vehicle", "ko": "적재함 위 불안정한 화물 위 작업, 승강 발판 미사용, 도크와 차량 사이 단차·틈" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "None in particular", "ko": "특별한 조치 없음" },
+    "measures": { "en": "Provide steps or platforms for truck-bed access; install dock levelers to bridge gaps; minimize work on top of cargo; wear hard hats during loading work", "ko": "적재함 승강용 안전발판·계단 사용, 도크레벨러 설치로 단차 해소, 적재함 상부 작업 최소화, 상하차 작업 시 안전모 착용" }
+  },
+  {
+    "industry": "logistics_warehouse",
+    "process": { "en": "Manual handling and picking", "ko": "인력 상하차·피킹 작업" },
+    "hazard": { "en": "Back injury from repetitive heavy lifting", "ko": "중량물 반복 취급에 의한 요통" },
+    "cause": { "en": "High-volume manual handling under time pressure; twisting and overreaching postures", "ko": "시간 압박 속 다량 인력 취급, 허리 비틀기·과도한 뻗침 자세 반복" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "None in particular", "ko": "특별한 조치 없음" },
+    "measures": { "en": "Use conveyors and pallet trucks to cut manual carries; require two-person lifts over set weights; mark weights on boxes; run stretching sessions and musculoskeletal hazard surveys", "ko": "컨베이어·핸드파렛트트럭 활용으로 인력 운반 최소화, 기준 중량 초과 시 2인 1조 취급, 상자 중량 표시, 작업 전 스트레칭 및 근골격계부담작업 유해요인조사" }
+  },
+  {
+    "industry": "logistics_warehouse",
+    "process": { "en": "Conveyor sorting", "ko": "컨베이어 분류 작업" },
+    "hazard": { "en": "Entanglement in conveyor drive or rollers", "ko": "컨베이어 구동부·롤러 사이 끼임" },
+    "cause": { "en": "Clearing jammed parcels while conveyor running; unguarded drive units and pinch points", "ko": "가동 중 낀 화물 제거, 구동부·물림점 방호덮개 미설치" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Emergency stop at control panel only", "ko": "제어반 비상정지만 설치" },
+    "measures": { "en": "Guard drive units and pinch points; install pull-cord emergency stops along the line and test them; stop and lock out the conveyor before clearing jams; ban loose clothing near moving belts", "ko": "구동부·물림점 방호덮개 설치, 라인 전 구간 풀코드식 비상정지장치 설치·작동시험, 낀 화물 제거 시 정지 후 잠금(LOTO), 가동부 인근 헐렁한 복장 금지" }
+  },
+  {
+    "industry": "logistics_warehouse",
+    "process": { "en": "Walking in warehouse aisles", "ko": "창고 내 보행" },
+    "hazard": { "en": "Slips and trips on floor debris or wet spots", "ko": "바닥 방치물·물기에 의한 미끄러짐·걸림 넘어짐" },
+    "cause": { "en": "Stretch wrap, strapping and pallets left in aisles; rainwater at dock entrances; poor lighting", "ko": "랩·밴드·파렛트 통로 방치, 우천 시 도크 입구 물기, 조도 부족" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "Occasional cleanup", "ko": "수시 청소 수준" },
+    "measures": { "en": "Enforce housekeeping (5S) with designated waste points; repair damaged floor surfaces; improve aisle lighting; place mats and wet-floor signs at dock entrances; issue slip-resistant footwear", "ko": "정리정돈(5S) 및 폐기물 지정 배출 장소 운영, 파손 바닥 보수, 통로 조도 개선, 도크 입구 매트·물기주의 표지 비치, 미끄럼방지 안전화 지급" }
+  },
+  {
+    "industry": "logistics_warehouse",
+    "process": { "en": "Night-shift sorting and loading", "ko": "야간 상하차·분류 작업" },
+    "hazard": { "en": "Fatigue-related accidents and health effects of night work", "ko": "야간작업 피로·졸음에 의한 사고 및 건강장해" },
+    "cause": { "en": "Long continuous night shifts with insufficient breaks; high workload peaks; poor lighting", "ko": "휴게시간 부족한 장시간 야간 연속작업, 물량 집중, 조도 부족" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "Short meal break only", "ko": "식사 휴게만 부여" },
+    "measures": { "en": "Guarantee rest breaks and provide a rest area; smooth workload peaks and improve shift rotation; provide special health examinations for night workers; improve lighting in work zones", "ko": "휴게시간 보장 및 휴게시설 설치, 물량 분산·교대제 개선, 야간작업 근로자 특수건강진단 실시, 작업구역 조도 개선" }
+  },
+  {
+    "industry": "logistics_warehouse",
+    "process": { "en": "Truck docking and departure", "ko": "도크 접차·출차 작업" },
+    "hazard": { "en": "Worker crushed between vehicle and dock", "ko": "차량과 도크 사이 협착" },
+    "cause": { "en": "Truck reversing to dock without guidance; no wheel chocks; vehicle pulling away during loading", "ko": "유도자 없이 차량 후진 접차, 고임목 미설치, 상하차 중 차량 조기 출발" },
+    "likelihood": 1,
+    "severity": 3,
+    "current_controls": { "en": "None in particular", "ko": "특별한 조치 없음" },
+    "measures": { "en": "Assign a guide for docking; use wheel chocks or dock locks during loading; operate a departure signal procedure (dock traffic lights or key control); prohibit standing between a moving vehicle and the dock", "ko": "접차 시 유도자 배치, 상하차 중 차량 고임목·도크 잠금장치 사용, 출차 신호 절차(도크 신호등·차키 보관) 운영, 이동 차량과 도크 사이 접근 금지" }
+  },
+  {
+    "industry": "restaurant",
+    "process": { "en": "Frying and cooking", "ko": "튀김·조리 작업" },
+    "hazard": { "en": "Burns from hot oil and steam", "ko": "튀김유·스팀에 의한 화상" },
+    "cause": { "en": "Oil splashing when wet ingredients are added; carrying hot oil; steam from pots and steamers; no heat PPE", "ko": "수분 있는 재료 투입 시 기름 튐, 뜨거운 기름 운반, 솥·찜기 증기 노출, 내열 보호구 미착용" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "Ordinary rubber gloves", "ko": "일반 고무장갑 착용 수준" },
+    "measures": { "en": "Provide heat-resistant gloves and long aprons; drain water from ingredients before frying; cool oil before moving or filtering it; train first aid for burns (cool with running water immediately)", "ko": "내열장갑·긴소매 앞치마 지급, 튀김 재료 수분 제거 후 투입, 기름 이동·여과는 식힌 후 실시, 화상 응급처치(즉시 흐르는 물 냉각) 교육" }
+  },
+  {
+    "industry": "restaurant",
+    "process": { "en": "Food preparation with knives", "ko": "식재료 손질 작업" },
+    "hazard": { "en": "Cuts from kitchen knives", "ko": "칼에 의한 베임" },
+    "cause": { "en": "Rushing during peak hours; slippery cutting board or wet hands; knives left in sinks", "ko": "바쁜 시간대 서두름, 미끄러운 도마·젖은 손, 개수대 내 칼 방치" },
+    "likelihood": 3,
+    "severity": 1,
+    "current_controls": { "en": "None in particular", "ko": "특별한 조치 없음" },
+    "measures": { "en": "Provide cut-resistant gloves for heavy prep; use dedicated knife racks instead of leaving blades in sinks; stabilize cutting boards (damp cloth underneath); keep knives sharpened — dull blades slip", "ko": "손질량 많은 작업에 베임방지장갑 지급, 칼 전용 보관대 사용(개수대 방치 금지), 도마 밑 젖은 행주로 미끄럼 방지, 칼날 관리(무딘 칼이 미끄러져 더 위험)" }
+  },
+  {
+    "industry": "restaurant",
+    "process": { "en": "Moving around the kitchen", "ko": "주방 내 이동" },
+    "hazard": { "en": "Slip on wet or greasy kitchen floor", "ko": "물·기름에 젖은 주방 바닥 미끄러짐" },
+    "cause": { "en": "Water and oil on floor during cooking and dishwashing; clogged drains; rushing with hot items", "ko": "조리·설거지 중 바닥 물기·기름, 배수구 막힘, 뜨거운 것을 든 채 급한 이동" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "Occasional mopping", "ko": "수시 걸레질 수준" },
+    "measures": { "en": "Install anti-slip flooring or mats in wet zones; wipe spills immediately; clean drains and grease regularly; issue slip-resistant kitchen shoes", "ko": "물 많은 구역 미끄럼방지 바닥재·매트 설치, 물·기름 즉시 제거 습관화, 배수구·기름때 정기 청소, 미끄럼방지 주방화 지급" }
+  },
+  {
+    "industry": "restaurant",
+    "process": { "en": "Gas cooking equipment use", "ko": "가스레인지·가스설비 사용 조리" },
+    "hazard": { "en": "Fire or explosion from gas leak", "ko": "가스 누출에 의한 화재·폭발" },
+    "cause": { "en": "Aged hoses and loose connections; valves left open after closing; poor ventilation accumulating gas", "ko": "호스 노후·연결부 헐거움, 영업 종료 후 밸브 미잠금, 환기 부족으로 가스 체류" },
+    "likelihood": 1,
+    "severity": 3,
+    "current_controls": { "en": "Fire extinguisher in kitchen", "ko": "주방 소화기 비치 수준" },
+    "measures": { "en": "Install a gas leak alarm; inspect hoses and valves periodically and replace aged parts; make closing-time valve shutoff a checklist item; keep a K-class extinguisher and train staff to use it; ventilate before igniting", "ko": "가스누설경보기 설치, 호스·밸브 정기점검 및 노후부품 교체, 영업 종료 시 중간밸브 잠금 체크리스트 운영, K급 소화기 비치 및 사용법 교육, 점화 전 환기 실시" }
+  },
+  {
+    "industry": "restaurant",
+    "process": { "en": "Motorcycle delivery", "ko": "오토바이 배달 작업" },
+    "hazard": { "en": "Traffic accident during delivery", "ko": "배달 중 교통사고" },
+    "cause": { "en": "Time pressure causing speeding and signal violations; riding in rain or on ice; helmet not worn; poor vehicle maintenance", "ko": "배달시간 압박에 의한 과속·신호위반, 우천·결빙 시 운행, 안전모 미착용, 이륜차 정비 불량" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "Helmet provided but use not checked", "ko": "안전모 지급만 하고 착용 확인 미실시" },
+    "measures": { "en": "Provide certified riding helmets and verify they are worn; remove delivery-time pressure (realistic dispatch); inspect brakes, tires and lights before each shift; restrict or suspend riding in heavy rain and icy conditions", "ko": "승차용 안전모 지급 및 착용 확인, 배달시간 압박 완화(여유 있는 배차), 운행 전 브레이크·타이어·등화장치 점검, 폭우·결빙 시 운행 제한 기준 운영" }
+  },
+  {
+    "industry": "restaurant",
+    "process": { "en": "Carrying food supplies", "ko": "식자재 운반 작업" },
+    "hazard": { "en": "Back injury from carrying heavy food supplies", "ko": "식자재 중량물 취급에 의한 요통" },
+    "cause": { "en": "Manual carrying of bulk sacks, water containers and boxes, often on stairs", "ko": "대용량 포대·물통·박스를 계단 포함 인력 운반" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "None in particular", "ko": "특별한 조치 없음" },
+    "measures": { "en": "Buy in smaller units where possible; use a hand truck for deliveries; store heavy items at waist height; carry heavy loads in pairs", "ko": "소분 단위 구매 검토, 운반 시 손수레(대차) 사용, 무거운 품목은 허리 높이에 보관, 중량물 2인 운반" }
+  },
+  {
+    "industry": "restaurant",
+    "process": { "en": "Dishwashing and kitchen cleaning", "ko": "설거지·주방 청소 작업" },
+    "hazard": { "en": "Dermatitis from detergents; chlorine gas from mixing bleach with acid", "ko": "세제·락스 접촉 피부질환 및 혼합 시 유해가스 흡입" },
+    "cause": { "en": "Prolonged bare-hand contact with detergents; mixing chlorine bleach with acidic cleaners; use in unventilated space", "ko": "맨손 장시간 세제 접촉, 락스와 산성 세제 혼합 사용, 환기 없는 공간 사용" },
+    "likelihood": 2,
+    "severity": 2,
+    "current_controls": { "en": "Rubber gloves sometimes worn", "ko": "고무장갑 수시 착용 수준" },
+    "measures": { "en": "Enforce rubber gloves and goggles for chemical cleaning; train and post warnings never to mix bleach with acid products; dilute concentrates per instructions; ventilate during use", "ko": "화학세제 사용 시 고무장갑·보안경 착용 관리, 락스와 산성 세제 혼합 금지 교육·경고표지 부착, 원액 희석 사용 기준 준수, 사용 중 환기 실시" }
+  },
+  {
+    "industry": "restaurant",
+    "process": { "en": "Kitchen appliance use and cleaning", "ko": "주방기기 사용·청소 작업" },
+    "hazard": { "en": "Electric shock in wet kitchen environment", "ko": "물기 있는 주방 환경에서 누전 감전" },
+    "cause": { "en": "Water splashing on outlets and appliances during cleaning; overloaded multi-plugs; ungrounded equipment", "ko": "물청소 시 콘센트·기기 침수, 문어발식 배선, 접지 미실시 기기 사용" },
+    "likelihood": 2,
+    "severity": 3,
+    "current_controls": { "en": "None in particular", "ko": "특별한 조치 없음" },
+    "measures": { "en": "Install earth-leakage breakers and test them regularly; use waterproof outlets in wet zones; unplug appliances before washing; replace damaged cords; avoid daisy-chained multi-plugs", "ko": "누전차단기 설치 및 정기 작동시험, 물 사용 구역 방수형 콘센트 설치, 세척 전 기기 플러그 분리, 손상 전선 즉시 교체, 문어발식 배선 금지" }
+  },
+  {
+    "industry": "wholesale_retail",
+    "process": { "en": "Stocking high shelves", "ko": "상품 진열·재고 정리(고소) 작업" },
+    "hazard": { "en": "Fall from ladder or step stool", "ko": "사다리·발판에서 추락" },
+    "cause": { "en": "Standing on top rung of A-ladder or on boxes; working alone; reaching sideways", "ko": "A형 사다리 최상단·박스 위 작업, 단독 작업, 옆으로 무리하게 뻗는 자세" },
+    "likelihood": 2,
+    "severity": 2,
+    "current_controls": { "en": "Ordinary A-ladder used", "ko": "일반 A형 사다리 사용" },
+    "measures": { "en": "Use platform ladders or step stools with handrails; ban standing on top rungs and on boxes; work in pairs for high stocking; store heavy or frequently picked items at reachable height", "ko": "난간형 발판 사다리·안전 스텝스툴 사용, 최상단 디딤대·박스 위 작업 금지, 높은 곳 진열 시 2인 1조, 무겁거나 자주 찾는 상품은 손 닿는 높이에 보관" }
+  },
+  {
+    "industry": "wholesale_retail",
+    "process": { "en": "Receiving and shelf stocking", "ko": "상품 하역·진열 작업" },
+    "hazard": { "en": "Back injury and dropped boxes when handling heavy stock", "ko": "중량 상품 취급에 의한 요통 및 낙하" },
+    "cause": { "en": "Repeated lifting of heavy boxes; heavy items stored on high shelves", "ko": "중량 박스 반복 취급, 무거운 상품의 상단 보관" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "None in particular", "ko": "특별한 조치 없음" },
+    "measures": { "en": "Store heavy items on lower shelves as a rule; use carts and hand trucks; mark weights on heavy boxes; train lifting posture and set two-person limits", "ko": "무거운 상품 하단 진열 원칙 운영, 대차·손수레 사용, 중량 상자 무게 표시, 들기 자세 교육 및 2인 취급 기준 설정" }
+  },
+  {
+    "industry": "wholesale_retail",
+    "process": { "en": "Cart and hand-truck transport", "ko": "매장·창고 대차 운반 작업" },
+    "hazard": { "en": "Cart striking a person or crushing feet", "ko": "대차와 사람 충돌·발등 깔림" },
+    "cause": { "en": "Overstacked carts blocking view; narrow congested aisles; pulling carts backwards", "ko": "시야를 가리는 과적, 통로 협소·혼잡, 대차를 끌며 후진 이동" },
+    "likelihood": 2,
+    "severity": 1,
+    "current_controls": { "en": "None in particular", "ko": "특별한 조치 없음" },
+    "measures": { "en": "Limit stacking height to keep a clear view; keep aisles clear and wide enough; push rather than pull carts; issue safety shoes for warehouse staff", "ko": "시야 확보 가능한 적재 높이 제한, 통로 폭 확보 및 장애물 정리, 대차는 끌지 않고 미는 원칙, 창고 담당자 안전화 지급" }
+  },
+  {
+    "industry": "wholesale_retail",
+    "process": { "en": "Moving around the store", "ko": "매장 내 이동" },
+    "hazard": { "en": "Slip on wet or damaged floor", "ko": "바닥 물기·파손에 의한 미끄러짐" },
+    "cause": { "en": "Rainwater at entrances; walking over freshly mopped areas; damaged tiles", "ko": "우천 시 출입구 물기, 청소 직후 통행, 바닥 타일 파손" },
+    "likelihood": 3,
+    "severity": 2,
+    "current_controls": { "en": "Occasional mopping", "ko": "수시 걸레질 수준" },
+    "measures": { "en": "Place entrance mats and umbrella wrappers on rainy days; use wet-floor signs during and after cleaning; wipe spills immediately; repair damaged flooring", "ko": "우천 시 출입구 매트·우산 빗물제거기 비치, 청소 중·후 미끄럼주의 표지판 설치, 액체 쏟아짐 즉시 제거 절차 운영, 파손 바닥 보수" }
+  },
+  {
+    "industry": "wholesale_retail",
+    "process": { "en": "Opening boxes with cutters", "ko": "박스 개봉·해체 작업" },
+    "hazard": { "en": "Cuts from box cutters", "ko": "박스커터(커터칼)에 의한 베임" },
+    "cause": { "en": "Cutting toward the body; blades left extended; dull blades requiring force", "ko": "몸 쪽으로 절단, 칼날 노출 상태 방치, 무딘 날 사용으로 과도한 힘" },
+    "likelihood": 3,
+    "severity": 1,
+    "current_controls": { "en": "Ordinary cutters used", "ko": "일반 커터칼 사용" },
+    "measures": { "en": "Issue safety cutters with auto-retracting blades; train cutting away from the body; replace blades on schedule; provide cut-resistant gloves for bulk unpacking", "ko": "자동 날 수납식 안전커터 지급, 몸 바깥 방향 절단 교육, 칼날 정기 교체, 대량 개봉 작업 시 베임방지장갑 지급" }
+  },
+  {
+    "industry": "wholesale_retail",
+    "process": { "en": "Customer service", "ko": "고객 응대 업무" },
+    "hazard": { "en": "Emotional-labor stress from abusive customers", "ko": "고객 폭언·무리한 요구에 의한 감정노동 건강장해" },
+    "cause": { "en": "Verbal abuse and unreasonable demands; no procedure allowing staff to pause or escalate", "ko": "고객 폭언·과도한 요구 상시 노출, 응대 중단·전환 절차 부재" },
+    "likelihood": 2,
+    "severity": 2,
+    "current_controls": { "en": "Individual staff cope on their own", "ko": "직원 개인이 감내하는 수준" },
+    "measures": { "en": "Post notices asking customers to refrain from abuse; prepare a response manual and train staff; allow workers to pause or hand over the interaction when abused, with temporary reassignment if needed; guide affected staff to counseling support (per OSH Act Art. 41 customer-service worker protections)", "ko": "폭언 자제 요청 문구 게시, 고객응대 매뉴얼 마련 및 교육, 폭언 발생 시 응대 중단·업무 일시 전환 권한 부여, 피해 근로자 상담 지원 안내(산업안전보건법 제41조 고객응대근로자 보호조치)" }
+  },
+  {
+    "industry": "wholesale_retail",
+    "process": { "en": "Checkout and sales-floor standing work", "ko": "계산대·매장 입식 근무" },
+    "hazard": { "en": "Leg and back strain from prolonged standing", "ko": "장시간 서서 근무에 의한 하지·허리 부담(근골격계질환)" },
+    "cause": { "en": "Standing entire shifts on hard floors with no seating or rest rotation", "ko": "딱딱한 바닥에서 의자 없이 전 근무시간 입식, 휴식 순환 부재" },
+    "likelihood": 3,
+    "severity": 1,
+    "current_controls": { "en": "None in particular", "ko": "특별한 조치 없음" },
+    "measures": { "en": "Place seats at checkout for use during idle periods; install anti-fatigue mats; guarantee rest breaks and rotate tasks; allow comfortable cushioned footwear", "ko": "계산대에 의자 비치(대기시간 착석 허용), 피로방지매트 설치, 휴게시간 보장 및 업무 순환, 쿠션 있는 편한 신발 착용 허용" }
+  },
+  {
+    "industry": "wholesale_retail",
+    "process": { "en": "Stockroom storage work", "ko": "창고 입출고·적재 작업" },
+    "hazard": { "en": "Crushed by toppling stacked goods", "ko": "적재물 무너짐에 의한 협착·깔림" },
+    "cause": { "en": "Unstable overstacking in cramped stockroom; heavy items on top; narrow blocked passages", "ko": "협소한 창고 내 과적·편중 적재, 무거운 물품 상단 적재, 통로 물건 적치" },
+    "likelihood": 2,
+    "severity": 2,
+    "current_controls": { "en": "None in particular", "ko": "특별한 조치 없음" },
+    "measures": { "en": "Set stacking height and stability rules (heavy items low, interlocked stacking); keep passages clear; practice first-in-first-out to avoid double handling; inspect stacks after deliveries", "ko": "적재 높이·안정성 기준 운영(무거운 것 하단, 엇쌓기), 통로 적치 금지·확보, 선입선출 정리로 재취급 최소화, 입고 후 적재 상태 점검" }
+  }
+]
