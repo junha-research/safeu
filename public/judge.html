@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>safeU — Judge's 3-Minute Verification Guide</title>
+<style>
+  :root { --primary:#1e40af; --ink:#1e293b; --dim:#64748b; --line:#e2e8f0; --green:#16a34a; --red:#dc2626; --bg:#f4f6fb; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--ink); line-height:1.6; font-size:15px; }
+  .wrap { max-width:840px; margin:0 auto; padding:40px 24px 80px; }
+  h1 { font-size:26px; letter-spacing:-0.5px; margin:0 0 6px; color:#0f172a; }
+  .lede { color:var(--dim); margin:0 0 28px; }
+  h2 { font-size:18px; margin:36px 0 10px; color:var(--primary); }
+  .card { background:#fff; border:1px solid var(--line); border-radius:10px; padding:20px 22px; margin-bottom:14px; box-shadow:0 1px 3px rgba(15,23,42,.06); }
+  code, .prompt { background:#0f172a; color:#fff; padding:2px 8px; border-radius:6px; font-size:13px; }
+  .prompt { display:block; padding:10px 14px; margin:8px 0; white-space:pre-wrap; }
+  ol li, ul li { margin-bottom:8px; }
+  .claim { border-left:4px solid var(--red); padding-left:14px; margin-bottom:16px; }
+  .claim strong { color:var(--red); }
+  table { border-collapse:collapse; width:100%; font-size:13.5px; }
+  th, td { border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top; }
+  th { background:var(--bg); }
+  .pill { display:inline-block; font-size:11px; font-weight:700; padding:2px 8px; border-radius:99px; }
+  .pill.rw { background:#fef3c7; color:#b45309; } .pill.ro { background:#dcfce7; color:var(--green); }
+  a { color:var(--primary); }
+  .foot { color:var(--dim); font-size:13px; margin-top:36px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🦺 safeU — Judge's Verification Guide</h1>
+  <p class="lede">Korean workplace-safety compliance where the human-in-the-loop isn't UX philosophy — it's statute. This page lets you verify every claim in about 3 minutes, no Korean required.</p>
+
+  <div class="card">
+    <strong>Why this domain forces human–agent collaboration:</strong> Korea's amended Occupational Safety and Health Act (산업안전보건법, in force 2026-06-01) makes workplace risk assessment fineable up to ₩10,000,000 — and separately fines <em>excluding workers from participation</em> and <em>not sharing results</em> (up to ₩5,000,000 each, Art. 36). The law itself says an AI cannot finish this document alone. safeU's WebMCP tool surface is shaped exactly like that law: everything a manager may delegate is a tool; everything the statute reserves for humans has <strong>no tool at all</strong>.
+  </div>
+
+  <h2>3-minute test itinerary</h2>
+  <div class="card">
+    <p><strong>Setup (choose one):</strong></p>
+    <ul>
+      <li><strong>ChatGPT desktop app</strong> — open <a href="https://safeu.netlify.app">safeu.netlify.app</a> in the built-in browser (site tools work out of the box; personal accounts, GPT-5.6 Sol/Terra).</li>
+      <li><strong>Chrome 149+</strong> — enable <code>chrome://flags/#enable-webmcp-testing</code>, open the site, and drive tools with any WebMCP agent surface (e.g. the <a href="https://chromewebstore.google.com/detail/gbpdfapgefenggkahomfgkhfehlcenpd">Model Context Tool Inspector</a> extension).</li>
+    </ul>
+    <p>The header badge shows the live tool count. Then:</p>
+    <ol>
+      <li>Ask: <span class="prompt">I run a 12-person metal fabrication shop in Korea — what safety paperwork do I legally need?</span> → the agent calls <code>set_workplace_profile</code>; the Step-1 dashboard rebuilds live with 10 duties, each carrying a statute chip and the real fine amount.</li>
+      <li>Ask: <span class="prompt">Draft a risk assessment for our welding and press work.</span> → rows slide into Step 2 with amber "Agent draft" badges. (Or attach any risk-assessment file — HWP/PDF/Excel/photo — and say "put this into safeU".)</li>
+      <li>Ask: <span class="prompt">Are we ready for a labor-office inspection?</span> → <code>check_inspection_readiness</code> returns blockers labeled 👤 human-only vs 🤖 agent-fixable. The agent can fix its own; it must ask <em>you</em> to confirm rows, record worker participation, and sign.</li>
+      <li>Click Confirm on the rows (Step 2), fill participation + signature (Step 3) → watch the toast: <strong>the three assessment write tools unregister</strong> (a <code>toolchange</code> event — the document is sealed). Ask the agent to add a row now; it can't — but it can still prepare a TBM briefing from the sealed, confirmed rows.</li>
+      <li>Step 4 → Print: a 6-document Korean inspection pack (assessment in the government-standard layout with signature lines, worker-participation minutes, result-sharing confirmation, postable summary, TBM briefing log, Serious-Accidents-Act semiannual check sheet).</li>
+    </ol>
+  </div>
+
+  <h2>Falsifiable claims — try to break them</h2>
+  <div class="card">
+    <div class="claim"><strong>1.</strong> "Sign the document for me." — <em>No signing tool exists.</em> Signatures, worker participation, duty check-offs and printing are absent from every inputSchema. Enforcement by absence, not validation.</div>
+    <div class="claim"><strong>2.</strong> Ask the agent to modify a row a human has Confirmed. — <em>Refused</em>: the tool returns <code>row_confirmed_by_human</code> and instructs the agent to ask you to unlock it.</div>
+    <div class="claim"><strong>3.</strong> Ask the agent to prepare a TBM briefing before any row is confirmed. — <em>Refused</em>: a toolbox meeting may only brief workers on human-confirmed hazards.</div>
+    <div class="claim"><strong>4.</strong> Complete review &amp; sign, then run <code>getTools()</code> (or check the tool list in your agent surface). — The write tools are <em>gone</em>; unlock one row and they re-register. In any browser console: <code>window.__safeuActiveTools</code>.</div>
+    <div class="claim"><strong>5.</strong> Every duty card and regulation result cites its statute with a law.go.kr source link — Korean statutes carry no copyright (Copyright Act Art. 7), and the bundled texts were verified against the current amendments (Aug 2026).</div>
+  </div>
+
+  <h2>Tool surface (8 tools, journey-stage dynamic)</h2>
+  <div class="card">
+    <table>
+      <tr><th>Tool</th><th>Kind</th><th>Registered when</th></tr>
+      <tr><td>get_site_status</td><td><span class="pill ro">read</span></td><td>always — returns the journey block (goal, step states, next_action)</td></tr>
+      <tr><td>search_regulations</td><td><span class="pill ro">read</span></td><td>always</td></tr>
+      <tr><td>set_workplace_profile</td><td><span class="pill rw">write</span></td><td>always</td></tr>
+      <tr><td>add_risk_assessment_rows</td><td><span class="pill rw">write</span></td><td rowspan="3">profile set <strong>and</strong> document not yet sealed (rows confirmed + participation + signature = these unregister)</td></tr>
+      <tr><td>update_risk_assessment_row</td><td><span class="pill rw">write</span></td></tr>
+      <tr><td>request_human_review</td><td><span class="pill rw">write</span></td></tr>
+      <tr><td>prepare_tbm_briefing</td><td><span class="pill rw">write</span></td><td>once human-confirmed rows exist — an operational tool, so it survives the seal (it never mutates the sealed pack)</td></tr>
+      <tr><td>check_inspection_readiness</td><td><span class="pill ro">read</span></td><td>once rows exist</td></tr>
+    </table>
+    <p style="margin-bottom:0"><small>Human-only (no tool, by design): confirming rows · recording worker participation · duty check-offs · signatures · printing/exporting · the SAPA semiannual attestation.</small></p>
+  </div>
+
+  <h2>Links</h2>
+  <div class="card">
+    <ul style="margin:0">
+      <li>Live app: <a href="https://safeu.netlify.app">safeu.netlify.app</a> (no sign-up; data never leaves your browser)</li>
+      <li>Source (MIT): <a href="https://github.com/junha-research/safeu">github.com/junha-research/safeu</a></li>
+      <li>Demo video: see the Devpost submission</li>
+    </ul>
+  </div>
+
+  <p class="foot">safeU works fully manually in any browser — WebMCP makes it collaborative, the law makes the human irreplaceable.</p>
+</div>
+</body>
+</html>

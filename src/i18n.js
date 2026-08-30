@@ -116,7 +116,7 @@ const dict = {
 
     // step 4
     print_title: 'Step 4 · Your inspection pack',
-    print_sub: 'Four documents an inspector expects: the assessment (KRAS layout, signature lines), participation minutes, result-sharing confirmation, and a postable summary.',
+    print_sub: 'Up to six documents an inspector expects: the assessment (KRAS layout, signature lines), participation minutes, result-sharing confirmation, a postable summary — plus a TBM briefing log and the SAPA semiannual check sheet.',
     check_readiness: 'Check readiness',
     readiness_title: 'Inspection readiness',
     ready_yes: 'Ready — print your pack and keep it for 3 years.',
@@ -139,6 +139,37 @@ const dict = {
     accident_title: 'If an accident happens: 산업재해조사표',
     accident_sub: 'A death, or an injury requiring 3+ days off work, must be reported within 1 month (fine: up to ₩15,000,000). This is the one document you actually submit — use the official form; your data below is ready to copy.',
     accident_link: 'Official form (별지 제30호서식) on law.go.kr →',
+
+    // TBM
+    tbm_title: 'TBM briefing (작업 전 안전점검회의)',
+    tbm_sub: 'A morning toolbox meeting built from your confirmed high-risk rows. A documented TBM counts toward statutory training hours (고시 제2023-63호) and is the daily unit of ongoing risk assessment (고시 제2023-19호) — one page, two legal credits.',
+    tbm_date: 'Meeting date',
+    tbm_leader: 'Leader (관리감독자)',
+    tbm_rows: 'Briefing topics',
+    tbm_rows_auto: 'Auto-selected from confirmed high-risk rows.',
+    tbm_badge: '15 min × {n} attendees accrues toward semiannual training hours',
+    tbm_agent_hint: 'Ask your agent: “Prepare tomorrow’s TBM briefing.”',
+    tbm_included: 'Included in the print pack (5th document).',
+    tbm_missing: 'Fill in date and leader to add it to the print pack.',
+    tbm_none: 'No confirmed rows yet — confirm rows in step 2 first.',
+
+    // SAPA semiannual check
+    sapa_title: 'Serious Accidents Act semiannual self-check',
+    sapa_sub: 'The Serious Accidents Punishment Act applies to workplaces with 5+ workers (since 2024-01-27). Decree Art. 4 requires several duties to be checked semiannually. Checking items off is attestation of real-world fact — human-only; no agent tool can write here.',
+    sapa_period: 'Check period',
+    sapa_period_ph: 'e.g. 2026-H2',
+    sapa_status_none: 'Not yet',
+    sapa_status_partial: 'In progress',
+    sapa_status_done: 'Done',
+    sapa_note_ph: 'Evidence note (document name, date…)',
+    sapa_auto3: 'Item 3 (hazard identification & improvement): your risk assessment in this app counts as this semiannual check.',
+    sapa_apply3: 'Mark done via risk assessment',
+    sapa_hidden_note: 'Item 2 (dedicated safety organization) is hidden — it applies to workplaces with 500+ workers.',
+    sapa_included: 'Items with a status are printed as the semiannual check sheet (6th document).',
+
+    // dynamic tool surface
+    tools_sealed: 'Document sealed — {n} write tools unregistered. Agents can now only read.',
+    tools_restored: '{n} write tools re-registered — document unlocked for edits.',
 
     // regulations
     reg_title: 'Regulation library',
@@ -261,7 +292,7 @@ const dict = {
     step3_next: '다음: 점검·출력 →',
 
     print_title: '4단계 · 점검 대비 서류',
-    print_sub: '감독관이 기대하는 4종: 위험성평가표(KRAS 양식·서명란), 참여 회의록, 결과 공람 확인서, 게시용 요약.',
+    print_sub: '감독관이 기대하는 최대 6종: 위험성평가표(KRAS 양식·서명란), 참여 회의록, 결과 공람 확인서, 게시용 요약 + TBM 일지, 중처법 반기 점검표.',
     check_readiness: '준비도 점검',
     readiness_title: '점검 준비도',
     ready_yes: '준비 완료 — 서류를 인쇄해 3년간 보존하세요.',
@@ -284,6 +315,34 @@ const dict = {
     accident_title: '재해가 발생했다면: 산업재해조사표',
     accident_sub: '사망 또는 3일 이상 휴업 재해는 1개월 내 관할 노동청에 제출해야 합니다 (과태료 최대 1,500만원). 유일하게 실제로 “제출”하는 서류입니다 — 공식 서식을 쓰세요. 아래 데이터는 복사해 붙여넣을 수 있습니다.',
     accident_link: '공식 서식 (별지 제30호서식) law.go.kr에서 받기 →',
+
+    tbm_title: 'TBM 일지 (작업 전 안전점검회의)',
+    tbm_sub: '확정된 고위험 행으로 아침 TBM 대본을 만듭니다. 기록된 TBM은 정기교육 시간으로 인정되고(고시 제2023-63호) 상시평가의 일 단위 활동입니다(고시 제2023-19호) — 한 장으로 법적 크레딧 2개.',
+    tbm_date: '실시 일자',
+    tbm_leader: '주재자 (관리감독자)',
+    tbm_rows: '브리핑 대상',
+    tbm_rows_auto: '확정된 고위험 행에서 자동 선택되었습니다.',
+    tbm_badge: 'TBM 15분 × 참석 {n}명 = 반기 정기교육 시간 적립',
+    tbm_agent_hint: '에이전트에게: “내일 아침 TBM 준비해줘”',
+    tbm_included: '인쇄팩에 포함됩니다 (5번째 문서).',
+    tbm_missing: '일자와 주재자를 채우면 인쇄팩에 포함됩니다.',
+    tbm_none: '아직 확정된 행이 없습니다 — 2단계에서 먼저 확정하세요.',
+
+    sapa_title: '중대재해처벌법 반기 셀프점검',
+    sapa_sub: '중대재해처벌법은 5인 이상 사업장에 적용됩니다(2024-01-27부터). 시행령 제4조의 여러 의무는 반기 1회 이상 점검해야 합니다. 체크는 실제 사실의 확인이므로 사람 전용 — 이 패널을 쓸 수 있는 에이전트 도구는 없습니다.',
+    sapa_period: '점검 기간',
+    sapa_period_ph: '예: 2026-하반기',
+    sapa_status_none: '미이행',
+    sapa_status_partial: '이행 중',
+    sapa_status_done: '이행',
+    sapa_note_ph: '증빙 메모 (문서명·일자 등)',
+    sapa_auto3: '3호(유해·위험요인 확인·개선): 이 앱에서 실시한 위험성평가가 반기 점검으로 간주됩니다.',
+    sapa_apply3: '위험성평가로 이행됨 표시',
+    sapa_hidden_note: '2호(전담조직)는 상시근로자 500명 이상 사업장만 해당되어 숨겼습니다.',
+    sapa_included: '상태를 선택한 항목이 반기 점검표(6번째 문서)로 인쇄됩니다.',
+
+    tools_sealed: '문서 봉인 — 쓰기 도구 {n}종이 해제되었습니다. 에이전트는 이제 읽기만 가능합니다.',
+    tools_restored: '쓰기 도구 {n}종 재등록 — 문서 잠금이 해제되었습니다.',
 
     reg_title: '법령 라이브러리',
     reg_sub: '산업안전보건법·중대재해처벌법·위험성평가 고시의 핵심 조문. 법령은 저작권이 없습니다(저작권법 제7조).',

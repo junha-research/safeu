@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useStore, update, loadData, data, journey } from './store.js'
+import { useStore, update, getState, loadData, data, journey } from './store.js'
 import { registerWebMCPTools } from './mcp.js'
 import { t } from './i18n.js'
 import Icon from './Icons.jsx'
@@ -38,11 +38,21 @@ export default function App() {
       setTimeout(() => setPulse(false), 1200)
     }
     const onToast = (e) => pushToast(e.detail.text, 9000)
+    const onToolsChanged = (e) => {
+      const { count, added, removed, initial } = e.detail
+      setMcp({ active: true, count })
+      if (initial) return
+      const { lang: l } = getState()
+      if (removed.length) pushToast(`🔒 ${t(l, 'tools_sealed').replace('{n}', removed.length)}`, 7000)
+      else if (added.length) pushToast(`🔓 ${t(l, 'tools_restored').replace('{n}', added.length)}`, 7000)
+    }
     window.addEventListener('safeu-agent-activity', onActivity)
     window.addEventListener('safeu-toast', onToast)
+    window.addEventListener('safeu-tools-changed', onToolsChanged)
     return () => {
       window.removeEventListener('safeu-agent-activity', onActivity)
       window.removeEventListener('safeu-toast', onToast)
+      window.removeEventListener('safeu-tools-changed', onToolsChanged)
     }
   }, [])
 

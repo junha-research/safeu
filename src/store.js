@@ -29,6 +29,8 @@ function defaultState() {
       rows: [],
     },
     participation: { mode: 'meeting', workers: [], date: '', shared: false },
+    tbm: { date: '', leader: '', rowIds: [] }, // toolbox-meeting briefing (5th print doc)
+    sapaCheck: { period: '', items: {}, checkedAt: null }, // 중처법 시행령 제4조 반기 점검 (human-only attestation)
     reviewFlag: null, // { ids, note, ts } set by agent via request_human_review
     regSearch: null, // { query, ids } mirrored to the Regulations screen
     readinessCheckedAt: null,
@@ -148,6 +150,21 @@ export function enforcementDate(profile) {
 
 export function daysUntil(dateStr) {
   return Math.ceil((new Date(dateStr) - Date.now()) / 86400000)
+}
+
+// TBM briefing rows: explicit selection, else confirmed high-risk rows, else confirmed rows. Cap 8.
+export function tbmRows(s) {
+  const rows = s.assessment.rows
+  if (s.tbm.rowIds.length) return rows.filter((r) => s.tbm.rowIds.includes(r.id)).slice(0, 8)
+  const confirmed = rows.filter((r) => r.human_confirmed)
+  const high = confirmed.filter((r) => riskOf(r.likelihood, r.severity) >= 6)
+  return (high.length ? high : confirmed).slice(0, 8)
+}
+
+// 중처법 시행령 제4조 items applicable to this workplace (item idx 1 = 전담조직, 500인+ only).
+export function sapaApplicableIdx(s) {
+  const all = data.regulations?.find((r) => r.id === 'sapa-decree-4')?.items || []
+  return all.map((_, i) => i).filter((i) => i !== 1 || (s.profile?.workers ?? 0) >= 500)
 }
 
 // ---------- journey (the single goal the UI and the agent both drive toward) ----------

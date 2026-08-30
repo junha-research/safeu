@@ -4,7 +4,7 @@
 
 A [WebMCP Challenge 2026](https://webmcp.devpost.com) entry. MIT licensed.
 
-> **Live demo:** https://safeu.netlify.app · **Demo video:** (YouTube link)
+> **Live demo:** https://safeu.netlify.app · **Judges: 3-minute verification guide → [safeu.netlify.app/judge.html](https://safeu.netlify.app/judge.html)** · **Demo video:** (YouTube link)
 
 ---
 
@@ -21,7 +21,9 @@ safeU is a free, no-signup, browser-only tool where **the agent does everything 
 - **Duty diagnosis** — industry + headcount → the exact legal duties that apply, each with its statute citation, real fine amounts, and enforcement dates. Built for people who need to tell real obligations from telemarketing.
 - **Collaborative risk assessment** — the agent drafts hazard rows (from an interview, or by reading the user's existing HWP/PDF/Excel/photo documents); every agent row lands as an amber *draft* that only a human can **Confirm**.
 - **Worker-participation evidence** — participation record, meeting minutes, result-sharing confirmation sheet with signature lines, and a postable summary. The vaguest new legal requirement, turned into printable artifacts.
-- **Inspection pack** — one Print click produces the 4-document pack a labor-office inspector expects (KRAS-standard layout, signature blocks — missing signatures/dates are the #1 inspection citation), plus Excel export and JSON backup for the 3-year retention duty.
+- **Inspection pack** — one Print click produces up to six documents a labor-office inspector expects: the assessment (KRAS-standard layout, signature blocks — missing signatures/dates are the #1 inspection citation), participation minutes, result-sharing confirmation, a postable summary, plus Excel export and JSON backup for the 3-year retention duty.
+- **TBM briefing log** — the agent turns confirmed high-risk rows into tomorrow morning's toolbox-meeting script with a signature sheet. One page, two statutory credits: it counts toward mandatory training hours (고시 제2023-63호) and is the daily unit of ongoing risk assessment (고시 제2023-19호).
+- **Serious-Accidents-Act semiannual self-check** — a guided walkthrough of the nine management duties in 중대재해처벌법 시행령 제4조 (the dedicated-organization item auto-hides below 500 workers), with evidence notes and a printable check sheet. Checking items off is attestation — human-only, no tool exists.
 
 ## Why WebMCP (and not a chatbot or an MCP server)
 
@@ -39,7 +41,7 @@ The tool boundary **is** the legal boundary, and it's enforced *by schema absenc
 
 ## WebMCP implementation
 
-Seven tools, registered once at page load in [`src/mcp.js`](src/mcp.js):
+Eight tools with a **journey-stage dynamic surface** in [`src/mcp.js`](src/mcp.js): tools register with an `AbortSignal` and the surface is re-synced on every state change, so agents observe the document lifecycle through `toolchange` events. When every row is human-confirmed, participation is recorded and the document is signed, the three assessment write tools **unregister** — the sealed document extends "enforcement by schema absence" from individual fields to the whole pack. Operational tools (like the TBM briefing, which only reads confirmed rows) survive the seal; a human unlocking a row re-registers the write tools.
 
 ```js
 document.modelContext.registerTool({
@@ -59,17 +61,24 @@ document.modelContext.registerTool({
 });
 ```
 
-| Tool | Kind |
-|---|---|
-| `get_site_status` | read — profile, duties, rows + review state, participation, readiness |
-| `set_workplace_profile` | write — rebuilds the duty dashboard live, returns `previous_profile` for undo |
-| `search_regulations` | read — results also render in the UI, so human and agent see the same cards |
-| `add_risk_assessment_rows` | write — batch drafts; `imported_from` marks rows extracted from a user's document |
-| `update_risk_assessment_row` | write — refuses human-confirmed rows |
-| `request_human_review` | write — scroll + highlight + banner on the human's screen |
-| `check_inspection_readiness` | read — blockers labeled 👤 human-only vs 🤖 agent-fixable |
+| Tool | Kind | Registered when |
+|---|---|---|
+| `get_site_status` | read — journey block (goal, step states, `next_action`), duties, rows, participation, readiness | always |
+| `search_regulations` | read — results also render in the UI, so human and agent see the same cards | always |
+| `set_workplace_profile` | write — rebuilds the duty dashboard live, returns `previous_profile` for undo | always |
+| `add_risk_assessment_rows` | write — batch drafts; `imported_from` marks rows extracted from a user's document | profile set ∧ not sealed |
+| `update_risk_assessment_row` | write — refuses human-confirmed rows | profile set ∧ not sealed |
+| `request_human_review` | write — scroll + highlight + banner on the human's screen | profile set ∧ not sealed |
+| `prepare_tbm_briefing` | write — builds the TBM log from *human-confirmed* rows only | confirmed rows exist (survives the seal — operational, never mutates the pack) |
+| `check_inspection_readiness` | read — blockers labeled 👤 human-only vs 🤖 agent-fixable | rows exist |
 
-Design details: feature-detect `document.modelContext` with a `navigator.modelContext` fallback; tools registered in the top-level page (ChatGPT ignores iframes); every `execute` is wrapped to emit an on-screen "agent activity" toast and auto-switch to the relevant tab; returns are capped and structured to respect the agent's context window. Without WebMCP the site works fully manually.
+Design details: feature-detect `document.modelContext` with a `navigator.modelContext` fallback; tools registered in the top-level page (ChatGPT ignores iframes); every `execute` is wrapped to emit an on-screen "agent activity" toast and auto-switch to the relevant step; returns are capped and structured to respect the agent's context window. Without WebMCP the site works fully manually.
+
+### Pattern notes (for the WebMCP-curious)
+
+- **Dynamic tool availability** follows Chrome's [best-practices](https://developer.chrome.com/docs/ai/webmcp/best-practices) guidance to register/unregister tools based on page state; the sealed-document transition is observable via `toolchange` and `window.__safeuActiveTools`.
+- **`request_human_review`** is a userland take on agent→human elicitation, which the spec itself still leaves unresolved ([webmcp#165](https://github.com/webmachinelearning/webmcp/issues/165)) — the page is the medium: scroll, pulse, banner.
+- **Agent drafts / human confirms** is a moderated-writes queue: every agent row lands unconfirmed (amber) and cannot pass inspection readiness until a human confirms it — and confirmed rows lock against agent edits.
 
 ## Run it
 

@@ -1,8 +1,10 @@
 // Print-only document pack (Korean-primary — these are documents for a Korean
 // labor-office inspection). Rendered always, shown only via @media print.
 import React from 'react'
-import { useStore, data, riskOf, bandOf } from '../store.js'
+import { useStore, data, riskOf, bandOf, tbmRows, sapaApplicableIdx } from '../store.js'
 import { pick } from '../i18n.js'
+
+const SAPA_STATUS_KO = { none: '미이행', partial: '이행 중', done: '이행' }
 
 const BAND_KO = { low: '낮음', medium: '보통', high: '높음' }
 const STATUS_KO = { open: '미조치', progress: '조치 중', done: '완료' }
@@ -154,6 +156,101 @@ export default function PrintPack() {
         </table>
         <p className="p-note">위험요인을 발견하면 관리자에게 알려주세요. 근로자는 위험성평가에 참여할 권리가 있습니다 (산업안전보건법 제36조).</p>
       </section>
+
+      {/* ── 5. TBM 일지 ─────────────────────────────────── */}
+      {s.tbm.date && s.tbm.leader && (
+        <section className="print-page">
+          <h1>TBM 일지 (작업 전 안전점검회의) <span className="en-sub">Toolbox Meeting Log</span></h1>
+          <table className="p-meta">
+            <tbody>
+              <tr>
+                <th>사업장명</th><td>{s.profile?.companyName || ''}</td>
+                <th>실시 일자</th><td>{s.tbm.date}</td>
+                <th>주재자(관리감독자)</th><td>{s.tbm.leader}</td>
+              </tr>
+            </tbody>
+          </table>
+          <h2>오늘의 브리핑 — 위험요인과 지킬 사항</h2>
+          <table className="p-rows">
+            <thead>
+              <tr><th>공정/작업</th><th>유해·위험요인</th><th>오늘 지킬 사항 (감소대책)</th><th>확인</th></tr>
+            </thead>
+            <tbody>
+              {tbmRows(s).map((r) => (
+                <tr key={r.id}>
+                  <td>{r.process}</td>
+                  <td>{r.hazard}</td>
+                  <td>{r.measures}</td>
+                  <td></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <h2>참석자 (서명)</h2>
+          <table className="p-sign-grid">
+            <thead>
+              <tr><th>성명</th><th>서명</th><th>성명</th><th>서명</th></tr>
+            </thead>
+            <tbody>
+              {Array.from({ length: Math.max(3, Math.ceil(s.participation.workers.length / 2)) }).map((_, i) => (
+                <tr key={i}>
+                  <td>{s.participation.workers[i * 2] || ''}</td><td></td>
+                  <td>{s.participation.workers[i * 2 + 1] || ''}</td><td></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="p-note">
+            기록된 TBM은 안전보건교육규정(고용노동부고시 제2023-63호)에 따라 관리감독자 주재 등 요건 충족 시 정기 안전보건교육 시간으로 인정될 수 있으며,
+            사업장 위험성평가에 관한 지침의 상시평가 일(日) 단위 활동에 해당합니다. (TBM 15분 × 참석 {s.participation.workers.length || '___'}명)
+          </p>
+        </section>
+      )}
+
+      {/* ── 6. 중처법 반기 점검표 ───────────────────────── */}
+      {sapaApplicableIdx(s).some((i) => s.sapaCheck.items[i]?.status && s.sapaCheck.items[i].status !== 'none') && (
+        <section className="print-page">
+          <h1>안전보건관리체계 반기 점검표 <span className="en-sub">SAPA Decree Art. 4 Semiannual Check</span></h1>
+          <table className="p-meta">
+            <tbody>
+              <tr>
+                <th>사업장명</th><td>{s.profile?.companyName || ''}</td>
+                <th>점검 기간</th><td>{s.sapaCheck.period || ''}</td>
+                <th>점검일</th><td>{s.sapaCheck.checkedAt ? new Date(s.sapaCheck.checkedAt).toISOString().slice(0, 10) : ''}</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>중대재해처벌법 제4조 및 같은 법 시행령 제4조에 따른 안전보건관리체계 구축·이행 사항을 아래와 같이 점검합니다.</p>
+          <table className="p-rows">
+            <thead>
+              <tr><th>호</th><th>이행 사항</th><th>상태</th><th>증빙</th></tr>
+            </thead>
+            <tbody>
+              {sapaApplicableIdx(s).map((i) => {
+                const items = data.regulations?.find((r) => r.id === 'sapa-decree-4')?.items || []
+                const it = s.sapaCheck.items[i] || { status: 'none', note: '' }
+                return (
+                  <tr key={i}>
+                    <td>{i + 1}호</td>
+                    <td>{pick(items[i], 'ko')}</td>
+                    <td>{SAPA_STATUS_KO[it.status]}</td>
+                    <td>{it.note}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+          <table className="p-sign">
+            <tbody>
+              <tr>
+                <th>점검자</th><td>{s.assessment.preparedBy} (서명: __________ )</td>
+                <th>경영책임자 확인</th><td>__________ (서명: __________ )</td>
+              </tr>
+            </tbody>
+          </table>
+          <p className="p-note">※ 2호(전담조직)는 상시근로자 500명 이상 사업장 등에 한하여 적용됩니다. 유해·위험요인 확인·개선(3호)은 산업안전보건법 제36조 위험성평가 실시 시 반기 점검을 한 것으로 봅니다 (시행령 제4조제3호).</p>
+        </section>
+      )}
     </div>
   )
 }

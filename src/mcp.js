@@ -10,6 +10,7 @@
 import {
   getState,
   update,
+  subscribe,
   data,
   uid,
   riskOf,
@@ -23,10 +24,10 @@ import {
   INDUSTRIES,
   journey,
   NEXT_ACTION,
+  tbmRows,
+  sapaApplicableIdx,
 } from './store.js'
 import { pick } from './i18n.js'
-
-let registered = false
 
 function activity(tool, summary) {
   window.dispatchEvent(new CustomEvent('safeu-agent-activity', { detail: { tool, summary } }))
@@ -104,6 +105,11 @@ const TOOLS = [
           current_step: jr.current,
           next_action: NEXT_ACTION[jr.current],
         }
+        const reviewDone = jr.steps.find((st) => st.id === 'review')?.done
+        if (reviewDone) {
+          journeyInfo.tool_surface_note =
+            'Document sealed: the assessment write tools (add/update/request_review) are unregistered — a toolchange event fired. Operational tools (prepare_tbm_briefing) remain. A human can unlock a row in step 2 to amend, which re-registers the write tools.'
+        }
         if (!s.profile) {
           return {
             profile: null,
@@ -113,6 +119,7 @@ const TOOLS = [
         }
         const rows = s.assessment.rows
         const readiness = computeReadiness(s)
+        const sapaIdx = sapaApplicableIdx(s)
         return {
           journey: journeyInfo,
           profile: s.profile,
@@ -136,7 +143,20 @@ const TOOLS = [
           worker_participation: {
             recorded: s.participation.workers.length > 0 && !!s.participation.date,
             shared_with_workers: s.participation.shared,
-            note: 'Human-only. Recorded via the Participation panel on the Evidence tab — no tool can write it.',
+            note: 'Human-only. Recorded via the Participation panel on step 3 — no tool can write it.',
+          },
+          tbm_briefing: {
+            prepared: !!(s.tbm.date && s.tbm.leader),
+            date: s.tbm.date || null,
+            leader: s.tbm.leader || null,
+            rows_selected: tbmRows(s).length,
+            note: 'Use prepare_tbm_briefing to draft it. Running the meeting and collecting signatures is human-only; 15 min × attendees counts toward statutory training hours (고시 제2023-63호).',
+          },
+          sapa_semiannual_check: {
+            period: s.sapaCheck.period || null,
+            done: sapaIdx.filter((i) => s.sapaCheck.items[i]?.status === 'done').length,
+            total: sapaIdx.length,
+            note: 'Human-only attestation (중처법 시행령 제4조, semiannual). Checked on step 4 — no tool can write it.',
           },
           inspection_ready: readiness.ready,
         }
@@ -403,6 +423,61 @@ const TOOLS = [
 
   wrap(
     {
+      name: 'prepare_tbm_briefing',
+      description:
+        "Prepare a toolbox-meeting (TBM, 작업 전 안전점검회의) briefing sheet from HUMAN-CONFIRMED risk-assessment rows. It becomes the 5th document in the print pack. Running the meeting and collecting attendee signatures is human-only; a documented TBM counts toward statutory safety-training hours (고시 제2023-63호) and the daily unit of 상시평가 (고시 제2023-19호).",
+      inputSchema: {
+        type: 'object',
+        properties: {
+          date: { type: 'string', pattern: '^\\d{4}-\\d{2}-\\d{2}$', description: 'Meeting date, YYYY-MM-DD' },
+          leader: { type: 'string', maxLength: 40, description: 'Meeting leader (관리감독자) name' },
+          row_ids: {
+            type: 'array',
+            items: { type: 'string' },
+            maxItems: 8,
+            description: 'Confirmed row ids to brief on. Omit to auto-select confirmed high-risk rows.',
+          },
+        },
+        required: ['date'],
+        additionalProperties: false,
+      },
+      async execute({ date, leader, row_ids }) {
+        const s = getState()
+        const confirmed = s.assessment.rows.filter((r) => r.human_confirmed)
+        if (!confirmed.length) {
+          return {
+            ok: false,
+            error: 'no_confirmed_rows',
+            human_action_needed:
+              'A TBM briefs workers on confirmed hazards, but no row has been confirmed yet. Ask the user to review and Confirm rows in step 2 first.',
+          }
+        }
+        let ids = []
+        if (row_ids?.length) {
+          ids = row_ids.filter((id) => confirmed.some((r) => r.id === id))
+          if (!ids.length)
+            return { ok: false, error: 'row_ids must reference human-confirmed rows. Call get_site_status for current ids.' }
+        }
+        update((st) => {
+          st.tbm = { date, leader: leader || st.tbm.leader, rowIds: ids }
+        })
+        const chosen = tbmRows(getState())
+        return {
+          ok: true,
+          tbm: { date, leader: leader || getState().tbm.leader || null, rows: chosen.map((r) => ({ id: r.id, process: r.process, hazard: r.hazard })) },
+          human_action_needed:
+            'The TBM sheet is now in the print pack (step 4). Only a human (관리감독자) can lead the meeting and collect signatures' +
+            (leader ? '.' : ' — ask the user for the meeting leader name.') +
+            ' 15 minutes × attendees counts toward semiannual training hours.',
+        }
+      },
+    },
+    'print',
+    (i) => `prepared TBM briefing for ${i.date}`
+  ),
+
+  wrap(
+    {
       name: 'check_inspection_readiness',
       description:
         'Check whether the risk-assessment document pack is ready for a labor-office inspection (근로감독). Returns blockers; most require HUMAN action — the return value tells you which, and what to say. Printing/exporting is triggered by the user, not by you.',
@@ -438,22 +513,81 @@ const TOOLS = [
 // tool code paths even without a WebMCP-enabled browser.
 if (typeof window !== 'undefined') window.__safeuTools = TOOLS
 
+// ---------- dynamic, journey-stage tool registration ----------
+// The tool surface itself changes with the document lifecycle (Chrome
+// best-practices: register/unregister based on page state; agents observe it
+// via the toolchange event). Once every row is human-confirmed, participation
+// is recorded and the document is signed, the write tools UNREGISTER — the
+// sealed document extends "enforcement by schema absence" to the whole pack.
+const ASSESSMENT_WRITE_TOOLS = ['add_risk_assessment_rows', 'update_risk_assessment_row', 'request_human_review']
+
+function desiredToolNames(s) {
+  const names = ['get_site_status', 'search_regulations', 'set_workplace_profile']
+  const reviewDone = journey(s).steps.find((st) => st.id === 'review')?.done
+  if (s.profile && !reviewDone) names.push(...ASSESSMENT_WRITE_TOOLS)
+  if (s.assessment.rows.length > 0) names.push('check_inspection_readiness')
+  // TBM is an operational document derived from confirmed rows — it stays
+  // available after the assessment seals (it never mutates the sealed pack).
+  if (s.assessment.rows.some((r) => r.human_confirmed)) names.push('prepare_tbm_briefing')
+  return names
+}
+
+let mc = null
+let signalSupported = true
+const controllers = new Map() // tool name -> AbortController
+
+function syncTools(initial = false) {
+  const want = desiredToolNames(getState())
+  if (!mc) {
+    // No WebMCP host (plain browser / headless QA): still expose the would-be
+    // surface for testing and the /judge page's falsifiable claims.
+    window.__safeuActiveTools = want
+    return
+  }
+  const added = want.filter((n) => !controllers.has(n))
+  const removed = [...controllers.keys()].filter((n) => !want.includes(n))
+  if (signalSupported) {
+    for (const n of removed) {
+      controllers.get(n).abort()
+      controllers.delete(n)
+    }
+  }
+  for (const n of added) {
+    const tool = TOOLS.find((t) => t.name === n)
+    const ctrl = new AbortController()
+    try {
+      mc.registerTool(tool, { signal: ctrl.signal })
+      controllers.set(n, ctrl)
+    } catch {
+      try {
+        mc.registerTool(tool) // host without options support: register once, never unregister
+        signalSupported = false
+        controllers.set(n, ctrl)
+      } catch (e2) {
+        console.warn('WebMCP registerTool failed:', n, e2)
+      }
+    }
+  }
+  window.__safeuActiveTools = [...controllers.keys()]
+  if (added.length || (signalSupported && removed.length)) {
+    window.dispatchEvent(
+      new CustomEvent('safeu-tools-changed', {
+        detail: { count: controllers.size, added, removed: signalSupported ? removed : [], initial },
+      })
+    )
+  }
+}
+
 export function registerWebMCPTools() {
-  if (registered) return { active: true, count: TOOLS.length }
-  const mc =
+  if (mc) return { active: true, count: controllers.size }
+  mc =
     typeof document !== 'undefined' && typeof document.modelContext?.registerTool === 'function'
       ? document.modelContext
       : typeof navigator !== 'undefined' && typeof navigator.modelContext?.registerTool === 'function'
         ? navigator.modelContext // deprecated alias kept for older Chrome builds
         : null
+  syncTools(true)
+  subscribe(() => syncTools())
   if (!mc) return { active: false, count: 0 }
-  for (const tool of TOOLS) {
-    try {
-      mc.registerTool(tool)
-    } catch (e) {
-      console.warn('WebMCP registerTool failed:', tool.name, e)
-    }
-  }
-  registered = true
-  return { active: true, count: TOOLS.length }
+  return { active: true, count: controllers.size }
 }
